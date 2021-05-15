@@ -46,7 +46,7 @@
                 <td class="text-center"> <?php echo remove_junk($product['name']); ?></td>
                 <td> <?php echo remove_junk($product['description']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['categorie']); ?></td>
-                <td class="text-center"> <?php echo read_date($product['date']); ?></td>
+                <td class="text-center"> <?php echo read_date($product['brand']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['quantity']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>
                 <td class="text-center">

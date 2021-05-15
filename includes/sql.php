@@ -12,6 +12,14 @@ function find_all($table)
   }
 }
 /*--------------------------------------------------------------*/
+/* Function for find all database table rows by table name
+/*--------------------------------------------------------------*/
+function find_by_name($name)
+{
+    return join_product_by_name($name);
+  
+}
+/*--------------------------------------------------------------*/
 /* Function for Perform queries
 /*--------------------------------------------------------------*/
 function find_by_sql($sql)
@@ -59,6 +67,20 @@ function count_by_id($table)
   global $db;
   if (tableExists($table)) {
     $sql    = "SELECT COUNT(id) AS total FROM " . $db->escape($table);
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+/*--------------------------------------------------------------*/
+/* Function for Count id  By table name
+/*--------------------------------------------------------------*/
+
+function join_count_by_id($table, $id)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(id) AS total FROM " . $db->escape($table);
+    $sql    .= " WHERE categorie_id=" .$db->escape($id);
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
@@ -219,6 +241,7 @@ function join_product_table()
   $sql  .= " AS categorie,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+  $sql  .= " LEFT JOIN brands b ON b.id = p.brand_id";
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
   $sql  .= " ORDER BY p.id ASC";
   return find_by_sql($sql);
@@ -233,12 +256,61 @@ function join_product_table_by_id($id)
   $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
   $sql  .= " AS categorie,m.file_name AS image";
   $sql  .= " FROM products p";
-  $sql .= " WHERE c.id=" . $db->escape($id);
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+  $sql .= " WHERE p.id=" . $db->escape($id);
   $sql  .= " ORDER BY p.id ASC";
   return find_by_sql($sql);
 }
+/*--------------------------------------------------------------*/
+/* Function for Finding all product name
+   /* JOIN with categorie  and media database table
+   /*--------------------------------------------------------------*/
+   function join_product_table_by_id_category($id)
+   {
+     global $db;
+     $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+     $sql  .= " AS categorie,m.file_name AS image";
+     $sql  .= " FROM products p";
+     $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+     $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+     $sql .= " WHERE p.categorie_id=" . $db->escape($id);
+     $sql  .= " ORDER BY p.id ASC";
+     return find_by_sql($sql);
+   }
+/*--------------------------------------------------------------*/
+/* Function for Finding all product name
+   /* JOIN with categorie  and media database table
+   /*--------------------------------------------------------------*/
+   function join_product_table_new()
+   {
+     global $db;
+     $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+     $sql  .= " AS categorie,m.file_name AS image";
+     $sql  .= " FROM products p";
+     $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+     $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+     $sql  .= " ORDER BY p.id DESC";
+     $sql .= " LIMIT 6";
+     return find_by_sql($sql);
+   }
+   /*--------------------------------------------------------------*/
+/* Function for Finding all product name
+   /* JOIN with categorie  and media database table
+   /*--------------------------------------------------------------*/
+   function join_product_by_name($name)
+   {
+     global $db;
+     $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+     $sql  .= " AS categorie,m.file_name AS image";
+     $sql  .= " FROM products p";
+     $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+     $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+     $sql .= " WHERE p.name like '%$name%'";
+     $sql  .= " ORDER BY p.id ASC";
+
+     return find_by_sql($sql);
+   }
 /*--------------------------------------------------------------*/
 /* Function for Finding all product name
   /* Request coming from ajax.php for auto suggest

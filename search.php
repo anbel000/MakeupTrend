@@ -32,11 +32,10 @@
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
   //page_require_level(2);
-  if (empty($_GET['id'])) {
-    redirect('404.php');
-  }
-  $products = join_product_table_by_id_category((int)$_GET['id']);
+ 
+  $products = find_by_name($_GET['keyword']);
   $categories = find_all('categories');
+  
   ?>
 
   <div class="preloader" style="opacity: 0; display: none;">
@@ -188,7 +187,12 @@
                 <div class="category-grid-topbar">
                   <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-12">
+                      <?php if(empty($products)){?>
+                      <h3 class="title"style="color: red;">NO SE ENCONTRO NINGÚN PRODUCTO</h3>
+
+                      <?php }else{?>
                       <h3 class="title">Showing 1-12 of 21 ads found</h3>
+                      <?php }; ?>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                       <nav>
@@ -207,7 +211,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                           <div class="single-item-grid">
                             <div class="image">
-                              <a href="addetails.php?id=<?php echo (int)$product['id']; ?>"><img src="./assets/images/items-grid/item-1.jpg" alt="#"></a>
+                              <a href="./addetails.php?id=<?php echo (int)$product['id']; ?>"><img src="./assets/images/items-grid/item-1.jpg" alt="#"></a>
                               <?php if (remove_junk($product['quantity']) == 0) { ?>
                                 <span class="flat-badge sale">Agotado</span>
                               <?php } ?>

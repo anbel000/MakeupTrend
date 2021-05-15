@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Error 404 - ClassiGrids Classified Ads and Listing Website Template.</title>
+  <title>Página no encontrada</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
@@ -53,10 +53,10 @@
         <div class="container">
           <div class="error-content">
             <h1>404</h1>
-            <h2>Here Is Some Problem</h2>
-            <p>The page you are looking for it maybe deleted</p>
+            <h2>Ha ocurrido un problema</h2>
+            <p>La página que estas buscando no existe o fue eliminada</p>
             <div class="button">
-              <a href="index.html" class="btn">Go To Home</a>
+              <a href="index.php" class="btn">Regresar</a>
             </div>
           </div>
         </div>

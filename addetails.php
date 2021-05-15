@@ -32,6 +32,16 @@
       </p>
     <![endif]-->
 
+    <?php
+  require_once('includes/load.php');
+  // Checkin What level user has permission to view this page
+   //page_require_level(2);
+   if (empty($_GET['id'])) {
+    redirect('404.php');
+  }
+  $products = join_product_table_by_id((int)$_GET['id']);
+?>
+
     <div class="preloader" style="opacity: 0; display: none;">
         <div class="preloader-inner">
             <div class="preloader-icon">
@@ -106,8 +116,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="./index.html">Inicio</a></li>
-                        <li>Ad Details</li>
+                        <li><a href="./index.php">Inicio</a></li>
+                        <li>Detalles</li>
                     </ul>
                 </div>
             </div>
@@ -121,6 +131,7 @@
             <div class="top-area">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
+                    <?php foreach ($products as $product):?>
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
@@ -138,18 +149,20 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
-                            <h2 class="title">MacBook Pro 13-inch</h2>
-                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">New York,
-                                    USA</a></p>
-                            <h3 class="price">$999</h3>
+                            <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
+                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">
+                            <?php echo remove_junk($product['categorie']); ?></a></p>
+                            <h3 class="price">$<?php echo remove_junk($product['sale_price']); ?></h3>
                             <div class="list-info">
                                 <h4>Información</h4>
                                 <ul>
-                                    <li><span>Cantidades disponibles:</span> 10</li>
-                                    <li><span>Marca:</span> Apple</li>
-                                    <li><span>Categoria:</span> Mackbook Pro</li>
+                                    <li><span><?php echo remove_junk($product['description']); ?></span></li>
+                                    <li><span>Cantidades disponibles:</span><?php echo remove_junk($product['quantity']); ?></li>
+                                    <li><span>Marca:</span> <?php echo remove_junk($product['categorie']); ?></li>
+                                    <li><span>Categoria:</span><?php echo remove_junk($product['categorie']); ?></li>
                                 </ul>
                             </div>
+                            <?php endforeach; ?>
                             <div class="contact-info">
                                 <ul>
                                     <li>
@@ -177,65 +190,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="item-details-blocks">
-                <div class="row" style="padding-bottom: 50px;">
-                    <div class="col-lg-12 col-md-12 col-12">
-
-                        <div class="single-block description">
-                            <h3>Descripción</h3>
-                            <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have
-                                suffered alteration in some form, by injected humour, or randomised words which don't
-                                look even slightly believable.
-                            </p>
-                            <ul>
-                                <li>Model: Apple MacBook Pro 13.3-Inch MYDA2</li>
-                                <li>Apple M1 chip with 8-core CPU and 8-core GPU</li>
-                                <li>8GB RAM</li>
-                                <li>256GB SSD</li>
-                                <li>13.3-inch 2560x1600 LED-backlit Retina Display</li>
-                            </ul>
-                            <p>The generated Lorem Ipsum is therefore always free from repetition, injected humour, or
-                                non-characteristic words etc.</p>
-                        </div>
-
-                        <!--POSIBLE AYUDA PARA ENVIO DE PEDIDO-->
-                        <!--<div class="single-block comment-form">
-                            <h3>Post a comment</h3>
-                            <form action="https://demo.graygrids.com/themes/classigrids-demo/item-details.html#"
-                                method="POST">
-                                <div class="row">
-                                    <div class="col-lg-6 col-12">
-                                        <div class="form-box form-group">
-                                            <input type="text" name="name" class="form-control form-control-custom"
-                                                placeholder="Your Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-12">
-                                        <div class="form-box form-group">
-                                            <input type="email" name="email" class="form-control form-control-custom"
-                                                placeholder="Your Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-box form-group">
-                                            <textarea name="#" class="form-control form-control-custom"
-                                                placeholder="Your Comments"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="button">
-                                            <button type="submit" class="btn">Post Comment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>-->
-
-                    </div>
-                   
                 </div>
             </div>
         </div>
