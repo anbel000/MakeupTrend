@@ -29,6 +29,13 @@
         your experience and security.
       </p>
     <![endif]-->
+    <?php
+  require_once('includes/load.php');
+  // Checkin What level user has permission to view this page
+   //page_require_level(2);
+  $products = join_product_table();
+  
+?>
 
   <div class="preloader" style="opacity: 0; display: none;">
     <div class="preloader-inner">
@@ -217,8 +224,9 @@
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                     <div class="row">
+                    <?php foreach ($products as $product):?>
                       <div class="col-lg-4 col-md-6 col-12">
-
+                      
                         <div class="single-item-grid">
                           <div class="image">
                             <a href="./addetails.html"><img
@@ -227,230 +235,22 @@
                             <span class="flat-badge sale">Sale</span>
                           </div>
                           <div class="content">
-                            <a href="javascript:void(0)" class="tag">Mobile</a>
+                            <a href="javascript:void(0)" class="tag"><?php echo remove_junk($product['categorie']); ?></a>
                             <h3 class="title">
-                              <a href="./addetails.html">Apple
-                                Iphone X</a>
+                              <a href="./addetails.html"><?php echo remove_junk($product['name']); ?></a>
                             </h3>
                             <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Boston</a></p>
+                                </i>Unidades disponibles: <?php echo remove_junk($product['quantity']); ?></a></p>
                             <ul class="info">
-                              <li class="price">$890.00</li>
+                              <li class="price"><?php echo remove_junk($product['sale_price']); ?></li>
                               <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
                               </li>
                             </ul>
                           </div>
                         </div>
-
+                        
                       </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-2.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Others</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Travel
-                                Kit</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>San Francisco</a></p>
-                            <ul class="info">
-                              <li class="price">$580.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-3.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Electronic</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Nikon DSLR
-                                Camera</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Alaska, USA</a></p>
-                            <ul class="info">
-                              <li class="price">$560.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-4.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Furniture</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Poster
-                                Paint</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Las Vegas</a></p>
-                            <ul class="info">
-                              <li class="price">$85.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-5.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Furniture</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Official
-                                Metting Chair</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Alaska, USA</a></p>
-                            <ul class="info">
-                              <li class="price">$750.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-6.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge rent">Rent</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Books &amp; Magazine</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Story
-                                Book</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>New York, USA</a></p>
-                            <ul class="info">
-                              <li class="price">$120.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-7.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Electronic</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Cctv
-                                camera</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Delhi, India</a></p>
-                            <ul class="info">
-                              <li class="price">$350.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-1.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Mobile</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Apple
-                                Iphone X</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Boston</a></p>
-                            <ul class="info">
-                              <li class="price">$890.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="image">
-                            <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img
-                                src="./assets/images/items-grid/item-8.jpg" alt="#"></a>
-                            <i class=" cross-badge lni lni-bolt"></i>
-                            <span class="flat-badge sale">Sale</span>
-                          </div>
-                          <div class="content">
-                            <a href="javascript:void(0)" class="tag">Mobile</a>
-                            <h3 class="title">
-                              <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Samsung
-                                Glalaxy S8</a>
-                            </h3>
-                            <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                </i>Delaware, USA</a></p>
-                            <ul class="info">
-                              <li class="price">$299.00</li>
-                              <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                      </div>
+                      <?php endforeach; ?>
                     </div>
                     <div class="row" style="padding-bottom: 50px;">
                       <div class="col-12">
