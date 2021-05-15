@@ -279,6 +279,12 @@ ALTER TABLE `products`
   ADD CONSTRAINT `FK_brands` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `FK_media` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `sales`
 --
 ALTER TABLE `sales`
