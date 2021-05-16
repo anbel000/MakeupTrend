@@ -144,6 +144,7 @@
                                 </main>
                             </div>
                     </div>
+                    
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
                             <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
