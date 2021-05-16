@@ -254,10 +254,11 @@ function join_product_table_by_id($id)
 {
   global $db;
   $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
-  $sql  .= " AS categorie,m.file_name AS image";
+  $sql  .= " AS categorie,b.name as brand,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+  $sql  .= " LEFT JOIN brands b ON b.id = p.brand_id";
   $sql .= " WHERE p.id=" . $db->escape($id);
   $sql  .= " ORDER BY p.id ASC";
   return find_by_sql($sql);

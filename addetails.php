@@ -9,8 +9,7 @@
     <title>Ads Details - ClassiGrids Classified Ads and Listing Website Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon"
-        href="https://demo.graygrids.com/themes/classigrids-demo/assets/images/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="https://demo.graygrids.com/themes/classigrids-demo/assets/images/favicon.svg">
 
 
 
@@ -33,14 +32,14 @@
     <![endif]-->
 
     <?php
-  require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   //page_require_level(2);
-   if (empty($_GET['id'])) {
-    redirect('404.php');
-  }
-  $products = join_product_table_by_id((int)$_GET['id']);
-?>
+    require_once('includes/load.php');
+    // Checkin What level user has permission to view this page
+    //page_require_level(2);
+    if (empty($_GET['id'])) {
+        redirect('404.php');
+    }
+    $products = join_product_table_by_id((int)$_GET['id']);
+    ?>
 
     <div class="preloader" style="opacity: 0; display: none;">
         <div class="preloader-inner">
@@ -62,9 +61,7 @@
                             <a class="navbar-brand" href="index.html">
                                 <img src="assets/images/logo/logo.svg" alt="Logo">
                             </a>
-                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
                                 <span class="toggler-icon"></span>
                                 <span class="toggler-icon"></span>
@@ -131,63 +128,62 @@
             <div class="top-area">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
-                    <?php foreach ($products as $product):?>
-                        <div class="product-images">
-                            <main id="gallery">
-                                <div class="main-img">
-                                    <img src="./assets/images/products/image1.jpg" id="current" alt="#">
-                                </div>
-                                <div class="images">
-                                    <img src="./assets/images/products/image1.jpg" class="img" alt="#">
-                                    <img src="./assets/images/products/image2.jpg" class="img" alt="#">
-                                    <img src="./assets/images/products/image3.jpg" class="img" alt="#">
-                                    <img src="./assets/images/products/image4.jpg" class="img" alt="#">
-                                    <img src="./assets/images/products/image5.jpg" class="img" alt="#">
-                                </div>
-                            </main>
-                        </div>
+                        <?php foreach ($products as $product) : ?>
+                            <div class="product-images">
+                                <main id="gallery">
+                                    <div class="main-img">
+                                        <img src="./assets/images/products/image1.jpg" id="current" alt="#">
+                                    </div>
+                                    <div class="images">
+                                        <img src="./assets/images/products/image1.jpg" class="img" alt="#">
+                                        <img src="./assets/images/products/image2.jpg" class="img" alt="#">
+                                        <img src="./assets/images/products/image3.jpg" class="img" alt="#">
+                                        <img src="./assets/images/products/image4.jpg" class="img" alt="#">
+                                        <img src="./assets/images/products/image5.jpg" class="img" alt="#">
+                                    </div>
+                                </main>
+                            </div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
                             <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
-                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">
-                            <?php echo remove_junk($product['categorie']); ?></a></p>
                             <h3 class="price">$<?php echo remove_junk($product['sale_price']); ?></h3>
                             <div class="list-info">
                                 <h4>Información</h4>
                                 <ul>
                                     <li><span><?php echo remove_junk($product['description']); ?></span></li>
+                                </ul>
+                            </div>
+                            <div class="list-info">
+                                <ul>
                                     <li><span>Cantidades disponibles:</span><?php echo remove_junk($product['quantity']); ?></li>
-                                    <li><span>Marca:</span> <?php echo remove_junk($product['categorie']); ?></li>
+                                    <li><span>Marca:</span><?php echo remove_junk($product['brand']); ?></li>
                                     <li><span>Categoria:</span><?php echo remove_junk($product['categorie']); ?></li>
                                 </ul>
+
                             </div>
-                            <?php endforeach; ?>
-                            <div class="contact-info">
-                                <ul>
-                                    <li>
-                                        <a href="tel:+002562352589" class="call">
-                                            <i class="lni lni-phone-set"></i>
-                                            COMPRAR
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="social-share">
-                                <h4>Share Ad</h4>
-                                <ul>
-                                    <li><a href="javascript:void(0)" class="facebook"><i
-                                                class="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)" class="twitter"><i
-                                                class="lni lni-twitter-original"></i></a></li>
-                                    <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i></a>
-                                    </li>
-                                    <li><a href="javascript:void(0)" class="linkedin"><i
-                                                class="lni lni-linkedin-original"></i></a></li>
-                                    <li><a href="javascript:void(0)" class="pinterest"><i
-                                                class="lni lni-pinterest"></i></a></li>
-                                </ul>
-                            </div>
+                        <?php endforeach; ?>
+                        <div class="contact-info">
+                            <ul>
+                                <li>
+                                    <a href="tel:+002562352589" class="call">
+                                        <i class="lni lni-phone-set"></i>
+                                        COMPRAR
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="social-share">
+                            <h4>Share Ad</h4>
+                            <ul>
+                                <li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="javascript:void(0)" class="twitter"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i></a>
+                                </li>
+                                <li><a href="javascript:void(0)" class="linkedin"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="javascript:void(0)" class="pinterest"><i class="lni lni-pinterest"></i></a></li>
+                            </ul>
+                        </div>
                         </div>
                     </div>
                 </div>

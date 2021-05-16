@@ -197,7 +197,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <!-- Start Single List -->
                                 <div class="single-list wow fadeInUp" data-wow-delay=".2s">
-                                    <i class="lni lni-book"></i>
+                                    <a href="assets/catálagos/Catalogo Al Por Mayor - Makeup Trend.pdf" download="Catalogo Al Por Mayor - Makeup Trend.pdf"> <i class="lni lni-book"></i></a>
                                     <h4>Catálogo Al Mayor</h4>
                                     <p>Descarga nuestro catálogo al por mayor para enterar de precios y productos.</p>
                                 </div>
@@ -206,7 +206,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <!-- Start Single List -->
                                 <div class="single-list wow fadeInUp" data-wow-delay=".4s">
-                                    <i class="lni lni-leaf"></i>
+                                <a href="assets/catálagos/Catalogo Al Detal - Makeup Trend.pdf" download="Catalogo Al Detal - Makeup Trend.pdf"> <i class="lni lni-book"></i></a>
                                     <h4>Catálogo Al Detal</h4>
                                     <p>Descarga nuestro catálogo al detal para enterar de precios y productos.</p>
                                 </div>
@@ -240,7 +240,7 @@
                             <!-- Start Single Grid -->
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
-                                    <a href="item-details.html" class="thumbnail"><img src="assets/images/items-grid/img1.jpg" alt="#"></a>
+                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="thumbnail"><img src="assets/images/items-grid/img1.jpg" alt="#"></a>
                                     <div class="author">
 
                                         <p class="sale">Disponible</p>
@@ -248,7 +248,7 @@
                                 </div>
                                 <div class="content">
                                     <div class="top-content">
-                                        <p href="javascript:void(0)" class="tag"><?php echo remove_junk($product['categorie']); ?></p>
+                                        <p class="tag"><?php echo remove_junk($product['categorie']); ?></p>
                                         <h3 class="title">
                                             <a href="addetails.php?id=<?php echo (int)$product['id']; ?>"><?php echo remove_junk($product['name']); ?></a>
                                         </h3>
