@@ -238,11 +238,11 @@ function join_product_table()
 {
   global $db;
   $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
-  $sql  .= " AS categorie,m.file_name AS image";
+  $sql  .= " AS categorie,b.name as brand,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
-  $sql  .= " LEFT JOIN brands b ON b.id = p.brand_id";
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+  $sql  .= " LEFT JOIN brands b ON b.id = p.brand_id";
   $sql  .= " ORDER BY p.id ASC";
   return find_by_sql($sql);
 }
@@ -383,12 +383,46 @@ function find_higest_saleing_product($limit)
 function find_all_sale()
 {
   global $db;
-  $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
+  $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.payment_method";
   $sql .= " FROM sales s";
-  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
-  $sql .= " ORDER BY s.date DESC";
+  $sql .= " ORDER BY s.id DESC";
   return find_by_sql($sql);
 }
+/*--------------------------------------------------------------*/
+/* Function for find by id all sales
+ /*--------------------------------------------------------------*/
+ function find_all_sale_by_id($id)
+ {
+   global $db;
+   $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.neighborhood,s.type_ubication,s.payment_method";
+   $sql .= " FROM sales s";
+   $sql .= " WHERE s.id = $id";
+   return find_by_sql($sql);
+
+ }
+/*--------------------------------------------------------------*/
+/* Function for find all sales by id
+ /*--------------------------------------------------------------*/
+ function find_all_sale_products_by_id($id)
+ {
+   global $db;
+   $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,sp.date,p.name";
+   $sql .= " AS name_product,p.quantity as quantity_available,p.sale_price as sale_price"; 
+   $sql .= " FROM sales_products sp";
+   $sql .= " LEFT JOIN products p ON sp.product_id = p.id";
+   $sql .= " WHERE sp.id = $id";
+   $sql .= " ORDER BY p.name ASC";
+   return find_by_sql($sql);
+ }
+ function find_all_sale_products()
+ {
+   global $db;
+   $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
+   $sql .= " FROM sales_products s";
+   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+   $sql .= " ORDER BY s.date DESC";
+   return find_by_sql($sql);
+ }
 /*--------------------------------------------------------------*/
 /* Function for Display Recent sale
  /*--------------------------------------------------------------*/
@@ -450,5 +484,18 @@ function  monthlySales($year)
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y' ) = '{$year}'";
   $sql .= " GROUP BY DATE_FORMAT( s.date,  '%c' ),s.product_id";
   $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
+  return find_by_sql($sql);
+}
+/*--------------------------------------------------------------*/
+/* Function for get id sale report
+/*--------------------------------------------------------------*/
+function  get_id_sale_by_name($name)
+{
+  global $db;
+  $sql  = "SELECT s.id";
+  $sql .= " FROM sales s";
+  $sql .= " WHERE name= '{$name}'";
+  $sql  .= " ORDER BY s.id DESC";
+  $sql .= " LIMIT 1";
   return find_by_sql($sql);
 }

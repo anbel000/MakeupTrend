@@ -4,6 +4,7 @@
   // Checkin What level user has permission to view this page
    page_require_level(2);
   $products = join_product_table();
+  
 ?>
 <?php include_once('layouts/header.php'); ?>
   <div class="row">
@@ -23,8 +24,7 @@
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
                 <th> Imagen</th>
-                <th class="text-center" style="width: 10%;">Nombre</th>
-                <th> Descripción </th>
+                <th class="text-center" style="width: 35%;">Nombre</th>
                 <th class="text-center" style="width: 10%;"> Categoría </th>
                 <th class="text-center" style="width: 10%;"> Marca </th>
                 <th class="text-center" style="width: 10%;"> Stock </th>
@@ -44,9 +44,8 @@
                 <?php endif; ?>
                 </td>
                 <td class="text-center"> <?php echo remove_junk($product['name']); ?></td>
-                <td> <?php echo remove_junk($product['description']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['categorie']); ?></td>
-                <td class="text-center"> <?php echo read_date($product['brand']); ?></td>
+                <td class="text-center"> <?php echo remove_junk($product['brand']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['quantity']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>
                 <td class="text-center">

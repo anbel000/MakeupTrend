@@ -32,10 +32,10 @@
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
   //page_require_level(2);
- 
+
   $products = find_by_name($_GET['keyword']);
   $categories = find_all('categories');
-  
+
   ?>
 
   <div class="preloader" style="opacity: 0; display: none;">
@@ -65,28 +65,15 @@
               <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                 <ul id="nav" class="navbar-nav ms-auto">
                   <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Inicio</a>
+                    <a href="index.php" aria-label="Toggle navigation">Inicio</a>
                   </li>
+                  <?php foreach ($categories as $categorie) : ?>
+                    <li class="nav-item">
+                      <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>" aria-label="Toggle navigation"><?php echo remove_junk($categorie['name']); ?></a>
+                    </li>
+                  <?php endforeach; ?>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Brochas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Cejas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Cuidado de piel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Labios</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Ojos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Piel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">FAQ</a>
+                    <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
                   </li>
                 </ul>
               </div> <!-- navbar collapse -->
@@ -187,11 +174,11 @@
                 <div class="category-grid-topbar">
                   <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-12">
-                      <?php if(empty($products)){?>
-                      <h3 class="title"style="color: red;">NO SE ENCONTRO NINGÚN PRODUCTO</h3>
+                      <?php if (empty($products)) { ?>
+                        <h3 class="title" style="color: red;">NO SE ENCONTRO NINGÚN PRODUCTO</h3>
 
-                      <?php }else{?>
-                      <h3 class="title">Showing 1-12 of 21 ads found</h3>
+                      <?php } else { ?>
+                        <h3 class="title">Showing 1-12 of 21 ads found</h3>
                       <?php }; ?>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">

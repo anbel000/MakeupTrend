@@ -10,7 +10,7 @@ $all_categories = find_all('categories');
 $all_photo = find_all('media');
 $all_brands = find_all('brands');
 if (!$product) {
-  $session->msg("d", "Missing product id.");
+  $session->msg("d", "El producto no ha sido encontrado.");
   redirect('product.php');
 }
 ?>
@@ -80,7 +80,7 @@ if (isset($_POST['product'])) {
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-th-large"></i>
               </span>
-              <input type="text" class="form-control" name="description" value="<?php echo remove_junk($product['description']); ?>">
+              <textarea type="text" class="form-control" name="description" rows="5"><?php echo remove_junk($product['description']); ?></textarea>
             </div>
           </div>
           <div class="form-group">

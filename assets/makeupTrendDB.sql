@@ -6,7 +6,7 @@
 -- localhost
 -- username: root
 -- password: 
-
+-- Correr el sql por partes para evitar fallos.
 
 --------------- CREACIÓN DE TABLAS -----------------
 
@@ -29,18 +29,28 @@ create table media (
 create table products (
     id int(11) AUTO_INCREMENT primary key,
     name varchar(255) not null,
-    quantity int(3) not null,
+    quantity int(3) unsigned not null,
     sale_price decimal(25,2) not null,
     categorie_id int(11) not null,
     media_id int(11) not null,
     date datetime not null,
-    description varchar(5000 not null,
+    description varchar(5000) not null,
     brand_id int(11) not null,
     unique (id)
 );
 
 create table sales (
     id int(11) AUTO_INCREMENT primary key,
+    name varchar(200) not null,
+    cel_phone int(11) not null,
+    direction varchar(200) not null,
+    neighborhood varchar(200) not null,
+    type_ubication varchar(200) not null,
+    payment_method varchar(200) not null,
+);
+
+create table sales_products (
+    id int(11) not null,
     product_id int(11) not null,
     qty int(11) not null,
     price decimal(25,2) not null,
@@ -82,7 +92,11 @@ alter table products
 add constraint fk_media_product
 foreign key (media_id) references media(id);
 
-alter table sales
+alter table sales_products
+add constraint fk_sale
+foreign key (id) references sales(id);
+
+alter table sales_products
 add constraint fk_product_sales
 foreign key (product_id) references products(id);
 
@@ -122,31 +136,4 @@ insert into users (name, username, password, user_level, image, status, last_log
 ('Special User', 'special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'no_image.jpg', 1, '2017-06-16 07:11:26'),
 ('Default User', 'user', '12dea96fec20593566ab75692c9949596833adc9', 3, 'no_image.jpg', 1, '2017-06-16 07:11:03');
 
-
-
-insert into products (name, quantity, sale_price, categorie_id, media_id, date, description, brand_id) values
-('TRENDY SKINCARE CREMA CONTORNO DE OJOS TRENDY 30ML (IDEAL DESDE LOS 20-30 AÑOS)', 100, 10.00, 1, 1, '2017-06-16 07:03:16',
-'¿Por qué debemos usar contorno de ojos? Esta parte de nuestra piel es menos gruesa que el resto del rostro, además es de las que necesit más flexibilidad debido al movimiento que hacemos con los ojos. Es por eso que cuando estamos felices, tristes, cansados o simplemente con la edad se van notando signos de envejecimiento especialmente en esta zona, antes que en el resto de la cara. Otro factor es que  posee menos fibras de elastina y colágeno, así como menos glándulas sebáceas.
-¿Qué es un contorno de ojos? Es un producto en crema que tiene muchísimos beneficios en nuestra piel, aportando hidratación y flexibilidad, tiene un alto poder re afirmante y antiarrugas. Recuerda que al igual que todos los productos de cuidado de piel debe ser progresivo y su éxito depende de su aplicación constante para potenciar su efecto.
-¿Por qué tenemos 2 tipos de contorno de ojos?
-1. CONTORNO DE OJOS: Enfocado para pieles mixtas a grasas entre los 20-35 años. Está diseñada para humectar y revitalizar la zona, formulada especialmente con:
-Extracto de úrea: lo que hace que evitemos la pérdida de agua en la piel.
-Extracto de pepino: es astringente, por lo que reduce el acné y la producción excesiva de grasa en el rostro.
-Extracto de avena: elimina células muertas e impurezas, tiene efecto limpiador, absorbe la suciedad que se acumula en los poros.
-Extracto de Aloe: suaviza la piel, actuando como un excelente regenerador celular, asegura una muy buena penetración del producto en la piel.
-2. CONTORNO DE OJOS, ARRUGAS Y BOLSAS: Enfocado a pieles mixtas a secas mayores a 35 años, o maduras. No es una restricción obligatoria la edad sino más en el tipo de piel, ya que tenemos diferentes necesidades. Diseñado para disminuir la presencia de ojeras o círculos negros, líneas de expresión o bolsas de inflamación, formulada especialmente con:
-Extracto de pepino: es astringente, por lo que reduce el acné y la producción excesiva de grasa en el rostro.
-Extracto de caléndula: ayuda a tonificar la zona, aportando suavidad, rápida cicatrización y propiedades antiinflamatorias.
-Extracto de Pfaffia: oxigena las cédulas de la piel, actuando como un agente protector, permitiendo una mejor circulación y una mejor apariencia.
-Extracto de úrea: lo que hace que evitemos la pérdida de agua en la piel.
-Extracto de flor de lirio: hidrata y suaviza la piel en profundidad desde la última capa y estimula la capacidad de autorregulación de la piel.
-MODO DE USO EN LA MAÑANA:
-Suero antiedad
-Crema hidratante
-Protector solar
-Contorno de ojos
-MODO DE USO EN LA NOCHE CON EL ROSTRO LIMPIO:
-Suero antiedad
-(Opcional: Crema hidratante)
-Contorno de ojos', 1);
 

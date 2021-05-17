@@ -66,28 +66,15 @@
               <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                 <ul id="nav" class="navbar-nav ms-auto">
                   <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Inicio</a>
+                    <a href="index.php" aria-label="Toggle navigation">Inicio</a>
                   </li>
+                  <?php foreach ($categories as $categorie) : ?>
+                    <li class="nav-item">
+                      <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>" aria-label="Toggle navigation"><?php echo remove_junk($categorie['name']); ?></a>
+                    </li>
+                  <?php endforeach; ?>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Brochas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Cejas</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Cuidado de piel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Labios</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Ojos</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">Piel</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">FAQ</a>
+                    <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
                   </li>
                 </ul>
               </div> <!-- navbar collapse -->
