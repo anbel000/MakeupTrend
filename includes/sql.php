@@ -383,30 +383,20 @@ function find_higest_saleing_product($limit)
 function find_all_sale()
 {
   global $db;
-  $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.payment_method";
+  $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.date,st.name";
+  $sql .= " AS state";
   $sql .= " FROM sales s";
+  $sql .= " LEFT JOIN state_sale st ON s.state = st.id";
   $sql .= " ORDER BY s.id DESC";
   return find_by_sql($sql);
 }
-/*--------------------------------------------------------------*/
-/* Function for find by id all sales
- /*--------------------------------------------------------------*/
- function find_all_sale_by_id($id)
- {
-   global $db;
-   $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.neighborhood,s.type_ubication,s.payment_method";
-   $sql .= " FROM sales s";
-   $sql .= " WHERE s.id = $id";
-   return find_by_sql($sql);
-
- }
 /*--------------------------------------------------------------*/
 /* Function for find all sales by id
  /*--------------------------------------------------------------*/
  function find_all_sale_products_by_id($id)
  {
    global $db;
-   $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,sp.date,p.name";
+   $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,p.name";
    $sql .= " AS name_product,p.quantity as quantity_available,p.sale_price as sale_price"; 
    $sql .= " FROM sales_products sp";
    $sql .= " LEFT JOIN products p ON sp.product_id = p.id";

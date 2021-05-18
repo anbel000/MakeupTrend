@@ -33,7 +33,8 @@ $sales = find_all_sale();
                 <th> Nombre del cliente </th>
                 <th class="text-center" style="width: 15%;"> Número Celular</th>
                 <th class="text-center" style="width: 15%;"> Dirección </th>
-                <th class="text-center" style="width: 15%;"> Tipo de pago </th>
+                <th class="text-center" style="width: 15%;"> Estado </th>
+                <th class="text-center" style="width: 15%;"> Fecha </th>
                 <th class="text-center" style="width: 100px;"> Acciones </th>
              </tr>
             </thead>
@@ -44,7 +45,8 @@ $sales = find_all_sale();
                <td><?php echo remove_junk($sale['name']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['cel_phone']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['direction']); ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['payment_method']); ?></td>
+               <td class="text-center"><?php echo remove_junk($sale['state']); ?></td>
+               <td class="text-center"><?php echo remove_junk($sale['date']); ?></td>
                <td class="text-center">
                   <div class="btn-group">
                      <a href="edit_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">

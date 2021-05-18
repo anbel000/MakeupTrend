@@ -80,6 +80,10 @@
                                     <li class="nav-item">
                                         <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
+                                    </li>
+                                    
                                 </ul>
                             </div> <!-- navbar collapse -->
                         </nav> <!-- navbar -->

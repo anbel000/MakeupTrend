@@ -5,12 +5,14 @@ require_once('includes/load.php');
 page_require_level(3);
 ?>
 <?php
+
+$states = find_all('state_sale');
 if(isset($_SESSION["datosTabla"]) == true){
   $_SESSION["datosTabla"] = array();
 }
 if (isset($_POST['add_sale'])) {
-  if (1 <= 100) {
-    $req_fields = array('s_id', 'quantity', 'price', 'total', 'date', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method');
+  if ($_POST['quantity'] <= $_POST['quantity_available']) {
+    $req_fields = array('s_id', 'quantity', 'price', 'total', 'date', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'state', 'date');
     validate_fields($req_fields);
     if (empty($errors)) {
       $name_sale      = $db->escape($_POST['name_sale']);
@@ -19,11 +21,13 @@ if (isset($_POST['add_sale'])) {
       $neighborhood      = $db->escape($_POST['neighborhood']);
       $type_ubication    = $db->escape($_POST['type_ubication']);
       $payment_method      = $db->escape($_POST['payment_method']);
+      $state      = $db->escape($_POST['state']);
+      $date    = $db->escape($_POST['date']);
 
       $sql  = "INSERT INTO sales (";
-      $sql .= " name,cel_phone,direction,neighborhood,type_ubication,payment_method";
+      $sql .= " name,cel_phone,direction,neighborhood,type_ubication,payment_method,state,date";
       $sql .= ") VALUES (";
-      $sql .= "'{$name_sale}',{$cel_phone},'{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}'";
+      $sql .= "'{$name_sale}',{$cel_phone},'{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$state}','{$date}'";
       $sql .= ")";
 
       if ($db->query($sql)) {
@@ -32,19 +36,15 @@ if (isset($_POST['add_sale'])) {
         $session->msg('d', 'Falló en la creación del cliente.');
         redirect('add_sale.php', false);
       }
-
       $id_sale = get_id_sale_by_name($_POST['name_sale']);
       $p_id      = $db->escape((int)$_POST['s_id']);
       $s_qty     = $db->escape((int)$_POST['quantity']);
       $s_total   = $db->escape($_POST['total']);
-      $date      = $db->escape($_POST['date']);
-      $s_date    = make_date();
-
 
       $sql  = "INSERT INTO sales_products (";
-      $sql .= " id,product_id,qty,price,date";
+      $sql .= "id,product_id,qty,price";
       $sql .= ") VALUES (";
-      $sql .= "'{$id_sale[0]['id']}','{$p_id}','{$s_qty}','{$s_total}','{$s_date}'";
+      $sql .= "'{$id_sale[0]['id']}','{$p_id}','{$s_qty}','{$s_total}'";
       $sql .= ")";
 
       if ($db->query($sql)) {
@@ -61,7 +61,7 @@ if (isset($_POST['add_sale'])) {
     }
   } else {
     $session->msg('d', 'Lo siento, la cantidad de productos no esta disponible.');
-    
+    redirect('add_sale.php', false);
   }
 }
 
@@ -130,7 +130,21 @@ if (isset($_POST['add_sale'])) {
             </div>
           </div>
 
-
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <select class="form-control" name="state" id="state">
+                  <option value="">Selecciona el estado de la venta</option>
+                  <?php foreach($states as $state): ?>
+                  <option value="<?php echo (int)$state['id'] ?>"><?php echo $state['name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <input type="date" class="form-control" datePicker name="date" data-date data-date-format="yyyy-mm-dd">
+              </div>
+            </div>
+          </div>
 
 
           <table class="table table-bordered">
@@ -140,7 +154,6 @@ if (isset($_POST['add_sale'])) {
               <th> Cantidad </th>
               <th> Cantidad Disponible </th>
               <th> Total </th>
-              <th> Agregado</th>
               <th> Acciones</th>
             </thead>
             <tbody id="product_info"> </tbody>

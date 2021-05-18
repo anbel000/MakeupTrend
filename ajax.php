@@ -67,6 +67,7 @@ if (isset($_POST['product_name']) && strlen($_POST['product_name'])) {
         $html .= "<tr>";
         $html .= "<td id=\"s_name\">" . $result['name'] . "</td>";
         $html .= "<input type=\"hidden\" name=\"s_id\" value=\"{$result['id']}\">";
+        $html .= "<input type=\"hidden\" name=\"quantity_available\" value=\"{$result['quantity']}\">";
         $html  .= "<td>";
         $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" value=\"{$result['sale_price']}\">";
         $html  .= "</td>";
@@ -76,9 +77,6 @@ if (isset($_POST['product_name']) && strlen($_POST['product_name'])) {
         $html .= "<td id=\"quantity_available\">" . $result['quantity'] . "</td>";
         $html  .= "<td>";
         $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" value=\"{$result['sale_price']}\">";
-        $html  .= "</td>";
-        $html  .= "<td>";
-        $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date\" data-date data-date-format=\"yyyy-mm-dd\">";
         $html  .= "</td>";
         $html  .= "<td>";
         $html  .= "<button  name=\"remove_product\" class=\"btn btn-primary\" onClick=\"quitar(" . $result['id'] . "); return false;\">Quitar</button>";
@@ -118,9 +116,6 @@ if (isset($_POST['p_id'])) {
     $html .= "<td id=\"quantity_available\">" . $result['quantity'] . "</td>";
     $html  .= "<td>";
     $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" value=\"{$result['sale_price']}\">";
-    $html  .= "</td>";
-    $html  .= "<td>";
-    $html  .= "<input type=\"date\" class=\"form-control datePicker\" name=\"date\" data-date data-date-format=\"yyyy-mm-dd\">";
     $html  .= "</td>";
     $html  .= "<td>";
     $html  .= "<button  name=\"remove_product\" class=\"btn btn-primary\" onClick=\"quitar(" . $result['id'] . "); return false;\">Quitar</button>";

@@ -26,6 +26,11 @@ create table media (
     file_type varchar(100) not null
 );
 
+create table state_sale (
+    id int(11) AUTO_INCREMENT primary key,
+    name varchar(60) not null
+);
+
 create table products (
     id int(11) AUTO_INCREMENT primary key,
     name varchar(255) not null,
@@ -47,14 +52,15 @@ create table sales (
     neighborhood varchar(200) not null,
     type_ubication varchar(200) not null,
     payment_method varchar(200) not null,
+    state int(11) not null,
+    date date not null
 );
 
 create table sales_products (
     id int(11) not null,
     product_id int(11) not null,
     qty int(11) not null,
-    price decimal(25,2) not null,
-    date date not null
+    price decimal(25,2) not null
 );
 
 create table users (
@@ -100,6 +106,10 @@ alter table sales_products
 add constraint fk_product_sales
 foreign key (product_id) references products(id);
 
+alter table sales
+add constraint fk_state_sale
+foreign key (state) references state_sale(id);
+
 alter table users
 add constraint fk_user
 foreign key (user_level) references user_groups(group_level);
@@ -122,6 +132,10 @@ insert into brands (name) values
 
 insert into media (file_name, file_type) values
 ('filter.jpg','image/jpeg');
+
+insert into state_sale (name) values
+('Pagado'),
+('Pendiente');
 
 insert into products (name, quantity, sale_price, categorie_id, media_id, date, description, brand_id) values
 ('Filtro de gasolina', 100, 10.00, 1, 1, '2017-06-16 07:03:16','Producto de comercialización, pureba número 1', 1);
