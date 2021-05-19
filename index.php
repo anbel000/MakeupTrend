@@ -232,10 +232,11 @@
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
                                     <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="thumbnail"><img src="assets/images/items-grid/img1.jpg" alt="#"></a>
-                                    <div class="author">
-
-                                        <p class="sale">Disponible</p>
+                                    <?php if ($product['quantity'] == 0) {?>
+                                        <div class="author">
+                                        <p class="sale">Agotado</p>
                                     </div>
+                                    <?php } ?>
                                 </div>
                                 <div class="content">
                                     <div class="top-content">

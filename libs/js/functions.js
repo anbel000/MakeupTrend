@@ -134,7 +134,6 @@ function registrarVenta() {
     var formData = {
         'productos': productos,
         'add_sale' : 'guardar',
-        'update_sale' : "guardar",
         'name_sale' : $('[name="name_sale"]')[0].value,
         'cel_phone' : $('[name="cel_phone"]')[0].value,
         'direction' : $('[name="direction"]')[0].value,
@@ -157,7 +156,47 @@ function registrarVenta() {
         location.reload();
         //Tratamos a respuesta según sea el tipo  y la estructura               
     }).fail(function(jqXHR, textStatus) {
-        alert("Hubo un error: " + textStatus);
+        alert("Falta información para registrar la venta");
+    });
+        
+
+}
+
+function actualizarVenta() {
+
+    var productos = $('#tablaProductos').tableToJSON({
+        extractor: function (cellIndex, $cell) {
+            return $cell.find('span').text() || $cell.text() || $($cell[0]).children()[0].value;
+        }
+    });
+
+    var formData = {
+        'productos': productos,
+        'update_sale' : 'guardar',
+        'id' : $('[name="id"]')[0].value,
+        'name_sale' : $('[name="name_sale"]')[0].value,
+        'cel_phone' : $('[name="cel_phone"]')[0].value,
+        'direction' : $('[name="direction"]')[0].value,
+        'neighborhood' : $('[name="neighborhood"]')[0].value,
+        'type_ubication' : $('[name="type_ubication"]')[0].value,
+        'payment_method' : $('[name="payment_method"]')[0].value,
+        'state' : $('[name="state"]')[0].value,
+        'date' : $('[name="date"]')[0].value
+    };
+    // process the form
+    $.ajax({
+        type: 'POST',
+        url: 'update_sale.php',
+        data: formData,
+        dataType: 'json',
+        encode: true
+    }).done(function(respuesta) {
+        console.log(respuesta);
+        alert(respuesta);
+        location.reload();
+        //Tratamos a respuesta según sea el tipo  y la estructura               
+    }).fail(function(jqXHR, textStatus) {
+        alert("Falta información para actualizar la venta" + textStatus);
     });
         
 

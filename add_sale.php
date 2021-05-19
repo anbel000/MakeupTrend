@@ -8,8 +8,6 @@ page_require_level(3);
 
 $states = find_all('state_sale');
 
-var_dump("----> ", $_POST['name_sale']);
-
 if (isset($_POST['add_sale']) == false) {
   if(isset($_SESSION["datosTabla"]) == true){
     $_SESSION["datosTabla"] = array();
