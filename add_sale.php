@@ -7,61 +7,12 @@ page_require_level(3);
 <?php
 
 $states = find_all('state_sale');
-if(isset($_SESSION["datosTabla"]) == true){
-  $_SESSION["datosTabla"] = array();
-}
-if (isset($_POST['add_sale'])) {
-  if ($_POST['quantity'] <= $_POST['quantity_available']) {
-    $req_fields = array('s_id', 'quantity', 'price', 'total', 'date', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'state', 'date');
-    validate_fields($req_fields);
-    if (empty($errors)) {
-      $name_sale      = $db->escape($_POST['name_sale']);
-      $cel_phone     = $db->escape((int)$_POST['cel_phone']);
-      $direction   = $db->escape($_POST['direction']);
-      $neighborhood      = $db->escape($_POST['neighborhood']);
-      $type_ubication    = $db->escape($_POST['type_ubication']);
-      $payment_method      = $db->escape($_POST['payment_method']);
-      $state      = $db->escape($_POST['state']);
-      $date    = $db->escape($_POST['date']);
 
-      $sql  = "INSERT INTO sales (";
-      $sql .= " name,cel_phone,direction,neighborhood,type_ubication,payment_method,state,date";
-      $sql .= ") VALUES (";
-      $sql .= "'{$name_sale}',{$cel_phone},'{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$state}','{$date}'";
-      $sql .= ")";
+var_dump("----> ", $_POST['name_sale']);
 
-      if ($db->query($sql)) {
-        $session->msg('s', "Cliente creado.");
-      } else {
-        $session->msg('d', 'Falló en la creación del cliente.');
-        redirect('add_sale.php', false);
-      }
-      $id_sale = get_id_sale_by_name($_POST['name_sale']);
-      $p_id      = $db->escape((int)$_POST['s_id']);
-      $s_qty     = $db->escape((int)$_POST['quantity']);
-      $s_total   = $db->escape($_POST['total']);
-
-      $sql  = "INSERT INTO sales_products (";
-      $sql .= "id,product_id,qty,price";
-      $sql .= ") VALUES (";
-      $sql .= "'{$id_sale[0]['id']}','{$p_id}','{$s_qty}','{$s_total}'";
-      $sql .= ")";
-
-      if ($db->query($sql)) {
-        update_product_qty($s_qty, $p_id);
-        $session->msg('s', "Venta agregada ");
-        redirect('add_sale.php', false);
-      } else {
-        $session->msg('d', 'Lo siento, registro falló.');
-        redirect('add_sale.php', false);
-      }
-    } else {
-      $session->msg("d", $errors);
-      redirect('add_sale.php', false);
-    }
-  } else {
-    $session->msg('d', 'Lo siento, la cantidad de productos no esta disponible.');
-    redirect('add_sale.php', false);
+if (isset($_POST['add_sale']) == false) {
+  if(isset($_SESSION["datosTabla"]) == true){
+    $_SESSION["datosTabla"] = array();
   }
 }
 
@@ -147,8 +98,9 @@ if (isset($_POST['add_sale'])) {
           </div>
 
 
-          <table class="table table-bordered">
+          <table class="table table-bordered" id="tablaProductos">
             <thead>
+              <th style="width: 5%;"> ID </th>
               <th style="width: 20%;"> Producto </th>
               <th> Precio </th>
               <th> Cantidad </th>
@@ -161,7 +113,7 @@ if (isset($_POST['add_sale'])) {
 
 
 
-          <button type="submit" name="add_sale" class="btn btn-danger">Agregar producto</button>
+          <button name="add_sale" class="btn btn-danger" onclick="registrarVenta(); return false;">Agregar producto</button>
         </form>
       </div>
     </div>

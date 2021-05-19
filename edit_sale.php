@@ -13,12 +13,11 @@ if (!$sale) {
   redirect('sales.php');
 }
 ?>
-<?php $products = find_all_sale_products_by_id((int)$_GET['id']);
-var_dump($products); ?>
+<?php $products = find_all_sale_products_by_id((int)$_GET['id']);?>
 <?php
 
 if (isset($_POST['update_sale'])) {
-  $req_fields = array('sp_qty', 'total', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method');
+  $req_fields = array('sp_qty', 'total', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'state', 'date');
   validate_fields($req_fields);
   if (empty($errors)) {
     $name_sale      = $db->escape($_POST['name_sale']);
@@ -27,19 +26,20 @@ if (isset($_POST['update_sale'])) {
     $neighborhood      = $db->escape($_POST['neighborhood']);
     $type_ubication    = $db->escape($_POST['type_ubication']);
     $payment_method      = $db->escape($_POST['payment_method']);
+    $state      = $db->escape($_POST['state']);
+    $date      = $db->escape($_POST['date']);
 
     $sql  = "UPDATE sales SET";
-    $sql .= " name= '{$name_sale}',cel_phone= '{$cel_phone}',direction= '{$direction}',neighborhood= '{$neighborhood}',type_ubication= '{$type_ubication}',payment_method= '{$payment_method}'";
-    $sql .= " WHERE id ='{$sale[0]['id']}'";
+    $sql .= " name= '{$name_sale}',cel_phone= '{$cel_phone}',direction= '{$direction}',neighborhood= '{$neighborhood}',type_ubication= '{$type_ubication}',payment_method= '{$payment_method}',state= '{$state}',date= '{$date}'";
+    $sql .= " WHERE id ={$sale['id']}";
     $result = $db->query($sql);
 
     if ($result && $db->affected_rows() === 1 || $db->affected_rows() === 0) {
       $session->msg('s', "Cliente actualizado");
     } else {
       $session->msg('d', 'Error al actualizar el cliente');
-      //redirect('sales.php', false);
-      echo $result;
-      echo $db->affected_rows();
+      redirect('sales.php', false);
+     
     }
 
 
@@ -48,26 +48,22 @@ if (isset($_POST['update_sale'])) {
     $s_total   = $db->escape((int)$_POST['total']);
 
 
-    var_dump($s_qty);
-    var_dump($sp_id);
-    var_dump($s_total);
-
     $sql  = "UPDATE sales_products SET";
     $sql .= " qty={$s_qty},price={$s_total}";
-    $sql .= " WHERE id = {$sale[0]['id']} AND product_id = {$sp_id}";
+    $sql .= " WHERE id = {$sale['id']} AND product_id = {$sp_id}";
 
     $result = $db->query($sql);
     if ($result && $db->affected_rows() === 1 || $db->affected_rows() === 0) {
       //update_product_qty($s_qty, $p_id);
       $session->msg('s', "Venta actualizada");
-      //redirect('edit_sale.php?id=' . $sale['id'], false);
+      redirect('edit_sale.php?id=' . $sale['id'], false);
     } else {
       $session->msg('d', 'Falló al actualizar la venta');
-      //redirect('sales.php', false);
+      redirect('sales.php', false);
     }
   } else {
     $session->msg("d", $errors);
-    //redirect('edit_sale.php?id=' . (int)$sale['id'], false);
+    redirect('edit_sale.php?id=' . (int)$sale['id'], false);
   }
 }
 
@@ -92,7 +88,7 @@ if (isset($_POST['update_sale'])) {
         </div>
       </div>
       <div class="panel-body">
-        <form method="post" action="edit_sale.php?id=<?php echo (int)$sale[0]['id']; ?>">
+        <form method="post" action="edit_sale.php?id=<?php echo (int)$sale['id']; ?>">
           <div class="panel-heading">
             <strong>
               <span class="glyphicon glyphicon-th"></span>

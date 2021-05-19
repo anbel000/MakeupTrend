@@ -62,26 +62,26 @@ if (isset($_POST['product_name']) && strlen($_POST['product_name'])) {
           $_SESSION["datosTabla"] = $temporal;
         }
       }
-
+      $indice = 0;
       foreach ($_SESSION["datosTabla"] as $result) {
         $html .= "<tr>";
+        $html .= "<td>" . $result['id'] . "</td>";
         $html .= "<td id=\"s_name\">" . $result['name'] . "</td>";
-        $html .= "<input type=\"hidden\" name=\"s_id\" value=\"{$result['id']}\">";
-        $html .= "<input type=\"hidden\" name=\"quantity_available\" value=\"{$result['quantity']}\">";
         $html  .= "<td>";
-        $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" value=\"{$result['sale_price']}\">";
+        $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" tipo=\"price".$indice."\" value=\"{$result['sale_price']}\">";
         $html  .= "</td>";
         $html .= "<td id=\"s_qty\">";
-        $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" value=\"1\">";
+        $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" tipo=\"quantity".$indice."\" value=\"1\">";
         $html  .= "</td>";
         $html .= "<td id=\"quantity_available\">" . $result['quantity'] . "</td>";
         $html  .= "<td>";
-        $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" value=\"{$result['sale_price']}\">";
+        $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" tipo=\"total".$indice."\" value=\"{$result['sale_price']}\">";
         $html  .= "</td>";
         $html  .= "<td>";
         $html  .= "<button  name=\"remove_product\" class=\"btn btn-primary\" onClick=\"quitar(" . $result['id'] . "); return false;\">Quitar</button>";
         $html  .= "</td>";
         $html  .= "</tr>";
+        $indice = $indice + 1;
       }
     } else {
       $html = '<tr><td>El producto no se encuentra registrado en la base de datos</td></tr>';
@@ -103,24 +103,26 @@ if (isset($_POST['p_id'])) {
   }
   $_SESSION["datosTabla"] = $arryTemp;
 
+  $indice = 0;
   foreach ($_SESSION["datosTabla"] as $result) {
     $html .= "<tr>";
+    $html .= "<td>" . $result['id'] . "</td>";
     $html .= "<td id=\"s_name\">" . $result['name'] . "</td>";
-    $html .= "<input type=\"hidden\" name=\"s_id\" value=\"{$result['id']}\">";
     $html  .= "<td>";
-    $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" value=\"{$result['sale_price']}\">";
+    $html  .= "<input type=\"text\" class=\"form-control\" name=\"price\" tipo=\"price".$indice."\" value=\"{$result['sale_price']}\">";
     $html  .= "</td>";
     $html .= "<td id=\"s_qty\">";
-    $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" value=\"1\">";
+    $html .= "<input type=\"text\" class=\"form-control\" name=\"quantity\" tipo=\"quantity".$indice."\" value=\"1\">";
     $html  .= "</td>";
     $html .= "<td id=\"quantity_available\">" . $result['quantity'] . "</td>";
     $html  .= "<td>";
-    $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" value=\"{$result['sale_price']}\">";
+    $html  .= "<input type=\"text\" class=\"form-control\" name=\"total\" tipo=\"total".$indice."\" value=\"{$result['sale_price']}\">";
     $html  .= "</td>";
     $html  .= "<td>";
     $html  .= "<button  name=\"remove_product\" class=\"btn btn-primary\" onClick=\"quitar(" . $result['id'] . "); return false;\">Quitar</button>";
     $html  .= "</td>";
     $html  .= "</tr>";
+    $indice = $indice + 1;
   }
 
   echo json_encode($html);

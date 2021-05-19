@@ -101,7 +101,7 @@
             <div class="title">
                 <div class="row">
                     <div class="col">
-                        <h4><b>Carrito de compras</b></h4>
+                        <h4>Carrito de compras</h4>
                     </div>
                     <div class="col align-self-center text-right text-muted">3 productos</div>
                 </div>
@@ -143,7 +143,7 @@
         </div>
         <div class="col-md-4 summary">
             <div>
-                <h5><b>Resumen</b></h5>
+                <h5>Resumen</h5>
             </div>
             <hr>
             <div class="row">

@@ -68,10 +68,11 @@ $('#sug-form').submit(function (e) {
 });
 function total() {
     $('#product_info input').change(function (e) {
-        var price = +$('input[name=price]').val() || 0;
-        var qty = +$('input[name=quantity]').val() || 0;
-        var total = qty * price;
-        $('input[name=total]').val(total.toFixed(2));
+        var elementoCantidad = $(e.currentTarget)[0];
+        var tipo = $(elementoCantidad).attr('tipo').replace(elementoCantidad.name, '');
+        var precio = parseInt($('[tipo=price'+tipo+']')[0].value);
+        var cantidad = parseInt(elementoCantidad.value);
+        $('[tipo=total'+tipo+']')[0].value = precio * cantidad;
     });
 }
 
@@ -118,5 +119,46 @@ function quitar(id) {
         }).fail(function () {
             $('#product_info').html(data).show();
         });
+
+}
+
+
+function registrarVenta() {
+
+    var productos = $('#tablaProductos').tableToJSON({
+        extractor: function (cellIndex, $cell) {
+            return $cell.find('span').text() || $cell.text() || $($cell[0]).children()[0].value;
+        }
+    });
+
+    var formData = {
+        'productos': productos,
+        'add_sale' : 'guardar',
+        'update_sale' : "guardar",
+        'name_sale' : $('[name="name_sale"]')[0].value,
+        'cel_phone' : $('[name="cel_phone"]')[0].value,
+        'direction' : $('[name="direction"]')[0].value,
+        'neighborhood' : $('[name="neighborhood"]')[0].value,
+        'type_ubication' : $('[name="type_ubication"]')[0].value,
+        'payment_method' : $('[name="payment_method"]')[0].value,
+        'state' : $('[name="state"]')[0].value,
+        'date' : $('[name="date"]')[0].value
+    };
+    // process the form
+    $.ajax({
+        type: 'POST',
+        url: 'insert_sale.php',
+        data: formData,
+        dataType: 'json',
+        encode: true
+    }).done(function(respuesta) {
+        console.log(respuesta);
+        alert(respuesta);
+        location.reload();
+        //Tratamos a respuesta según sea el tipo  y la estructura               
+    }).fail(function(jqXHR, textStatus) {
+        alert("Hubo un error: " + textStatus);
+    });
+        
 
 }
