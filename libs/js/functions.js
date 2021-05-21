@@ -166,7 +166,7 @@ function actualizarVenta() {
 
     var productos = $('#tablaProductos').tableToJSON({
         extractor: function (cellIndex, $cell) {
-            return $cell.find('span').text() || $cell.text() || $($cell[0]).children()[0].value;
+            return ($($cell[0]).children()[0] ? $($cell[0]).children()[0].value : null) || $cell.find('span').text() || $cell.text() ;
         }
     });
 

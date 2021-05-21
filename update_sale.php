@@ -1,6 +1,13 @@
 <?php
+$page_title = 'Agregar venta';
+require_once('includes/load.php');
+// Checkin What level user has permission to view this page
+page_require_level(3);
+?>
 
-/*if (isset($_POST['update_sale'])) {
+<?php
+
+if (isset($_POST['update_sale'])) {
     if (isset($_POST['productos'])) {
         $req_fields = array('id', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'state', 'date');
         validate_fields($req_fields);
@@ -64,8 +71,6 @@
             echo ($errors);
         }
     }
-}*/
-
-var_dump($_POST["productos"]);
+}
 
 ?>
