@@ -247,8 +247,8 @@
                                     </div>
                                     <div class="bottom-content">
                                         <p class="price">Precio: <span>$<?php echo remove_junk($product['sale_price']); ?></span></p>
-                                        <a href="javascript:void(0)"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%;">Comprar <i class="fa fa-cart-plus"></i></button></a>
+                                        <a href="add_shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%;">COMPRAR<i class="fa fa-cart-plus"></i></button></a>
                                     </div>
                                 </div>
                             </div>

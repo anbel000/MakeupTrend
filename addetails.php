@@ -135,6 +135,7 @@
 
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
+                            <input id="id" type="number" hidden value="<?php echo remove_junk($product['id']); ?>">
                             <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
                             <h3 class="price">$<?php echo remove_junk($product['sale_price']); ?></h3>
                             <div class="list-info">
@@ -149,7 +150,11 @@
                                     <li><span>Marca:</span><?php echo remove_junk($product['brand']); ?></li>
                                     <li><span>Categoria:</span><?php echo remove_junk($product['categorie']); ?></li>
                                 </ul>
-
+                                <BR></BR>
+                                <ul>
+                                    <li>Cantidad</li>
+                                    <li><input type="number" style="width:80px;text-align: center;" id="qty" class="form-control" value="1" min="1" /></li>
+                                </ul>
                             </div>
                         <?php endforeach; ?>
                         <div class="contact-info">
@@ -177,13 +182,14 @@
                                 <input name="shipmentPackageHeightDimension" type="hidden" value="12">
                                 <input name="shipmentPackageWidthDimension" type="hidden" value="24">
                                 <input name="shipmentPackageLengthDimension" type="hidden" value="12">
-                                
+
 
 
                                 <input name="responseUrl" type="hidden" value="http://www.test.com/response">
                                 <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
                                 <input name="Submit" type="submit" value="COMPRAR">
                             </form>
+                            <button onclick="agregarCarrito(); return false;">Añadir al carrito</button>
                             <!-- 4Vj8eK4rloUd272L48hsrarnUA~508029~PAGO01~30000~COP~12000 -->
                         </div>
                         <div class="social-share">
@@ -236,12 +242,15 @@
     <a href="#" class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>
     </a>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="./assets/js/wow.min.js"></script>
     <script src="./assets/js/tiny-slider.js"></script>
     <script src="./assets/js/glightbox.min.js"></script>
     <script src="./assets/js/main.js"></script>
+    
     <script type="text/javascript">
         const current = document.getElementById("current");
         const opacity = 0.6;
@@ -259,6 +268,39 @@
                 e.target.style.opacity = opacity;
             });
         });
+    </script>
+
+    <script type="text/javascript">
+
+        function agregarCarrito() {
+
+            var formData = {
+                'id': document.getElementById("id").value,
+                'qty': document.getElementById("qty").value
+            };
+            // process the form
+            $.ajax({
+                type: 'POST',
+                url: 'add_shopping_cart.php',
+                data: formData,
+                dataType: 'json',
+                encode: true
+            }).done(function(respuesta) {
+                if (respuesta['error'] == true) {
+                    console.log(respuesta['msg']);
+                    alert(respuesta['msg']);
+                } else {
+                    console.log(respuesta['msg']);
+                    alert(respuesta['msg']);
+                    location.reload();
+                }
+                //Tratamos a respuesta según sea el tipo  y la estructura               
+            }).fail(function(jqXHR, textStatus) {
+                alert("Falta información para agregar" + textStatus);
+            });
+
+
+        }
     </script>
 
 </body>

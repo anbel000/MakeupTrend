@@ -39,6 +39,17 @@
     // Checkin What level user has permission to view this page
     //page_require_level(2);
     $categories = find_all("categories");
+
+    session_start();
+    var_dump($_SESSION);
+    foreach($_SESSION["carrito"] as $indice =>$result){
+        var_dump($indice);
+        var_dump($result);
+    }
+    /*foreach($_SESSION["products_shoppingCart"] as $indice =>$result){
+        var_dump($indice);
+        var_dump($result);
+    }*/
     ?>
 
     <!-- Preloader -->
@@ -106,39 +117,28 @@
                         <div class="col align-self-center text-right text-muted">3 productos</div>
                     </div>
                 </div>
-                <div class="row border-top border-bottom">
+                <?php  
+                     foreach($_SESSION["products_shoppingCart"] as $indice =>$qty){
+                        $product = join_product_table_by_id($indice);
+                        foreach($product as $result){
+                ?>
+                <div class="row border-top">
                     <div class="row main align-items-center">
                         <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                         <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
+                            <div class="row text-muted"><?php echo $result["categorie"]?></div>
+                            <div class="row"><?php echo $result["name"]?></div>
                         </div>
-                        <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                        <div class="col"> <a href="#">-</a><a href="#" class="border"><?php echo $qty?></a><a href="#">+</a> </div>
+                        <div class="col">&euro; <?php echo $result["sale_price"]?> <span class="close">&#10005;</span></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col"> <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a> </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
+                <?php
+                        }
+                    }
+                ?>
+                
+                
                 <div class="back-to-shop"><a href="index.php">&leftarrow;<span class="text-muted"> Regresar a la tienda</span></a></div>
             </div>
             <div class="col-md-4 summary">
