@@ -45,6 +45,23 @@ function find_by_id($table, $id)
   }
 }
 /*--------------------------------------------------------------*/
+/*  Function for Find all data from table by id 
+/*--------------------------------------------------------------*/
+function find_sales_by_id($table, $id)
+{
+  global $db;
+  $id = (int)$id;
+  if (tableExists($table)) {
+    $sql = "SELECT product_id,qty ";
+    $sql .= "FROM ".$db->escape($table);
+    $sql .= " WHERE id=".$db->escape($id);
+    return find_by_sql($sql);
+  }else{
+    return "No existe";
+  }
+  
+}
+/*--------------------------------------------------------------*/
 /* Function for Delete data from table by id
 /*--------------------------------------------------------------*/
 function delete_by_id($table, $id)
@@ -56,6 +73,19 @@ function delete_by_id($table, $id)
     $sql .= " LIMIT 1";
     $db->query($sql);
     return ($db->affected_rows() === 1) ? true : false;
+  }
+}
+/*--------------------------------------------------------------*/
+/* Function for Delete data from table by id
+/*--------------------------------------------------------------*/
+function delete_sales_by_id($table, $id)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql = "DELETE FROM " . $db->escape($table);
+    $sql .= " WHERE id=" . $db->escape($id);
+    $db->query($sql);
+    return ($db->affected_rows() > 0) ? true : false;
   }
 }
 /*--------------------------------------------------------------*/

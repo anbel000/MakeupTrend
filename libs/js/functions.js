@@ -70,9 +70,9 @@ function total() {
     $('#product_info input').change(function (e) {
         var elementoCantidad = $(e.currentTarget)[0];
         var tipo = $(elementoCantidad).attr('tipo').replace(elementoCantidad.name, '');
-        var precio = parseInt($('[tipo=price'+tipo+']')[0].value);
+        var precio = parseInt($('[tipo=price' + tipo + ']')[0].value);
         var cantidad = parseInt(elementoCantidad.value);
-        $('[tipo=total'+tipo+']')[0].value = precio * cantidad;
+        $('[tipo=total' + tipo + ']')[0].value = precio * cantidad;
     });
 }
 
@@ -98,7 +98,6 @@ $(document).ready(function () {
 });
 
 function quitar(id) {
-    console.log("ID QUE LLEGFA : " + id);
     var formData = {
         'p_id': id
     };
@@ -133,15 +132,15 @@ function registrarVenta() {
 
     var formData = {
         'productos': productos,
-        'add_sale' : 'guardar',
-        'name_sale' : $('[name="name_sale"]')[0].value,
-        'cel_phone' : $('[name="cel_phone"]')[0].value,
-        'direction' : $('[name="direction"]')[0].value,
-        'neighborhood' : $('[name="neighborhood"]')[0].value,
-        'type_ubication' : $('[name="type_ubication"]')[0].value,
-        'payment_method' : $('[name="payment_method"]')[0].value,
-        'state' : $('[name="state"]')[0].value,
-        'date' : $('[name="date"]')[0].value
+        'add_sale': 'guardar',
+        'name_sale': $('[name="name_sale"]')[0].value,
+        'cel_phone': $('[name="cel_phone"]')[0].value,
+        'direction': $('[name="direction"]')[0].value,
+        'neighborhood': $('[name="neighborhood"]')[0].value,
+        'type_ubication': $('[name="type_ubication"]')[0].value,
+        'payment_method': $('[name="payment_method"]')[0].value,
+        'state': $('[name="state"]')[0].value,
+        'date': $('[name="date"]')[0].value
     };
     // process the form
     $.ajax({
@@ -150,15 +149,21 @@ function registrarVenta() {
         data: formData,
         dataType: 'json',
         encode: true
-    }).done(function(respuesta) {
-        console.log(respuesta);
-        alert(respuesta);
-        location.reload();
+    }).done(function (respuesta) {
+        if (respuesta['error'] == true) {
+            console.log(respuesta['msg']);
+            alert(respuesta['msg']);
+        } else {
+            console.log(respuesta['msg']);
+            alert(respuesta['msg']);
+            location.reload();
+        }
+
         //Tratamos a respuesta según sea el tipo  y la estructura               
-    }).fail(function(jqXHR, textStatus) {
+    }).fail(function (jqXHR, textStatus) {
         alert("Falta información para registrar la venta");
     });
-        
+
 
 }
 
@@ -166,22 +171,22 @@ function actualizarVenta() {
 
     var productos = $('#tablaProductos').tableToJSON({
         extractor: function (cellIndex, $cell) {
-            return ($($cell[0]).children()[0] ? $($cell[0]).children()[0].value : null) || $cell.find('span').text() || $cell.text() ;
+            return ($($cell[0]).children()[0] ? $($cell[0]).children()[0].value : null) || $cell.find('span').text() || $cell.text();
         }
     });
 
     var formData = {
         'productos': productos,
-        'update_sale' : 'guardar',
-        'id' : $('[name="id"]')[0].value,
-        'name_sale' : $('[name="name_sale"]')[0].value,
-        'cel_phone' : $('[name="cel_phone"]')[0].value,
-        'direction' : $('[name="direction"]')[0].value,
-        'neighborhood' : $('[name="neighborhood"]')[0].value,
-        'type_ubication' : $('[name="type_ubication"]')[0].value,
-        'payment_method' : $('[name="payment_method"]')[0].value,
-        'state' : $('[name="state"]')[0].value,
-        'date' : $('[name="date"]')[0].value
+        'update_sale': 'guardar',
+        'id': $('[name="id"]')[0].value,
+        'name_sale': $('[name="name_sale"]')[0].value,
+        'cel_phone': $('[name="cel_phone"]')[0].value,
+        'direction': $('[name="direction"]')[0].value,
+        'neighborhood': $('[name="neighborhood"]')[0].value,
+        'type_ubication': $('[name="type_ubication"]')[0].value,
+        'payment_method': $('[name="payment_method"]')[0].value,
+        'state': $('[name="state"]')[0].value,
+        'date': $('[name="date"]')[0].value
     };
     // process the form
     $.ajax({
@@ -190,14 +195,19 @@ function actualizarVenta() {
         data: formData,
         dataType: 'json',
         encode: true
-    }).done(function(respuesta) {
-        console.log(respuesta);
-        alert(respuesta);
-        location.reload();
+    }).done(function (respuesta) {
+        if (respuesta['error'] == true) {
+            console.log(respuesta['msg']);
+            alert(respuesta['msg']);
+        } else {
+            console.log(respuesta['msg']);
+            alert(respuesta['msg']);
+            location.reload();
+        }
         //Tratamos a respuesta según sea el tipo  y la estructura               
-    }).fail(function(jqXHR, textStatus) {
+    }).fail(function (jqXHR, textStatus) {
         alert("Falta información para actualizar la venta" + textStatus);
     });
-        
+
 
 }

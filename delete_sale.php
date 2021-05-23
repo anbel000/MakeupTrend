@@ -4,19 +4,27 @@
   page_require_level(3);
 ?>
 <?php
-  $d_sale = find_by_id('sales',(int)$_GET['id']);
+  $d_sale = find_sales_by_id('sales_products',(int)$_GET['id']);
   if(!$d_sale){
-    $session->msg("d","ID vacío.");
+    $session->msg("d","ID no disponible.");
     redirect('sales.php');
   }
 ?>
 <?php
-  $delete_id = delete_by_id('sales',(int)$d_sale['id']);
-  if($delete_id){
-      $session->msg("s","Venta eliminada.");
+  $delete_products_id = delete_sales_by_id('sales_products',(int)$_GET['id']);
+  if($delete_products_id){
+    $delete_sale = delete_by_id('sales',(int)$_GET['id']);
+    if ($delete_sale) {
+      foreach($d_sale as $result){
+        update_product_base_qty($result['qty'], $result['product_id']);
+      }
+      $session->msg("s","Venta eliminada");
       redirect('sales.php');
+    }
   } else {
-      $session->msg("d","Eliminación falló");
+      $session->msg("d","Falló la eliminación de los productos");
       redirect('sales.php');
   }
+
+
 ?>

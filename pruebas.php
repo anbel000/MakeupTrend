@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-   
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
 
@@ -81,7 +81,7 @@
                                         <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
+                                        <a href="cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
                                     </li>
 
                                 </ul>
@@ -211,7 +211,7 @@
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
- 
-    </body>
+
+</body>
 
 </html>

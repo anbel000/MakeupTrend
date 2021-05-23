@@ -8413,34 +8413,37 @@ blockquote .shape {
 
 /*--------------*/
 
+
+
+.contenedor_body {
+    vertical-align: middle;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold
+}
+
 .title {
     margin-bottom: 5vh
 }
 
 .card {
-	margin-top: 10%;
-    margin-left: auto;
+    margin-top: 10%;
+	margin-bottom: 5%;
+	margin-left: auto;
 	margin-right: auto;
     max-width: 950px;
     width: 90%;
-	padding: 20px 50px;
-	border-radius: 20px;
-    border: none;
-    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent
 }
-
-
 
 @media(max-width:767px) {
     .card {
-        margin-top: 16vh;
-    	margin-right: auto;
-    	margin-bottom: 5vh;
-    	margin-left: auto;
+        margin: 30vh auto
     }
 }
-
-
 
 .cart {
     background-color: #fff;
@@ -8458,7 +8461,7 @@ blockquote .shape {
 }
 
 .summary {
-    background-color: #ddd;
+    background-color: rgb(255 255 255);
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     padding: 4vh;
@@ -8480,7 +8483,9 @@ blockquote .shape {
     padding: 0
 }
 
-
+.card .row {
+    margin: 0
+}
 
 .title b {
     font-size: 1.5rem
@@ -8492,31 +8497,78 @@ blockquote .shape {
     width: 100%
 }
 
+.card .col-2,
+.col {
+    padding: 0 1vh
+}
 
+.card a {
+    padding: 0 1vh
+}
 
 .close {
     margin-left: auto;
     font-size: 0.7rem
 }
 
+.card img {
+    width: 3.5rem
+}
 
 .back-to-shop {
     margin-top: 4.5rem
 }
 
+.card h5 {
+    margin-top: 4vh
+}
+.card p {
+    margin-bottom: 16px
+}
 
-.btn_cart {
-    background-color: #000;
-    border-color: #000;
+.card select {
+	margin-bottom: 16px
+}
+
+
+.card hr {
+    margin-top: 1.25rem;
+	background: rgb(223,3,152);
+    background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);
+    opacity: .9;
+    height: 2px;
+}
+
+.card form {
+    padding: 2vh 0
+}
+
+
+
+.card input {
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247)
+}
+
+.card input:focus::-webkit-input-placeholder {
+    color: transparent
+}
+
+.card .btn {
+    background: rgb(223,3,152);
+    background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);
+    opacity: .9;
     color: white;
     width: 100%;
     font-size: 0.7rem;
     margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0
 }
 
-.btn_cart:focus {
+.card .btn:focus {
     box-shadow: none;
     outline: none;
     box-shadow: none;
@@ -8526,20 +8578,25 @@ blockquote .shape {
     transition: none
 }
 
-.btn_cart:hover {
+.card .btn:hover {
     color: white
 }
 
+.card a {
+    color: black
+}
 
+.card a:hover {
+    color: black;
+    text-decoration: none
+}
 
-
-
-#code {
+/*#code {
     background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
     background-repeat: no-repeat;
     background-position-x: 95%;
     background-position-y: center
-}
+}*/
 
 
 
@@ -8547,137 +8604,3 @@ blockquote .shape {
 
 
 
-
-
-
-
-
-/*---------------------------------------*/
-
-.plus-minus {
-    position: relative
-}
-
-.plus {
-    position: absolute;
-    top: -4px;
-    left: 2px;
-    cursor: pointer
-}
-
-.minus {
-    position: absolute;
-    top: 8px;
-    left: 5px;
-    cursor: pointer
-}
-
-.vsm-text:hover {
-    color: #FF5252
-}
-
-.book,
-.book-img {
-    width: 120px;
-    height: 180px;
-    border-radius: 5px
-}
-
-.book {
-    margin: 20px 15px 5px 15px
-}
-
-.border-top {
-    border-top: 1px solid #EEEEEE !important;
-    margin-top: 20px;
-    padding-top: 15px
-}
-
-.card2 {
-	margin-top: 2%;
-    margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 5%;
-    max-width: 950px;
-	padding: 20px 50px;
-    width: 90%;
-    border-radius: 20px;
-    border: none;
-    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
-}
-
-
-.pay {
-    width: 80px;
-    height: 40px;
-    border-radius: 5px;
-    border: 1px solid #673AB7;
-    margin: 10px 20px 10px 0px;
-    cursor: pointer;
-    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
-}
-
-.gray {
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    filter: grayscale(100%);
-    color: #E0E0E0
-}
-
-.gray .pay {
-    box-shadow: none
-}
-
-#tax {
-    border-top: 1px lightgray solid;
-    margin-top: 10px;
-    padding-top: 10px
-}
-
-.btn-blue {
-    border: none;
-	width: 100%;
-    border-radius: 10px;
-    background-color: #673AB7;
-    color: #fff;
-    padding: 8px 15px;
-    margin: 20px 0px;
-    cursor: pointer
-}
-
-.btn-blue:hover {
-    background-color: #311B92;
-    color: #fff
-}
-
-#checkout {
-    float: left
-}
-
-#check-amt {
-    float: right
-}
-
-@media screen and (max-width: 768px) {
-
-    .book,
-    .book-img {
-        width: 100px;
-        height: 150px
-    }
-
-    .card2 {
-        padding-left: 15px;
-        padding-right: 15px
-    }
-
-    .mob-text {
-        font-size: 13px
-    }
-
-    .pad-left {
-        padding-left: 20px
-    }
-}
