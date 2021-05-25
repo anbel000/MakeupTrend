@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
+
 </head>
 
 <body style="background-image:url(./assets/images/25077201.jpg)">
@@ -35,6 +37,7 @@
 
     <?php
     require_once('includes/load.php');
+    require_once('controller_shopping_cart.php');
     // Checkin What level user has permission to view this page
     //page_require_level(2);
     $products = join_product_table_new();
@@ -83,7 +86,7 @@
                                     <li class="nav-item">
                                         <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
                                     </li>
-                                    
+
                                 </ul>
                             </div> <!-- navbar collapse -->
                         </nav> <!-- navbar -->
@@ -227,15 +230,17 @@
             <div class="single-head">
                 <div class="row">
                     <?php foreach ($products as $product) : ?>
+                        <input id="id" type="number" hidden value="<?php echo (int)$product['id']; ?>">
+                        <input id="qty" type="number" hidden value="1">
                         <div class="col-lg-4 col-md-6 col-12">
                             <!-- Start Single Grid -->
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
                                     <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="thumbnail"><img src="assets/images/items-grid/img1.jpg" alt="#"></a>
-                                    <?php if ($product['quantity'] == 0) {?>
+                                    <?php if ($product['quantity'] == 0) { ?>
                                         <div class="author">
-                                        <p class="sale">Agotado</p>
-                                    </div>
+                                            <p class="sale">Agotado</p>
+                                        </div>
                                     <?php } ?>
                                 </div>
                                 <div class="content">
@@ -247,8 +252,21 @@
                                     </div>
                                     <div class="bottom-content">
                                         <p class="price">Precio: <span>$<?php echo remove_junk($product['sale_price']); ?></span></p>
-                                        <a href="add_shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%;">COMPRAR<i class="fa fa-cart-plus"></i></button></a>
+                                        <?php
+                                        $validation = validation_product_session((int)$product['id']);
+                                        if ($validation == true) {
+                                        ?>
+                                            <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%; width:100px;">Ver carrito<i class="fa fa-cart-plus"></i></button></a>
+                                        <?php
+                                        } else {
+
+                                        ?>
+                                            <a><button type="button" onclick="agregarCarrito(<?php echo $product['id']?>, 1 ); return false;" class="btn btn-primary" style="background: rgb(223,3,152);
+                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%;">Comprar<i class="fa fa-cart-plus"></i></button></a>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -294,41 +312,71 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
+  
+
     <script type="text/javascript">
-        //========= Category Slider 
-        tns({
-            container: '.category-slider',
-            items: 3,
-            slideBy: 'page',
-            autoplay: false,
-            mouseDrag: true,
-            gutter: 0,
-            nav: false,
-            controls: true,
-            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-            responsive: {
-                0: {
-                    items: 1,
-                },
-                540: {
-                    items: 2,
-                },
-                768: {
-                    items: 4,
-                },
-                992: {
-                    items: 5,
-                },
-                1170: {
-                    items: 6,
+        function agregarCarrito(id, qty) {
+
+            var formData = {
+                //'id': document.getElementById("id").value,
+                //'qty': document.getElementById("qty").value
+                'id': id,
+                'qty': qty
+            };
+            // process the form
+            $.ajax({
+                type: 'POST',
+                url: 'add_shopping_cart.php',
+                data: formData,
+                dataType: 'json',
+                encode: true
+            }).done(function(respuesta) {
+                if (respuesta['error'] == true) {
+                    console.log(respuesta['msg']);
+                    swal({
+                        title: "¡Error!",
+                        text: "Lo sentimos, no se ha podido almacenar el producto para su compra",
+                        type: "error",
+                    });
+                } else {
+                    swal({
+                        title: "",
+                        showCancelButton: true,
+                        confirmButtonText: `Ir a pagar`,
+                        cancelButtonText: `Añadir al carrito`,
+                        text: "¿Qué deseas hacer?",
+                        type: "question",
+                    }).then(function() {
+                        window.location.href = "shopping_cart.php";
+                    }, function(dismiss) {
+                        if (dismiss === 'cancel') {
+                            swal({
+                                title: "",
+                                text: respuesta['msg'],
+                                type: "success",
+                            }).then(function(){
+                                location.reload();
+                            })
+                            
+                        }
+                    });
+
                 }
-            }
-        });
+                //Tratamos a respuesta según sea el tipo  y la estructura               
+            }).fail(function(jqXHR, textStatus) {
+                alert("Falta información para agregar");
+            });
+
+
+        }
     </script>
 </body>
 

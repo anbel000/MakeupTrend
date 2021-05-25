@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-
-
 if (session_status() == PHP_SESSION_ACTIVE) {
   
     if (isset($_POST["id"]) && isset($_POST["qty"])) {
@@ -32,17 +29,10 @@ if (session_status() == PHP_SESSION_ACTIVE) {
     }
 }
 
-var_dump($_SESSION);
+
 echo $json_data;
 
-$_SESSION["carrito"]["1"] = "Daniela";
-$_SESSION["carrito"]["3"] = "Andres";
-$_SESSION["carrito"]["2"] = "Cristina";
-/*
-foreach($_SESSION["carrito"] as $indice =>$result){
-    var_dump($indice);
-    var_dump($result);
-}*/
+
 
 
 

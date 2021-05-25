@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="https://demo.graygrids.com/themes/classigrids-demo/assets/images/favicon.svg">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
 
 
 
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="./assets/css/tiny-slider.css">
     <link rel="stylesheet" href="./assets/css/glightbox.min.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+
 </head>
 
 <body>
@@ -242,36 +243,18 @@
     <a href="#" class="scroll-top btn-hover">
         <i class="lni lni-chevron-up"></i>
     </a>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="./assets/js/wow.min.js"></script>
     <script src="./assets/js/tiny-slider.js"></script>
     <script src="./assets/js/glightbox.min.js"></script>
     <script src="./assets/js/main.js"></script>
-    
-    <script type="text/javascript">
-        const current = document.getElementById("current");
-        const opacity = 0.6;
-        const imgs = document.querySelectorAll(".img");
-        imgs.forEach(img => {
-            img.addEventListener("click", (e) => {
-                //reset opacity
-                imgs.forEach(img => {
-                    img.style.opacity = 1;
-                });
-                current.src = e.target.src;
-                //adding class 
-                //current.classList.add("fade-in");
-                //opacity
-                e.target.style.opacity = opacity;
-            });
-        });
-    </script>
+
 
     <script type="text/javascript">
-
         function agregarCarrito() {
 
             var formData = {
@@ -288,15 +271,29 @@
             }).done(function(respuesta) {
                 if (respuesta['error'] == true) {
                     console.log(respuesta['msg']);
-                    alert(respuesta['msg']);
+                    swal({
+                        title: "¡Error!",
+                        text: respuesta['msg'],
+                        type: "error",
+                    });
                 } else {
                     console.log(respuesta['msg']);
-                    alert(respuesta['msg']);
-                    location.reload();
+                    swal({
+                        title: "",
+                        showCancelButton: true,
+                        confirmButtonText: `Ir a pagar`,
+                        cancelButtonText: `Seguir comprando`,
+                        text: respuesta['msg'],
+                        type: "success",
+                    }).then(function() {
+                        window.location.href = "shopping_cart.php";
+                    
+                    });
+
                 }
                 //Tratamos a respuesta según sea el tipo  y la estructura               
             }).fail(function(jqXHR, textStatus) {
-                alert("Falta información para agregar" + textStatus);
+                alert("Falta información para agregar");
             });
 
 

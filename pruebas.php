@@ -1,14 +1,14 @@
 <?php
-
-
+echo "hola";
 session_start();
 
-foreach($_SESSION["carrito"] as $indice =>$result){
-    var_dump($indice);
-    var_dump($result);
+if(!empty($_SESSION["products_shoppingCart"])){
+    echo "ENTRO";
+}else{
+    echo "NO ENTRO";
 }
-echo "<br>";
-var_dump($_SESSION);
+
+
 
 
 ?>
