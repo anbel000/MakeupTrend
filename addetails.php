@@ -34,6 +34,7 @@
 
     <?php
     require_once('includes/load.php');
+    require_once('controller_shopping_cart.php');
     // Checkin What level user has permission to view this page
     //page_require_level(2);
     if (empty($_GET['id'])) {
@@ -137,6 +138,7 @@
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
                             <input id="id" type="number" hidden value="<?php echo remove_junk($product['id']); ?>">
+                            <?php $id_product = $product['id']; ?>
                             <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
                             <h3 class="price">$<?php echo remove_junk($product['sale_price']); ?></h3>
                             <div class="list-info">
@@ -159,38 +161,14 @@
                             </div>
                         <?php endforeach; ?>
                         <div class="contact-info">
-                            <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                                <input name="merchantId" type="hidden" value="508029">
-                                <input name="accountId" type="hidden" value="512321">
-                                <input name="description" type="hidden" value="Productos Makeup Trend">
-                                <input name="referenceCode" type="hidden" value="PAGO01">
-                                <input name="amount" type="hidden" value="30000">
-                                <input name="tax" type="hidden" value="0">
-                                <input name="taxReturnBase" type="hidden" value="0">
-                                <input name="currency" type="hidden" value="COP">
-                                <input name="signature" type="hidden" value="3c2d59d2395bf2e525592296f001e936">
-                                <input name="test" type="hidden" value="1">
-                                <input name="buyerEmail" type="hidden" value="wwandresbeltran@gmail.com">
-                                <input name="buyerFullName" type="hidden" value="Andrés Beltrán">
-                                <input name="mobilePhone" type="hidden" value="31231245">
-                                <input name="shippingAddress" type="hidden" value="calle 91 n 47 - 65">
-                                <input name="shippingCity" type="hidden" value="Bogota">
-                                <input name="shippingCountry" type="hidden" value="COL">
-                                <input name="shippingValue" type="hidden" value="12000">
-
-
-                                <input name="kilogramWeight" type="hidden" value="12">
-                                <input name="shipmentPackageHeightDimension" type="hidden" value="12">
-                                <input name="shipmentPackageWidthDimension" type="hidden" value="24">
-                                <input name="shipmentPackageLengthDimension" type="hidden" value="12">
-
-
-
-                                <input name="responseUrl" type="hidden" value="http://www.test.com/response">
-                                <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
-                                <input name="Submit" type="submit" value="COMPRAR">
-                            </form>
-                            <button onclick="agregarCarrito(); return false;">Añadir al carrito</button>
+                            <?php if(validation_product_session($id_product)){ ?>
+                               <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">Ver carrito</button></a>
+                            <?php }else{ ?>
+                                <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
+                            <?php } ?>
+                            
                             <!-- 4Vj8eK4rloUd272L48hsrarnUA~508029~PAGO01~30000~COP~12000 -->
                         </div>
                         <div class="social-share">
@@ -253,6 +231,25 @@
     <script src="./assets/js/glightbox.min.js"></script>
     <script src="./assets/js/main.js"></script>
 
+    <script type="text/javascript">
+        const current = document.getElementById("current");
+        const opacity = 0.6;
+        const imgs = document.querySelectorAll(".img");
+        imgs.forEach(img => {
+            img.addEventListener("click", (e) => {
+                //reset opacity
+                imgs.forEach(img => {
+                    img.style.opacity = 1;
+                });
+                current.src = e.target.src;
+                //adding class 
+                //current.classList.add("fade-in");
+                //opacity
+                e.target.style.opacity = opacity;
+            });
+        });
+    </script>
+
 
     <script type="text/javascript">
         function agregarCarrito() {
@@ -270,14 +267,12 @@
                 encode: true
             }).done(function(respuesta) {
                 if (respuesta['error'] == true) {
-                    console.log(respuesta['msg']);
                     swal({
                         title: "¡Error!",
                         text: respuesta['msg'],
                         type: "error",
                     });
                 } else {
-                    console.log(respuesta['msg']);
                     swal({
                         title: "",
                         showCancelButton: true,
@@ -287,7 +282,13 @@
                         type: "success",
                     }).then(function() {
                         window.location.href = "shopping_cart.php";
-                    
+
+                    }, function(dismiss) {
+                        if (dismiss === 'cancel') {
+
+                            location.reload();
+
+                        }
                     });
 
                 }

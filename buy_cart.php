@@ -134,6 +134,37 @@
                         <button class="btn" style="height: 40px;">SIGUIENTE</button>
                     </a>
                 </div>
+                <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+                                <input name="merchantId" type="hidden" value="508029">
+                                <input name="accountId" type="hidden" value="512321">
+                                <input name="description" type="hidden" value="Productos Makeup Trend">
+                                <input name="referenceCode" type="hidden" value="PAGO01">
+                                <input name="amount" type="hidden" value="30000">
+                                <input name="tax" type="hidden" value="0">
+                                <input name="taxReturnBase" type="hidden" value="0">
+                                <input name="currency" type="hidden" value="COP">
+                                <input name="signature" type="hidden" value="3c2d59d2395bf2e525592296f001e936">
+                                <input name="test" type="hidden" value="1">
+                                <input name="buyerEmail" type="hidden" value="wwandresbeltran@gmail.com">
+                                <input name="buyerFullName" type="hidden" value="Andrés Beltrán">
+                                <input name="mobilePhone" type="hidden" value="31231245">
+                                <input name="shippingAddress" type="hidden" value="calle 91 n 47 - 65">
+                                <input name="shippingCity" type="hidden" value="Bogota">
+                                <input name="shippingCountry" type="hidden" value="COL">
+                                <input name="shippingValue" type="hidden" value="12000">
+
+
+                                <input name="kilogramWeight" type="hidden" value="12">
+                                <input name="shipmentPackageHeightDimension" type="hidden" value="12">
+                                <input name="shipmentPackageWidthDimension" type="hidden" value="24">
+                                <input name="shipmentPackageLengthDimension" type="hidden" value="12">
+
+
+
+                                <input name="responseUrl" type="hidden" value="http://www.test.com/response">
+                                <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
+                                <input name="Submit" type="submit" value="COMPRAR">
+                            </form>
             </div>
         </div>
     </div>
