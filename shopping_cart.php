@@ -161,17 +161,30 @@
 
 
                 <form>
+                    <p>Departamento de envío</p>
+                    <select class="form-select form-select-sm" id="departamentos" onchange="cargarCiudades()">
+                        <option class="text-muted" value="1">Seleccione la ciudad de destino</option>
+                    </select>
                     <p>Ciudad de envío</p>
-                    <select class="form-select form-select-sm" id="areas">
-                        <option class="text-muted" value="0">Seleccione una ciudad</option>
+                    <select class="form-select form-select-sm" id="ciudades" onchange="cargarEnvios()">
+                        <option class="text-muted" value="1">Seleccione la ciudad de destino</option>
                     </select>
                     <p>Tipo de envio</p>
-                    <select class="form-select form-select-sm" onchange="calculo()" id="categorias">
-                        <option class="text-muted" value="0">Seleccione una ciudad</option>
-                       
+                    <select class="form-select form-select-sm" onchange="calculo(), cargarPagos()" id="type_send">
+                        <option class="text-muted" value="1">Seleccione el tipo de envio</option>
                     </select>
                     <p><strong>Información de envío</strong></p>
-                    <p id="info">Hola</p>
+                    <p id="info">Escoja un tipo de envío</p>
+                    <br>
+                    <p>Tipo de pago</p>
+                    <select class="form-select form-select-sm" id="tipo_pago">
+                        <option class="text-muted" value="1">Seleccione el tipo de pago</option>
+                    </select>
+
+
+
+
+
                 </form>
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">TOTAL</div>
@@ -256,9 +269,14 @@
         type_send.oninput = function() {
 
             if (document.getElementById("type_send").value == 0) {
-                info.innerHTML = "Información interrapidisimo";
+                info.innerHTML = "La compra sera enviada a través de Inter Rapidisimo, el costo de envío lo asume el cliente. Dicho costo sera enviado al correo electronico al momento de realizar el envío.";
             } else {
-                info.innerHTML = "El producto sera enviado ";
+                if (document.getElementById("type_send").value == 7000) {
+                    info.innerHTML = "La compra sera enviada a domicilio, con un costo de $7.000 COP";
+                } else {
+                    info.innerHTML = "Escoja un tipo de envío";
+                }
+
             }
         };
 
@@ -279,50 +297,119 @@
 
 
     <script type="text/javascript">
-        
-        var categorias = [
-            {id:1,name:"categoria1",idArea:1},
-            {id:2,name:"categoria2",idArea:1},
-            {id:3,name:"categoria3",idArea:1},
-            {id:4,name:"categoria4",idArea:2},
-            {id:5,name:"categoria5",idArea:2},
-            {id:6,name:"categoria6",idArea:2},
-            {id:7,name:"categoria7",idArea:3},
-            {id:8,name:"categoria8",idArea:3},
-            {id:9,name:"categoria9",idArea:3},
-        ]
+        var informacion = [];
+        //creando los options de area
+        var departamentoSelect = document.getElementById('departamentos');
+        var ciudadesSelect = document.getElementById('ciudades');
+        var tipoEnvioSelect = document.getElementById('type_send');
+        var tipoPagoSelect = document.getElementById('tipo_pago');
 
-        var areas = [
-            {id:1,name:"area1"},
-            {id:2,name:"area2"},
-            {id:3,name:"area3"}
-        ]
 
-        var areasSelect = document.getElementById('areas');
-        var categoriasSelect = document.getElementById('categorias');
-        
-        areasSelect.addEventListener("change", cargarCategorias);
-        
-        areas.forEach(function(area){
-        let opcion = document.createElement('option')
-        opcion.value = area.id
-        opcion.text = area.name
-        areasSelect.add(opcion)
-        })
+        //getDepCiud();
 
-        function cargarCategorias(){
-        categoriasSelect.options.length = 1;
-        subCategoriasSelect.options.length = 1;
-        categorias
-        .filter(function (categoria){
-            return categoria.idArea == this;
-        }, areasSelect.value)
-        .forEach(function(categoria){
+        var departamentos;
+
+        var res = $.ajax({
+            type: 'GET',
+            url: 'https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json',
+            async: false,
+            success: function(result) {},
+            error: function(error) {
+                console.log('Error: ${error}')
+            }
+
+        }).responseText;
+
+        informacion = JSON.parse(res);
+
+
+        informacion.forEach(function(area) {
+
             let opcion = document.createElement('option')
-            opcion.value = categoria.id
-            opcion.text = categoria.name
-            categoriasSelect.add(opcion);
+            opcion.value = area.id
+            opcion.text = area.departamento
+            departamentoSelect.add(opcion)
         });
+
+
+
+
+        function cargarCiudades() {
+
+            for (i = ciudadesSelect.length - 1; i >= 0; i--) {
+                ciudadesSelect.remove(i);
+            }
+
+            var ciudades = this.informacion.filter(x => {
+                return x.id == parseInt(document.getElementById("departamentos").value);
+            })
+
+
+
+            ciudades[0].ciudades.forEach(function(area) {
+                let opcion = document.createElement('option')
+                opcion.value = area
+                opcion.text = area
+                ciudadesSelect.add(opcion)
+            })
+
+
+        }
+
+
+        function cargarEnvios() {
+
+            for (i = tipoEnvioSelect.length - 1; i >= 0; i--) {
+                tipoEnvioSelect.remove(i);
+            }
+            if (document.getElementById("ciudades").value == "Bogotá") {
+
+                let opcion = document.createElement('option')
+                opcion.value = 7000
+                opcion.text = "A Domicilio"
+                tipoEnvioSelect.add(opcion)
+
+                let opcion2 = document.createElement('option')
+                opcion2.value = 0
+                opcion2.text = "Inter Rapidisimo"
+                tipoEnvioSelect.add(opcion2)
+
+            } else {
+                let opcion = document.createElement('option')
+                opcion.value = 0
+                opcion.text = "Inter Rapidisimo"
+                tipoEnvioSelect.add(opcion)
+            }
+
+        }
+
+
+        function cargarPagos() {
+
+            for (i = tipoPagoSelect.length - 1; i >= 0; i--) {
+                tipoPagoSelect.remove(i);
+            }
+            if (document.getElementById("type_send").value == 7000) {
+
+                let opcion = document.createElement('option')
+                opcion.value = "contraEntrega"
+                opcion.text = "Contra Entrega"
+                tipoPagoSelect.add(opcion)
+
+                let opcion2 = document.createElement('option')
+                opcion2.value = 0
+                opcion2.text = "Pago online - PayU"
+                tipoPagoSelect.add(opcion2)
+
+            } else {
+                let opcion = document.createElement('option')
+                opcion.value = "payu"
+                opcion.text = "Pago online - PayU"
+                tipoPagoSelect.add(opcion)
+            }
+
+
+
         }
     </script>
 
