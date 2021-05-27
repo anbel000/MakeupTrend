@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
+
     <!-- ========================= CSS here ========================= -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
@@ -22,7 +24,7 @@
     <link rel="stylesheet" href="assets/css/glightbox.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
 
-    
+
 </head>
 
 <body>
@@ -108,63 +110,63 @@
                 <div class="row ">
                     <div class="row main align-items-center">
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="name_sale" placeholder="Nombre">
+                            <input type="text" class="form-control" id="name_sale" placeholder="Nombre">
                         </div>
                         <div class="col-md-4">
-                            <input type="number" class="form-control" name="cel_phone" placeholder="Celular">
+                            <input type="number" class="form-control" id="cel_phone" placeholder="Celular">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="direction" placeholder="Dirección">
+                            <input type="text" class="form-control" id="direction" placeholder="Dirección">
                         </div>
                     </div>
                     <div class="row main align-items-center">
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="neighborhood" placeholder="Barrio">
+                            <input type="text" class="form-control" id="neighborhood" placeholder="Barrio">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="type_ubication" placeholder="Apartamento o Casa">
+                            <input type="text" class="form-control" id="type_ubication" placeholder="Apartamento o Casa">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="payment_method" placeholder="Método de pago">
+                            <input type="text" class="form-control" id="email" placeholder="Correo electronico">
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <a href="buy_cart.php"> 
-                        <button class="btn" style="height: 40px;">SIGUIENTE</button>
-                    </a>
+                    
+                        <button class="btn" onclick="pagar()" style="height: 40px;">SIGUIENTE</button>
+                    
                 </div>
                 <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                                <input name="merchantId" type="hidden" value="508029">
-                                <input name="accountId" type="hidden" value="512321">
-                                <input name="description" type="hidden" value="Productos Makeup Trend">
-                                <input name="referenceCode" type="hidden" value="PAGO01">
-                                <input name="amount" type="hidden" value="30000">
-                                <input name="tax" type="hidden" value="0">
-                                <input name="taxReturnBase" type="hidden" value="0">
-                                <input name="currency" type="hidden" value="COP">
-                                <input name="signature" type="hidden" value="3c2d59d2395bf2e525592296f001e936">
-                                <input name="test" type="hidden" value="1">
-                                <input name="buyerEmail" type="hidden" value="wwandresbeltran@gmail.com">
-                                <input name="buyerFullName" type="hidden" value="Andrés Beltrán">
-                                <input name="mobilePhone" type="hidden" value="31231245">
-                                <input name="shippingAddress" type="hidden" value="calle 91 n 47 - 65">
-                                <input name="shippingCity" type="hidden" value="Bogota">
-                                <input name="shippingCountry" type="hidden" value="COL">
-                                <input name="shippingValue" type="hidden" value="12000">
+                    <input name="merchantId" type="hidden" value="508029">
+                    <input name="accountId" type="hidden" value="512321">
+                    <input name="description" type="hidden" value="Productos Makeup Trend">
+                    <input name="referenceCode" type="hidden" value="PAGO01">
+                    <input name="amount" type="hidden" value="30000">
+                    <input name="tax" type="hidden" value="0">
+                    <input name="taxReturnBase" type="hidden" value="0">
+                    <input name="currency" type="hidden" value="COP">
+                    <input name="signature" type="hidden" value="3c2d59d2395bf2e525592296f001e936">
+                    <input name="test" type="hidden" value="1">
+                    <input name="buyerEmail" type="hidden" value="wwandresbeltran@gmail.com">
+                    <input name="buyerFullName" type="hidden" value="Andrés Beltrán">
+                    <input name="mobilePhone" type="hidden" value="31231245">
+                    <input name="shippingAddress" type="hidden" value="calle 91 n 47 - 65">
+                    <input name="shippingCity" type="hidden" value="Bogota">
+                    <input name="shippingCountry" type="hidden" value="COL">
+                    <input name="shippingValue" type="hidden" value="12000">
 
 
-                                <input name="kilogramWeight" type="hidden" value="12">
-                                <input name="shipmentPackageHeightDimension" type="hidden" value="12">
-                                <input name="shipmentPackageWidthDimension" type="hidden" value="24">
-                                <input name="shipmentPackageLengthDimension" type="hidden" value="12">
+                    <input name="kilogramWeight" type="hidden" value="12">
+                    <input name="shipmentPackageHeightDimension" type="hidden" value="12">
+                    <input name="shipmentPackageWidthDimension" type="hidden" value="24">
+                    <input name="shipmentPackageLengthDimension" type="hidden" value="12">
 
 
 
-                                <input name="responseUrl" type="hidden" value="http://www.test.com/response">
-                                <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
-                                <input name="Submit" type="submit" value="COMPRAR">
-                            </form>
+                    <input name="responseUrl" type="hidden" value="http://www.test.com/response">
+                    <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
+                    <input name="Submit" type="submit" value="COMPRAR">
+                </form>
             </div>
         </div>
     </div>
@@ -205,32 +207,16 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script>
-        $(document).ready(function(){
+    <script src="libs/js/functions_buy.js"></script>
 
-$('.radio-group .radio').click(function(){
-$('.radio').addClass('gray');
-$(this).removeClass('gray');
-});
-
-$('.plus-minus .plus').click(function(){
-var count = $(this).parent().prev().text();
-$(this).parent().prev().html(Number(count) + 1);
-});
-
-$('.plus-minus .minus').click(function(){
-var count = $(this).parent().prev().text();
-$(this).parent().prev().html(Number(count) - 1);
-});
-
-});
-    </script>
+    
 </body>
 
 </html>

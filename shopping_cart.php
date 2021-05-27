@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="assets/css/main.css" />
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
 </head>
 
 <body>
@@ -119,13 +120,14 @@
                 ?>
                             <div class="row border-top">
                                 <div class="row main align-items-center">
+                                    <input hidden type="numer" id="id<?php echo $count; ?>" value="<?php echo $result["id"] ?>">
                                     <div class="col-md-2 col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                                     <div class="col-md-4 col">
                                         <div class="row text-muted"><?php echo $result["categorie"] ?></div>
                                         <div class="row"><?php echo $result["name"] ?></div>
                                     </div>
                                     <div class="col">
-                                        <input type="number" onchange="calculo()" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" min="1" />
+                                        <input type="number" onchange="calculo2()" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" min="1" />
                                     </div>
                                     <div class="col" id="price<?php echo $count; ?>">$ <?php echo $result["sale_price"] ?></div>
                                     <div class="col">
@@ -163,37 +165,31 @@
                 <form>
                     <p>Departamento de envío</p>
                     <select class="form-select form-select-sm" id="departamentos" onchange="cargarCiudades()">
-                        <option class="text-muted" value="1">Seleccione la ciudad de destino</option>
+                        <option class="text-muted" value="">Seleccione la ciudad de destino</option>
                     </select>
                     <p>Ciudad de envío</p>
                     <select class="form-select form-select-sm" id="ciudades" onchange="cargarEnvios()">
-                        <option class="text-muted" value="1">Seleccione la ciudad de destino</option>
+                        <option class="text-muted" value="">Seleccione la ciudad de destino</option>
                     </select>
                     <p>Tipo de envio</p>
-                    <select class="form-select form-select-sm" onchange="calculo(), cargarPagos()" id="type_send">
-                        <option class="text-muted" value="1">Seleccione el tipo de envio</option>
+                    <select class="form-select form-select-sm" onchange="calculo(<?php echo $count; ?>), cargarPagos()" id="type_send">
+                        <option class="text-muted" value="0">Seleccione el tipo de envio</option>
                     </select>
                     <p><strong>Información de envío</strong></p>
                     <p id="info">Escoja un tipo de envío</p>
                     <br>
                     <p>Tipo de pago</p>
                     <select class="form-select form-select-sm" id="tipo_pago">
-                        <option class="text-muted" value="1">Seleccione el tipo de pago</option>
+                        <option class="text-muted" value="">Seleccione el tipo de pago</option>
                     </select>
-
-
-
-
-
                 </form>
+
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">TOTAL</div>
                     <div class="col text-right" id="total">$ 0</div>
                 </div>
                 <div class="row">
-                    <a href="buy_cart.php">
-                        <button class="btn">SIGUIENTE</button>
-                    </a>
+                    <button class="btn" onclick="almacenarInfo(<?php echo $count; ?>)">SIGUIENTE</button>
                 </div>
 
             </div>
@@ -234,38 +230,16 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="libs/js/functions_cart.js"></script>
 
     <script type="text/javascript">
-        function quitarProducto(id) {
-            var formData = {
-                'id': id,
-                'remove_product': "remove_product"
-            };
-            // process the form
-            $.ajax({
-                type: 'POST',
-                url: 'controller_shopping_cart.php',
-                data: formData,
-                dataType: 'json',
-                encode: true
-            }).done(function(respuesta) {
-                location.reload();
-            })
-        }
-    </script>
-
-    <script type="text/javascript">
-        const formatterPeso = new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP',
-            minimumFractionDigits: 0
-        })
-
         type_send.oninput = function() {
 
             if (document.getElementById("type_send").value == 0) {
@@ -280,138 +254,13 @@
             }
         };
 
-        calculo();
+        calculo(<?php echo $count; ?>);
 
-        function calculo() {
-            subTotal = 0;
-            total = 0;
-            for (x = 1; x <= <?php echo $count; ?>; x++) {
-                valorProducto = document.getElementById("qty" + x).value * document.getElementById("price" + x).textContent.substr(2, );
-                subTotal = parseInt(subTotal) + parseInt(valorProducto);
-            }
-            document.getElementById("subTotal").innerHTML = formatterPeso.format(subTotal);
-            total = parseInt(subTotal) + parseInt(document.getElementById("type_send").value);
-            document.getElementById("total").innerHTML = formatterPeso.format(total);
+        function calculo2() {
+            calculo(<?php echo $count; ?>);
         }
     </script>
 
-
-    <script type="text/javascript">
-        var informacion = [];
-        //creando los options de area
-        var departamentoSelect = document.getElementById('departamentos');
-        var ciudadesSelect = document.getElementById('ciudades');
-        var tipoEnvioSelect = document.getElementById('type_send');
-        var tipoPagoSelect = document.getElementById('tipo_pago');
-
-
-        //getDepCiud();
-
-        var departamentos;
-
-        var res = $.ajax({
-            type: 'GET',
-            url: 'https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json',
-            async: false,
-            success: function(result) {},
-            error: function(error) {
-                console.log('Error: ${error}')
-            }
-
-        }).responseText;
-
-        informacion = JSON.parse(res);
-
-
-        informacion.forEach(function(area) {
-
-            let opcion = document.createElement('option')
-            opcion.value = area.id
-            opcion.text = area.departamento
-            departamentoSelect.add(opcion)
-        });
-
-
-
-
-        function cargarCiudades() {
-
-            for (i = ciudadesSelect.length - 1; i >= 0; i--) {
-                ciudadesSelect.remove(i);
-            }
-
-            var ciudades = this.informacion.filter(x => {
-                return x.id == parseInt(document.getElementById("departamentos").value);
-            })
-
-
-
-            ciudades[0].ciudades.forEach(function(area) {
-                let opcion = document.createElement('option')
-                opcion.value = area
-                opcion.text = area
-                ciudadesSelect.add(opcion)
-            })
-
-
-        }
-
-
-        function cargarEnvios() {
-
-            for (i = tipoEnvioSelect.length - 1; i >= 0; i--) {
-                tipoEnvioSelect.remove(i);
-            }
-            if (document.getElementById("ciudades").value == "Bogotá") {
-
-                let opcion = document.createElement('option')
-                opcion.value = 7000
-                opcion.text = "A Domicilio"
-                tipoEnvioSelect.add(opcion)
-
-                let opcion2 = document.createElement('option')
-                opcion2.value = 0
-                opcion2.text = "Inter Rapidisimo"
-                tipoEnvioSelect.add(opcion2)
-
-            } else {
-                let opcion = document.createElement('option')
-                opcion.value = 0
-                opcion.text = "Inter Rapidisimo"
-                tipoEnvioSelect.add(opcion)
-            }
-
-        }
-
-
-        function cargarPagos() {
-
-            for (i = tipoPagoSelect.length - 1; i >= 0; i--) {
-                tipoPagoSelect.remove(i);
-            }
-            if (document.getElementById("type_send").value == 7000) {
-
-                let opcion = document.createElement('option')
-                opcion.value = "contraEntrega"
-                opcion.text = "Contra Entrega"
-                tipoPagoSelect.add(opcion)
-
-                let opcion2 = document.createElement('option')
-                opcion2.value = 0
-                opcion2.text = "Pago online - PayU"
-                tipoPagoSelect.add(opcion2)
-
-            } else {
-                let opcion = document.createElement('option')
-                opcion.value = "payu"
-                opcion.text = "Pago online - PayU"
-                tipoPagoSelect.add(opcion)
-            }
-
-
-
-        }
-    </script>
 
 </body>
 
