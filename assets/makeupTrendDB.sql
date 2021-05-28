@@ -47,7 +47,7 @@ create table products (
 create table sales (
     id int(11) AUTO_INCREMENT primary key,
     name varchar(200) not null,
-    cel_phone int(11) not null,
+    cel_phone varchar(11) not null,
     direction varchar(200) not null,
     neighborhood varchar(200) not null,
     type_ubication varchar(200) not null,
@@ -135,7 +135,8 @@ insert into media (file_name, file_type) values
 
 insert into state_sale (name) values
 ('Pagado'),
-('Pendiente');
+('Pendiente'),
+('Temporal');
 
 insert into products (name, quantity, sale_price, categorie_id, media_id, date, description, brand_id) values
 ('Filtro de gasolina', 100, 10.00, 1, 1, '2017-06-16 07:03:16','Producto de comercialización, pureba número 1', 1);

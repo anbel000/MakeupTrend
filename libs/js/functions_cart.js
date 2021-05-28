@@ -149,18 +149,18 @@ function cargarPagos() {
     if (document.getElementById("type_send").value == 7000) {
 
         let opcion = document.createElement('option')
-        opcion.value = "contraEntrega"
+        opcion.value = "Contra Entrega"
         opcion.text = "Contra Entrega"
         tipoPagoSelect.add(opcion)
 
         let opcion2 = document.createElement('option')
-        opcion2.value = "payu"
+        opcion2.value = "PayU"
         opcion2.text = "Pago online - PayU"
         tipoPagoSelect.add(opcion2)
 
     } else {
         let opcion = document.createElement('option')
-        opcion.value = "payu"
+        opcion.value = "PayU"
         opcion.text = "Pago online - PayU"
         tipoPagoSelect.add(opcion)
     }
@@ -184,16 +184,20 @@ function almacenarInfo(count) {
 
         var productos = [];
 
-        function agregarEntrada(id_producto, qty, total) {
+        function agregarEntrada(id_producto, qty, total, qtyProducto) {
             productos.push({
-                id_producto: id_producto,
-                qty: qty,
-                total: total
+                ID: id_producto,
+                Cantidad: qty,
+                "Cantidad Disponible": qtyProducto,
+                Total: total
             });
         }
 
         for (x = 1; x <= count; x++) {
-            agregarEntrada(document.getElementById('id' + x).value, document.getElementById('qty' + x).value, parseInt(document.getElementById('qty' + x).value) * parseInt(document.getElementById("price" + x).textContent.substr(2,)));
+            agregarEntrada(document.getElementById('id' + x).value, 
+            document.getElementById('qty' + x).value, 
+            parseInt(document.getElementById('qty' + x).value) * parseInt(document.getElementById("price" + x).textContent.substr(2,))
+            ,document.getElementById('qtyDisponible' + x).value);
 
         }
 

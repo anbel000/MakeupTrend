@@ -121,6 +121,8 @@
                             <div class="row border-top">
                                 <div class="row main align-items-center">
                                     <input hidden type="numer" id="id<?php echo $count; ?>" value="<?php echo $result["id"] ?>">
+                                    <input hidden type="numer" id="qtyDisponible<?php echo $count; ?>" value="<?php echo $result["quantity"] ?>">
+                                    
                                     <div class="col-md-2 col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                                     <div class="col-md-4 col">
                                         <div class="row text-muted"><?php echo $result["categorie"] ?></div>

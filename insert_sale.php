@@ -28,7 +28,7 @@ if (isset($_POST['add_sale'])) {
 
       if ($disponibilidad == true) {
         $name_sale      = $db->escape($_POST['name_sale']);
-        $cel_phone     = $db->escape((int)$_POST['cel_phone']);
+        $cel_phone     = $db->escape($_POST['cel_phone']);
         $direction   = $db->escape($_POST['direction']);
         $neighborhood      = $db->escape($_POST['neighborhood']);
         $type_ubication    = $db->escape($_POST['type_ubication']);

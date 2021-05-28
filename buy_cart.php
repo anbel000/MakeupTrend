@@ -165,7 +165,7 @@
 
                     <input name="responseUrl" type="hidden" value="http://www.test.com/response">
                     <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
-                    <input name="Submit" type="submit" value="COMPRAR">
+                    <input  id="payment" hidden name="Submit" type="submit" value="COMPRAR">
                 </form>
             </div>
         </div>
