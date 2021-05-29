@@ -68,6 +68,20 @@ if (isset($_POST['add_sale']) == false) {
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
+                <input type="text" class="form-control" name="departamento" placeholder="Departamento">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="ciudad" placeholder="Ciudad">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="tipo_envio" placeholder="Tipo de envío">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
                 <input type="text" class="form-control" name="neighborhood" placeholder="Barrio">
               </div>
               <div class="col-md-4">
@@ -81,6 +95,9 @@ if (isset($_POST['add_sale']) == false) {
 
           <div class="form-group">
             <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="email" placeholder="Correo Electronico">
+              </div>
               <div class="col-md-4">
                 <select class="form-control" name="state" id="state">
                   <option value="">Selecciona el estado de la venta</option>

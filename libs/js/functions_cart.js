@@ -200,12 +200,16 @@ function almacenarInfo(count) {
             ,document.getElementById('qtyDisponible' + x).value);
 
         }
+        var el = document.getElementById('departamentos');
+        var text = el.options[el.selectedIndex].innerHTML;
+        var el2 = document.getElementById('type_send');
+        var text2 = el2.options[el2.selectedIndex].innerHTML;
 
         var infoVenta = {
             productos: productos,
-            departamento: document.getElementById('departamentos').value,
+            departamento: text,
             ciudad: document.getElementById('ciudades').value,
-            tipoEnvio: document.getElementById('type_send').value,
+            tipoEnvio: text2,
             tipoPago: document.getElementById('tipo_pago').value,
             total: document.getElementById('total').textContent.substr(2,)
         }

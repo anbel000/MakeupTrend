@@ -135,10 +135,14 @@ function registrarVenta() {
         'add_sale': 'guardar',
         'name_sale': $('[name="name_sale"]')[0].value,
         'cel_phone': $('[name="cel_phone"]')[0].value,
+        'email': $('[name="email"]')[0].value,
+        'department': $('[name="departamento"]')[0].value,
+        'city': $('[name="ciudad"]')[0].value,
         'direction': $('[name="direction"]')[0].value,
         'neighborhood': $('[name="neighborhood"]')[0].value,
         'type_ubication': $('[name="type_ubication"]')[0].value,
         'payment_method': $('[name="payment_method"]')[0].value,
+        'shipping_type': $('[name="tipo_envio"]')[0].value,
         'state': $('[name="state"]')[0].value,
         'date': $('[name="date"]')[0].value
     };

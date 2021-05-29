@@ -48,10 +48,14 @@ create table sales (
     id int(11) AUTO_INCREMENT primary key,
     name varchar(200) not null,
     cel_phone varchar(11) not null,
+    email varchar(200) not null,
+    department varchar(200) not null,
+    city varchar(200) not null,
     direction varchar(200) not null,
     neighborhood varchar(200) not null,
     type_ubication varchar(200) not null,
     payment_method varchar(200) not null,
+    shipping_type varchar(200) not null,
     state int(11) not null,
     date date not null
 );
