@@ -10,6 +10,7 @@ if(!isset($_POST["eliminarSession"])){
             $_SESSION["products_shoppingCart"][$product] = $qty_product;
             $json = array('error' => false, 'msg' => "Producto agregado al carrito");
             $json_data = json_encode($json);
+            $_SESSION["permit_session"] = true;
         } else {
             $json = array('error' => true, 'msg' => "El producto no ha sido agregado al carrito");
             $json_data = json_encode($json);
@@ -24,6 +25,7 @@ if(!isset($_POST["eliminarSession"])){
             $_SESSION["products_shoppingCart"][$product] = $qty_product;
             $json = array('error' => false, 'msg' => "Producto agregado al carritos");
             $json_data = json_encode($json);
+            $_SESSION["permit_session"] = true;
         } else {
             $json = array('error' => true, 'msg' => "El producto no ha sido agregado al carrito");
             $json_data = json_encode($json);

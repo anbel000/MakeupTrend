@@ -2,10 +2,13 @@
 $page_title = 'Agregar venta';
 require_once('includes/load.php');
 // Checkin What level user has permission to view this page
-if(isset($_POST["swaz1765QA@1312"])){
 
+if(isset($_SESSION["permit_session"]) && $_SESSION["permit_session"] == true){
+
+}else{
+  page_require_level(3);
 }
-page_require_level(3);
+
 ?>
 
 <?php

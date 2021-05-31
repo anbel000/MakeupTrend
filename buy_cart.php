@@ -137,7 +137,7 @@
                     
                 </div>
                 <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                    <input name="merchantId" type="hidden" value="508029">
+                    <!--<input name="merchantId" type="hidden" value="508029">
                     <input name="accountId" type="hidden" value="512321">
                     <input name="description" type="hidden" value="Productos Makeup Trend">
                     <input name="referenceCode" type="hidden" value="PAGO01">
@@ -153,14 +153,25 @@
                     <input name="shippingAddress" type="hidden" value="calle 91 n 47 - 65">
                     <input name="shippingCity" type="hidden" value="Bogota">
                     <input name="shippingCountry" type="hidden" value="COL">
-                    <input name="shippingValue" type="hidden" value="12000">
+                    <input name="shippingValue" type="hidden" value="12000">-->
 
-
-                    <input name="kilogramWeight" type="hidden" value="12">
-                    <input name="shipmentPackageHeightDimension" type="hidden" value="12">
-                    <input name="shipmentPackageWidthDimension" type="hidden" value="24">
-                    <input name="shipmentPackageLengthDimension" type="hidden" value="12">
-
+                    <input name="merchantId" type="hidden" >
+                    <input name="accountId" type="hidden">
+                    <input id="description" name="description" type="hidden">
+                    <input name="referenceCode" type="hidden">
+                    <input name="amount" type="hidden">
+                    <input name="tax" type="hidden">
+                    <input name="taxReturnBase" type="hidden" >
+                    <input name="currency" type="hidden">
+                    <input name="signature" type="hidden" >
+                    <input name="test" type="hidden">
+                    <input name="buyerEmail" type="hidden" >
+                    <input name="buyerFullName" type="hidden">
+                    <input name="mobilePhone" type="hidden">
+                    <input name="shippingAddress" type="hidden" >
+                    <input name="shippingCity" type="hidden">
+                    <input name="shippingCountry" type="hidden">
+                    <input name="shippingValue" type="hidden">
 
 
                     <input name="responseUrl" type="hidden" value="http://www.test.com/response">

@@ -1,4 +1,8 @@
+if(localStorage.getItem('informacion')){
 
+}else{
+    window.location.replace("index.php");
+}
 
 function pagar(){
     if (document.getElementById('name_sale').value !== "" &&
@@ -26,14 +30,12 @@ function pagar(){
                     type: "error",
                 });
             }else{
-                payU();
+                payU(informacion);
             }
             
         }else{
             if (informacion.tipoPago == "Contra Entrega") {
-                console.log("ENTRO A CONTRA ENTREGA");
                 respuesta = registrarVentaTemporal(informacion, 2);
-                console.log(respuesta);
                 if(respuesta['error'] == true){
                     swal({
                         title: "¡Error!",
@@ -41,7 +43,7 @@ function pagar(){
                         type: "error",
                     });
                 }else{
-                    /*localStorage.removeItem("informacion");
+                    localStorage.removeItem("informacion");
                     response = eliminarSession();
                     swal({
                         title: "Compra Realizada",
@@ -49,12 +51,11 @@ function pagar(){
                         type: "success",
                     }).then(function() {
                         window.location.href = "index.php";
-                    });*/
-                    console.log("NO VOTO ERROR");
+                    });
                 }
             }else{
                 swal({
-                    title: "¡Erro!",
+                    title: "¡Error!",
                     text: "Lo sentimos, ha ocurrido un error al procesar el pedido",
                     type: "error",
                 });
@@ -93,7 +94,6 @@ function registrarVentaTemporal(informacion, estado){
         'date': "2021-05-29"
     };
 
-    console.log("VA ENVIAR PETICION");
     // process the form
     
     var res = $.ajax({
@@ -104,7 +104,6 @@ function registrarVentaTemporal(informacion, estado){
         dataType: 'json',
         encode: true
     }).done(function (respuesta) {
-        console.log('--->TERMINA: '+respuesta);
         //Tratamos a respuesta según sea el tipo  y la estructura               
     }).fail(function (jqXHR, textStatus) {
         alert("Falta información para registrar la venta: " + textStatus);
@@ -113,18 +112,60 @@ function registrarVentaTemporal(informacion, estado){
     return JSON.stringify(res);
 }
 
-function payU(){
-    console.log("DATOS DE PAYU");
+function payU(informacion){
+
+    if (informacion.tipoEnvio == "Inter Rapidisimo") {
+        document.getElementsByName("merchantId")[0].value = 508029;
+        document.getElementsByName("accountId")[0].value = 512321;
+        document.getElementById("description").value = "Productos de maquillaje"
+        document.getElementsByName("referenceCode")[0].value = "PAGO01";
+        document.getElementsByName("amount")[0].value = 30000;
+        document.getElementsByName("tax")[0].value = 0;
+        document.getElementsByName("taxReturnBase")[0].value = 0;
+        document.getElementsByName("currency")[0].value = "COP";
+        document.getElementsByName("signature")[0].value = "3c2d59d2395bf2e525592296f001e936";
+        document.getElementsByName("test")[0].value = 1;
+        document.getElementsByName("buyerEmail")[0].value = "wwandresbeltran@gmail.com";
+        document.getElementsByName("buyerFullName")[0].value = "Andrés Beltrán";
+        document.getElementsByName("mobilePhone")[0].value = 31231245;
+        document.getElementsByName("shippingAddress")[0].value = "calle 91 n 47 - 65";
+        document.getElementsByName("shippingCity")[0].value = "Bogotá";
+        document.getElementsByName("shippingCountry")[0].value = "COL";
+        document.getElementsByName("shippingValue")[0].value = "12000";
+    
+        document.getElementById("payment").click();
+    }else{
+        if(informacion.tipoEnvio == "A Domicilio"){
+            document.getElementsByName("merchantId")[0].value = 508029;
+            document.getElementsByName("accountId")[0].value = 512321;
+            document.getElementById("description").value = "Productos de maquillaje"
+            document.getElementsByName("referenceCode")[0].value = "PAGO01";
+            document.getElementsByName("amount")[0].value = 30000;
+            document.getElementsByName("tax")[0].value = 0;
+            document.getElementsByName("taxReturnBase")[0].value = 0;
+            document.getElementsByName("currency")[0].value = "COP";
+            document.getElementsByName("signature")[0].value = "3c2d59d2395bf2e525592296f001e936";
+            document.getElementsByName("test")[0].value = 1;
+            document.getElementsByName("buyerEmail")[0].value = "wwandresbeltran@gmail.com";
+            document.getElementsByName("buyerFullName")[0].value = "Andrés Beltrán";
+            document.getElementsByName("mobilePhone")[0].value = 31231245;
+            document.getElementsByName("shippingAddress")[0].value = "calle 91 n 47 - 65";
+            document.getElementsByName("shippingCity")[0].value = "Bogotá";
+            document.getElementsByName("shippingCountry")[0].value = "COL";
+            document.getElementsByName("shippingValue")[0].value = "12000";
+        
+            document.getElementById("payment").click();
+        }
+    }
+   
 }
 
 function eliminarSession(){
     
 
-    /*var formData = {
+    var formData = {
         'eliminarSession': "eliminarSession"
     };
-
-    //console.log(formData);
     // process the form
     
     var res = $.ajax({
@@ -137,8 +178,10 @@ function eliminarSession(){
     }).done(function (respuesta) {
         //Tratamos a respuesta según sea el tipo  y la estructura               
     }).fail(function (jqXHR, textStatus) {
-        alert("NO SE QUE PASO");
+        alert("Ha ocurrido un error inesperado, no te preocupes. Ponte en contacto con nostros para verificar el estado de tu pedido.");
     }).responseText;
     
-    return JSON.parse(res);*/
+    return JSON.parse(res);
+
+    
 }
