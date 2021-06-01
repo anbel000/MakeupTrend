@@ -138,27 +138,27 @@
                 </div>
                 <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
 
-                    <input name="merchantId" type="hidden" >
+                    <input name="merchantId" type="hidden">
                     <input name="accountId" type="hidden">
                     <input id="description" name="description" type="hidden">
                     <input name="referenceCode" type="hidden">
                     <input name="amount" type="hidden">
                     <input name="tax" type="hidden">
-                    <input name="taxReturnBase" type="hidden" >
+                    <input name="taxReturnBase" type="hidden">
                     <input name="currency" type="hidden">
-                    <input name="signature" type="hidden" >
+                    <input name="signature" type="hidden">
                     <input name="test" type="hidden">
                     <input name="buyerEmail" type="hidden" >
                     <input name="buyerFullName" type="hidden">
                     <input name="mobilePhone" type="hidden">
-                    <input name="shippingAddress" type="hidden" >
+                    <input name="shippingAddress" type="hidden">
                     <input name="shippingCity" type="hidden">
                     <input name="shippingCountry" type="hidden">
                     <input name="shippingValue" type="hidden">
 
 
-                    <input name="responseUrl" type="hidden" value="http://localhost:8080/MakeupTrend/">
-                    <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
+                    <input name="responseUrl" type="hidden" value="http://localhost:8080/MakeupTrend/index.php">
+                    <input name="confirmationUrl" type="hidden" value="http://localhost:8080/MakeupTrend/confirmation.php">
                     <input  id="payment" hidden name="Submit" type="submit" value="COMPRAR">
                 </form>
             </div>

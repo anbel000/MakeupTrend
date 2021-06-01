@@ -262,7 +262,7 @@
                                         } else {
 
                                         ?>
-                                            <a><button type="button" onclick="agregarCarrito(<?php echo $product['id']?>, 1 ); return false;" class="btn btn-primary" style="background: rgb(223,3,152);
+                                            <a><button type="button" onclick="agregarCarrito(<?php echo $product['id'] ?>, 1 ); return false;" class="btn btn-primary" style="background: rgb(223,3,152);
                                         background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%;">Comprar<i class="fa fa-cart-plus"></i></button></a>
                                         <?php
                                         }
@@ -312,7 +312,7 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -320,7 +320,7 @@
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
-  
+
 
     <script type="text/javascript">
         function agregarCarrito(id, qty) {
@@ -362,10 +362,10 @@
                                 title: "",
                                 text: respuesta['msg'],
                                 type: "success",
-                            }).then(function(){
+                            }).then(function() {
                                 location.reload();
                             })
-                            
+
                         }
                     });
 
@@ -374,6 +374,61 @@
             }).fail(function(jqXHR, textStatus) {
                 alert("Falta información para agregar");
             });
+        }
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        verificar()
+
+        function verificar() {
+            state = getParameterByName("transactionState");
+            
+            if (state == '') {
+
+            } else {
+                if (state == 4) {
+
+                    swal({
+                        title: "Transacción Realizada",
+                        text: "Tu pedido ha sido procesdo con exitó, en los proximos dias llegara a tu domicilio.",
+                        type: "success",
+                    });
+                } else {
+                    if (state == 6) {
+                        swal({
+                            title: "Transacción Rechazada",
+                            text: "Lo sentimos, no se ha podido procesar tu pago porque la transacción fue rechazada.",
+                            type: "error",
+                        });
+                    } else {
+                        if (state == 104) {
+                            swal({
+                                title: "¡Error!",
+                                text: "Lo sentimos, payU ha registrado un error interno, por lo cual no se ha podido realizar tu pedido. Por favor vuelve a intentarlo  más tarde.",
+                                type: "error",
+                            });
+                        } else {
+                            if (state == 7) {
+                                swal({
+                                    title: "Transacción Pendiente",
+                                    text: "Tú trasacción ha quedo en estado pendiente, por lo cual tu pedido aun no sera procesado.",
+                                    type: "warning",
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+
+
 
 
         }
