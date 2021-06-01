@@ -137,23 +137,6 @@
                     
                 </div>
                 <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-                    <!--<input name="merchantId" type="hidden" value="508029">
-                    <input name="accountId" type="hidden" value="512321">
-                    <input name="description" type="hidden" value="Productos Makeup Trend">
-                    <input name="referenceCode" type="hidden" value="PAGO01">
-                    <input name="amount" type="hidden" value="30000">
-                    <input name="tax" type="hidden" value="0">
-                    <input name="taxReturnBase" type="hidden" value="0">
-                    <input name="currency" type="hidden" value="COP">
-                    <input name="signature" type="hidden" value="3c2d59d2395bf2e525592296f001e936">
-                    <input name="test" type="hidden" value="1">
-                    <input name="buyerEmail" type="hidden" value="wwandresbeltran@gmail.com">
-                    <input name="buyerFullName" type="hidden" value="Andrés Beltrán">
-                    <input name="mobilePhone" type="hidden" value="31231245">
-                    <input name="shippingAddress" type="hidden" value="calle 91 n 47 - 65">
-                    <input name="shippingCity" type="hidden" value="Bogota">
-                    <input name="shippingCountry" type="hidden" value="COL">
-                    <input name="shippingValue" type="hidden" value="12000">-->
 
                     <input name="merchantId" type="hidden" >
                     <input name="accountId" type="hidden">
@@ -174,7 +157,7 @@
                     <input name="shippingValue" type="hidden">
 
 
-                    <input name="responseUrl" type="hidden" value="http://www.test.com/response">
+                    <input name="responseUrl" type="hidden" value="http://localhost:8080/MakeupTrend/">
                     <input name="confirmationUrl" type="hidden" value="http://www.test.com/confirmation">
                     <input  id="payment" hidden name="Submit" type="submit" value="COMPRAR">
                 </form>
@@ -220,6 +203,10 @@
     <!-- ========================= JS here ========================= -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/tiny-slider.js"></script>

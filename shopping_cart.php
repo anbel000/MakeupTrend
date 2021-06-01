@@ -126,7 +126,7 @@
                                     <div class="col-md-2 col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                                     <div class="col-md-4 col">
                                         <div class="row text-muted"><?php echo $result["categorie"] ?></div>
-                                        <div class="row"><?php echo $result["name"] ?></div>
+                                        <div class="row" id="name_product<?php echo $count; ?>"><?php echo $result["name"] ?></div>
                                     </div>
                                     <div class="col">
                                         <input type="number" onchange="calculo2()" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" min="1" />

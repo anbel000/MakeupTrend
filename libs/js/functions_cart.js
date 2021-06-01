@@ -184,12 +184,13 @@ function almacenarInfo(count) {
 
         var productos = [];
 
-        function agregarEntrada(id_producto, qty, total, qtyProducto) {
+        function agregarEntrada(id_producto, qty, total, qtyProducto, nombre) {
             productos.push({
                 ID: id_producto,
                 Cantidad: qty,
                 "Cantidad Disponible": qtyProducto,
-                Total: total
+                Total: total,
+                Nombre: nombre
             });
         }
 
@@ -197,7 +198,7 @@ function almacenarInfo(count) {
             agregarEntrada(document.getElementById('id' + x).value, 
             document.getElementById('qty' + x).value, 
             parseInt(document.getElementById('qty' + x).value) * parseInt(document.getElementById("price" + x).textContent.substr(2,))
-            ,document.getElementById('qtyDisponible' + x).value);
+            ,document.getElementById('qtyDisponible' + x).value,document.getElementById('name_product' + x).textContent);
 
         }
         var el = document.getElementById('departamentos');
