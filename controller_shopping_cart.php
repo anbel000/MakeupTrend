@@ -1,7 +1,7 @@
 <?php
 
 function validation_product_session($id_product){
-
+    
     $id = $id_product;
     
     if (isset($_SESSION["products_shoppingCart"][$id])) {
