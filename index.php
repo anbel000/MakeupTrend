@@ -40,13 +40,11 @@
     })();
 </script>
 <style>
-
     img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+        display: block;
+        max-width: 100%;
+        height: auto;
     }
-
 </style>
 <!--End of Tawk.to Script-->
 
@@ -241,7 +239,7 @@
 
     <!-- Start Items Grid Area New Products -->
     <section class="items-grid section custom-padding">
-        <div class="container">
+        <div class="container justify-content-center">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
@@ -256,50 +254,57 @@
                     <?php foreach ($products as $product) : ?>
                         <input id="id" type="number" hidden value="<?php echo (int)$product['id']; ?>">
                         <input id="qty" type="number" hidden value="1">
-                        <div class="col-lg-3 col-md-3 col-12">
-                            <!-- Start Single Grid -->
-                            <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                                <div class="image" style="width: 356px;height: 244px;">
-                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="thumbnail">
-                                        <!--<img src="assets/images/items-grid/img1.jpg" alt="#">-->
-                                        <img src="assets/images/products/Polvos/1.jpg" alt="#" style="width: 324px;height: 244px;">
-                                    </a>
-                                    <?php if ($product['quantity'] == 0) { ?>
+                       
+                        <div class="col-lg-3 col-md-6">
+                            <figure class="card2 card2-product-grid card2-lg"> <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true"> <img src="./assets/images/products/Polvos/0.jpg"> </a>
+                            <!--<?php //if ($product['quantity'] == 0) { ?>
                                         <div class="author">
                                             <p class="sale">Agotado</p>
                                         </div>
-                                    <?php } ?>
-                                </div>
-                                <div class="content">
-                                    <div class="top-content">
-                                        <p class="tag"><?php echo remove_junk($product['categorie']); ?></p>
-                                        <h3 class="title">
-                                            <a href="addetails.php?id=<?php echo (int)$product['id']; ?>"><?php echo remove_junk($product['name']); ?></a>
-                                        </h3>
+                                    <?php //} ?>-->
+                                <figcaption class="info-wrap">
+                                    <div class="row">
+                                        <div class="col-md-9 col-xs-9">
+                                            <span class="rated"><?php echo remove_junk($product['categorie']); ?></span>
+                                            <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" data-abc="true" style="font-size: 18px;"><?php echo remove_junk($product['name']); ?></a>
+                                        </div>
                                     </div>
-                                    <div class="bottom-content">
-                                        <p class="price">Precio: <span>$<?php echo remove_junk($product['sale_price']); ?></span></p>
-                                        <?php
-                                        $validation = validation_product_session((int)$product['id']);
-                                        if ($validation == true) {
-                                        ?>
-                                            <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%; width:100px;">Ver carrito<i class="fa fa-cart-plus"></i></button></a>
-                                        <?php
-                                        } else {
+                                </figcaption>
+                                <div class="bottom-wrap-payment">
+                                    <figcaption class="info-wrap">
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-9">
+                                                <span class="rated">Precio</span>
+                                                <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" data-abc="true">$<?php echo remove_junk($product['sale_price']); ?></a>
+                                            </div>
+                                            <div class="col-md-8 col-xs-3">
+                                                <span class="rated">Unidades disponibles</span>
+                                                <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" style="text-align: center;" data-abc="true"><?php echo $product['quantity']; ?></a>
+                                            </div>
+                                        </div>
+                                    </figcaption>
+                                </div>
+                                <div class="bottom-wrap">
+                                    <?php
+                                    $validation = validation_product_session((int)$product['id']);
+                                    if ($validation == true) {
+                                    ?>
+                                        <a href="shopping_cart.php" class="btn btn-primary float-right" data-abc="true">Ver carrito</a>
+                                    <?php
+                                    } else {
 
-                                        ?>
-                                            <a><button type="button" onclick="agregarCarrito(<?php echo $product['id'] ?>, 1 ); return false;" class="btn btn-primary" style="background: rgb(223,3,152);
-                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); margin-left: 50%;">Comprar<i class="fa fa-cart-plus"></i></button></a>
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
+                                    ?>
+                                        <a onclick="agregarCarrito(<?php echo $product['id'] ?>, 1 ); return false;" class="btn btn-primary float-right" data-abc="true">Comprar</a>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
-                            </div>
-                            <!-- End Single Grid -->
+                            </figure>
                         </div>
                     <?php endforeach; ?>
+
+
+
                 </div>
             </div>
         </div>
