@@ -117,19 +117,45 @@
         <div class="container">
             <div class="top-area">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-12">
+                    <div class="col-lg-5 col-md-12 col-12">
                         <?php foreach ($products as $product) : ?>
                             <div class="product-images">
                                 <main id="gallery">
+                                    <?php 
+                                        $path = "./assets/images/products/{$product['image']}";
+                                        $dir = opendir($path);
+                                        // Leo todos los ficheros de la carpeta
+                                        $flag = 0;
+                                        while ($elemento = readdir($dir)){
+                                            // Tratamos los elementos . y .. que tienen todas las carpetas
+                                            if( $elemento != "." && $elemento != ".."){
+                                                // Si es una carpeta
+                                                if( is_dir($path.$elemento) ){
+                                                    // Muestro la carpeta
+                                                    //echo "<p><strong>CARPETA: ". $elemento ."</strong></p>";
+                                                // Si es un fichero
+                                                } else {
+                                                    // Muestro el fichero
+                                                    //echo "<br />". $elemento;
+                                                    $images[$flag] = $elemento;
+                                                    $flag++;
+                                                }
+                                            }
+                                            
+                                        }
+                                    ?>
+                                    
                                     <div class="main-img">
-                                        <img src="./assets/images/products/image1.jpg" id="current" alt="#">
+                                        
+                                        <img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[0] ?>" id="current" style="height: 400px;" alt="#">
+                                        
                                     </div>
+                                    
+                                   
                                     <div class="images">
-                                        <img src="./assets/images/products/image1.jpg" class="img" alt="#">
-                                        <img src="./assets/images/products/image2.jpg" class="img" alt="#">
-                                        <img src="./assets/images/products/image3.jpg" class="img" alt="#">
-                                        <img src="./assets/images/products/image4.jpg" class="img" alt="#">
-                                        <img src="./assets/images/products/image5.jpg" class="img" alt="#">
+                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[0] ?>" class="img" style="height: 80px;" alt="#">
+                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" class="img" style="height: 80px;" alt="#">
+                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" class="img" style="height: 80px;" alt="#">
                                     </div>
                                 </main>
                             </div>

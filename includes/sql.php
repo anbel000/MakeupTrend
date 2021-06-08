@@ -78,6 +78,20 @@ function delete_by_id($table, $id)
 /*--------------------------------------------------------------*/
 /* Function for Delete data from table by id
 /*--------------------------------------------------------------*/
+function delete_by_name($table, $name)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql = "DELETE FROM " . $db->escape($table);
+    $sql .= " WHERE file_name='$name'";
+    $sql .= " LIMIT 1";
+    $db->query($sql);
+    return ($db->affected_rows() === 1) ? true : false;
+  }
+}
+/*--------------------------------------------------------------*/
+/* Function for Delete data from table by id
+/*--------------------------------------------------------------*/
 function delete_sales_by_id($table, $id)
 {
   global $db;

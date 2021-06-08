@@ -32,7 +32,7 @@
    </ul>
   </li>
   <li>
-    <a href="media.php" >
+    <a href="upload_images.php#assets%2Fimages%2Fproducts" >
       <i class="glyphicon glyphicon-picture"></i>
       <span>Media</span>
     </a>

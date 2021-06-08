@@ -1,5 +1,7 @@
 <?php
-
+require_once('includes/load.php');
+// Checkin What level user has permission to view this page
+page_require_level(2);
 //Deshabilitar informe de error para superglobales indefinidos
 error_reporting(error_reporting() & ~E_NOTICE);
 
@@ -82,7 +84,7 @@ if ($_GET['do'] == 'list') {
     exit;
 } elseif ($_POST['do'] == 'delete') {
     if ($allow_delete) {
-        rmrf($file);
+       echo rmrf($file); 
     }
     exit;
 } elseif ($_POST['do'] == 'mkdir' && $allow_create_folder) {
@@ -92,7 +94,20 @@ if ($_GET['do'] == 'list') {
     if (substr($dir, 0, 2) === '..')
         exit;
     chdir($file);
-    @mkdir($_POST['name']);
+    $mkdia = @mkdir($_POST['name']);
+    echo $mkdia;
+    if($mkdia == 1){
+        $sql  = "INSERT INTO media ( file_name,file_type )";
+        $sql .= " VALUES ";
+        $sql .= "(
+                 '{$_POST['name']}',
+                 'Carpeta'
+                 )";
+        $response = $db->query($sql);
+        exit;
+    };
+   
+    header("Refresh:0");
 
     exit;
 } elseif ($_POST['do'] == 'upload' && $allow_upload) {
@@ -141,6 +156,9 @@ function rmrf($dir)
         foreach ($files as $file)
             rmrf("$dir/$file");
         rmdir($dir);
+        $texto = substr($dir, 23);
+        delete_by_name('media',$texto);
+        return true;        
     } else {
         unlink($dir);
     }
@@ -554,7 +572,7 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
                 var hashval = window.location.hash.substr(1);
                 $.get('?do=list&file=' + hashval, function(data) {
                     $tbody.empty();
-                    $('#breadcrumb').empty().html(renderBreadcrumbs(hashval));
+                    //$('#breadcrumb').empty().html(renderBreadcrumbs(hashval));
                     if (data.success) {
                         $.each(data.results, function(k, v) {
                             $tbody.append(renderFileRow(v));

@@ -39,6 +39,15 @@
         s0.parentNode.insertBefore(s1, s0);
     })();
 </script>
+<style>
+
+    img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    }
+
+</style>
 <!--End of Tawk.to Script-->
 
 <body style="background-image:url(./assets/images/25077201.jpg)">
@@ -247,11 +256,14 @@
                     <?php foreach ($products as $product) : ?>
                         <input id="id" type="number" hidden value="<?php echo (int)$product['id']; ?>">
                         <input id="qty" type="number" hidden value="1">
-                        <div class="col-lg-4 col-md-6 col-12">
+                        <div class="col-lg-3 col-md-3 col-12">
                             <!-- Start Single Grid -->
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
-                                <div class="image">
-                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="thumbnail"><img src="assets/images/items-grid/img1.jpg" alt="#"></a>
+                                <div class="image" style="width: 356px;height: 244px;">
+                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="thumbnail">
+                                        <!--<img src="assets/images/items-grid/img1.jpg" alt="#">-->
+                                        <img src="assets/images/products/Polvos/1.jpg" alt="#" style="width: 324px;height: 244px;">
+                                    </a>
                                     <?php if ($product['quantity'] == 0) { ?>
                                         <div class="author">
                                             <p class="sale">Agotado</p>
