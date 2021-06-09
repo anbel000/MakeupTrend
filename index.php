@@ -1,3 +1,14 @@
+<?php
+if(isset($_GET["closeSession"])){
+    session_start();
+    if(isset($_SESSION["loginUser"])){
+        $_SESSION["loginUser"] = false;
+        var_dump($_SESSION["loginUser"]);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 

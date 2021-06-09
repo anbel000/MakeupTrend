@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +13,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
   <link rel="stylesheet" href="assets/css/login.css">
 
- 
 
 </head>
 
@@ -32,20 +29,15 @@
               <div class="brand-wrapper">
                 <img src="assets/images/logo.svg" alt="logo" class="logo">
               </div>
-              <p class="login-card-description">Ingresa para visualizar el contenido</p>
+              <p class="login-card-description">Ingresa tu correo electronico para restablecer la contraseña</p>
               <form action="login.php" method="POST">
                 <input hidden type="text" value="verificarLogin">
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
                   <input type="email" name="email" id="email" required class="form-control" placeholder="Correo Electronico">
                 </div>
-                <div class="form-group mb-4">
-                  <label for="password" class="sr-only">Password</label>
-                  <input type="password" name="password" id="password" required class="form-control" placeholder="***********">
-                </div>
-                <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Iniciar Sesión">
+                <input name="resetpass" id="resetpass" class="btn btn-block login-btn mb-4" type="submit" value="Restablecer">
               </form>
-              <a href="resetpassword.php" class="forgot-password-link">Olvidó su contraseña?</a>
               <p class="login-card-footer-text"></p>
               <nav class="login-card-footer-nav">
                 <a href="index.php">Regresar a la tienda</a>
@@ -68,40 +60,38 @@
 </body>
 
 <?php
-require_once('includes/load.php');
-session_start();
-
-if ($_SESSION["loginUser"] == true) {
-  redirect("viewcourse.php", false);
-} else {
-  if (isset($_POST["login"])) {
-
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $user_id = authenticate($email, $password);
-    if ($user_id) {
-
-      $_SESSION["loginUser"] = true;
-      redirect("viewcourse.php", false);
-    } else {
-
-      echo '
-            <script type="text/javascript">
-
-            $(document).ready(function(){
-              swal({
-                  title: "Inicio de sesión fallido",
-                  text: "Por favor vuelve a ingresar tus datos y verifica que esten bien, si el error persiste, comunicate por medio del chat que esta disponible en la página web.",
-                  type: "error",
-              });
-            })
-
-            </script>
-            ';
-    }
-  }
+use PHPMailer\PHPMailer\PHPMailer;
+  
+require_once "libs/PHPMailer/PHPMailer.php";
+require_once "libs/PHPMailer/SMTP.php";
+require_once "libs/PHPMailer/Exception.php";
+$body = file_get_contents('Nueva plantilla.html');
+  
+$mail = new PHPMailer();
+  
+try {
+    $mail->SMTPDebug = 2;                                       
+    $mail->isSMTP();                                            
+    $mail->Host       = 'smtp.gmail.com;';                    
+    $mail->SMTPAuth   = true;                             
+    $mail->Username   = 'wwandresbeltran@gmail.com';                 
+    $mail->Password   = '123Andres@Beltran';                        
+    $mail->SMTPSecure = 'ssl';                              
+    $mail->Port       = 465;  
+  
+    $mail->setFrom('makeuptrendcol@gmail.com', 'Makeup Trend');           
+    $mail->addAddress('msartasarta@gmail.com');
+    
+       
+    $mail->isHTML(true);                                  
+    $mail->Subject = 'Restablecimiento de contraseña - Makeup Trend';
+    $mail->Body    = $body;
+    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+    $mail->send();
+    echo "Mail has been sent successfully!";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-
-
+  
 ?>
 </html>
