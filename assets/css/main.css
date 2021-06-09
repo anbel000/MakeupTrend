@@ -2514,6 +2514,10 @@ ol {
 	opacity: 0;
 	visibility: hidden
 }
+.imagee{
+	width: 100%;
+	height: 100%;
+}
 
 .latest-news-area .single-news .image:after {
 	position: absolute;
@@ -4116,9 +4120,7 @@ blockquote .shape {
 	overflow: hidden
 }
 
-.browse-cities .single-city .info-box {
-	position: relative
-}
+
 
 .browse-cities .single-city .info-box::before {
 	position: absolute;

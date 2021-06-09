@@ -103,7 +103,7 @@
                                         </li>
                                     <?php endforeach; ?>
                                     <li class="nav-item">
-                                        <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
+                                        <a href="login.php" aria-label="Toggle navigation">Cursos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
@@ -256,7 +256,10 @@
                         <input id="qty" type="number" hidden value="1">
                        
                         <div class="col-lg-3 col-md-6">
-                            <figure class="card2 card2-product-grid card2-lg"> <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true"> <img src="./assets/images/products/Polvos/0.jpg"> </a>
+                            <figure class="card2 card2-product-grid card2-lg"> 
+                            <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
+                                <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg"> 
+                            </a>
                             <!--<?php //if ($product['quantity'] == 0) { ?>
                                         <div class="author">
                                             <p class="sale">Agotado</p>
@@ -355,6 +358,8 @@
 
 
     <script type="text/javascript">
+
+    
         function agregarCarrito(id, qty) {
 
             var formData = {

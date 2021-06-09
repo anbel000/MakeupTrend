@@ -147,15 +147,15 @@
                                     
                                     <div class="main-img">
                                         
-                                        <img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[0] ?>" id="current" style="height: 400px;" alt="#">
+                                        <img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" id="current" style="height: 400px;" alt="#">
                                         
                                     </div>
                                     
                                    
                                     <div class="images">
-                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[0] ?>" class="img" style="height: 80px;" alt="#">
                                         <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" class="img" style="height: 80px;" alt="#">
                                         <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" class="img" style="height: 80px;" alt="#">
+                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>" class="img" style="height: 80px;" alt="#">
                                     </div>
                                 </main>
                             </div>
