@@ -34,7 +34,6 @@
               </div>
               <p class="login-card-description">Ingresa para visualizar el contenido</p>
               <form action="login.php" method="POST">
-                <input hidden type="text" value="verificarLogin">
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
                   <input type="email" name="email" id="email" required class="form-control" placeholder="Correo Electronico">

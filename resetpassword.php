@@ -30,8 +30,7 @@
                 <img src="assets/images/logo.svg" alt="logo" class="logo">
               </div>
               <p class="login-card-description">Ingresa tu correo electronico para restablecer la contraseña</p>
-              <form action="login.php" method="POST">
-                <input hidden type="text" value="verificarLogin">
+              <form action="resetpassword.php" method="POST">
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
                   <input type="email" name="email" id="email" required class="form-control" placeholder="Correo Electronico">
@@ -58,40 +57,21 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </body>
-
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
+require_once "sendemail.php";
+if(isset($_POST["resetpass"])){
+  require_once('includes/load.php');
   
-require_once "libs/PHPMailer/PHPMailer.php";
-require_once "libs/PHPMailer/SMTP.php";
-require_once "libs/PHPMailer/Exception.php";
-$body = file_get_contents('Nueva plantilla.html');
-  
-$mail = new PHPMailer();
-  
-try {
-    $mail->SMTPDebug = 2;                                       
-    $mail->isSMTP();                                            
-    $mail->Host       = 'smtp.gmail.com;';                    
-    $mail->SMTPAuth   = true;                             
-    $mail->Username   = 'wwandresbeltran@gmail.com';                 
-    $mail->Password   = '123Andres@Beltran';                        
-    $mail->SMTPSecure = 'ssl';                              
-    $mail->Port       = 465;  
-  
-    $mail->setFrom('makeuptrendcol@gmail.com', 'Makeup Trend');           
-    $mail->addAddress('msartasarta@gmail.com');
-    
-       
-    $mail->isHTML(true);                                  
-    $mail->Subject = 'Restablecimiento de contraseña - Makeup Trend';
-    $mail->Body    = $body;
-    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
-    $mail->send();
-    echo "Mail has been sent successfully!";
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+
+  $_SESSION["email"] = $_POST["email"];
+  $resposne = sendEmail($_POST["email"], "lyResetPassword.php", "Restablecimiento de contraseña - Makeup Trend");
+
+  if($response == true){
+
+  }else{
+
+  }
 }
-  
 ?>
+
 </html>

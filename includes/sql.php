@@ -14,10 +14,25 @@ function find_all($table)
 /*--------------------------------------------------------------*/
 /* Function for find all database table rows by table name
 /*--------------------------------------------------------------*/
+function find_by_email_user($email)
+{
+  global $db;
+  $email = $email;
+  if (tableExists('users')) {
+    $sql = "SELECT id";
+    $sql .= "FROM " . "users";
+    $sql .= " WHERE username=" . $email;
+    return find_by_sql($sql);
+  } else {
+    return "No existe";
+  }
+}
+/*--------------------------------------------------------------*/
+/* Function for find all database table rows by table name
+/*--------------------------------------------------------------*/
 function find_by_name($name)
 {
-    return join_product_by_name($name);
-  
+  return join_product_by_name($name);
 }
 /*--------------------------------------------------------------*/
 /* Function for Perform queries
@@ -53,13 +68,12 @@ function find_sales_by_id($table, $id)
   $id = (int)$id;
   if (tableExists($table)) {
     $sql = "SELECT product_id,qty ";
-    $sql .= "FROM ".$db->escape($table);
-    $sql .= " WHERE id=".$db->escape($id);
+    $sql .= "FROM " . $db->escape($table);
+    $sql .= " WHERE id=" . $db->escape($id);
     return find_by_sql($sql);
-  }else{
+  } else {
     return "No existe";
   }
-  
 }
 /*--------------------------------------------------------------*/
 /* Function for Delete data from table by id
@@ -124,7 +138,7 @@ function join_count_by_id($table, $id)
   global $db;
   if (tableExists($table)) {
     $sql    = "SELECT COUNT(id) AS total FROM " . $db->escape($table);
-    $sql    .= " WHERE categorie_id=" .$db->escape($id);
+    $sql    .= " WHERE categorie_id=" . $db->escape($id);
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
@@ -311,51 +325,51 @@ function join_product_table_by_id($id)
 /* Function for Finding all product name
    /* JOIN with categorie  and media database table
    /*--------------------------------------------------------------*/
-   function join_product_table_by_id_category($id)
-   {
-     global $db;
-     $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
-     $sql  .= " AS categorie,m.file_name AS image";
-     $sql  .= " FROM products p";
-     $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
-     $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
-     $sql .= " WHERE p.categorie_id=" . $db->escape($id);
-     $sql  .= " ORDER BY p.id ASC";
-     return find_by_sql($sql);
-   }
+function join_product_table_by_id_category($id)
+{
+  global $db;
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  .= " AS categorie,m.file_name AS image";
+  $sql  .= " FROM products p";
+  $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+  $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+  $sql .= " WHERE p.categorie_id=" . $db->escape($id);
+  $sql  .= " ORDER BY p.id ASC";
+  return find_by_sql($sql);
+}
 /*--------------------------------------------------------------*/
 /* Function for Finding all product name
    /* JOIN with categorie  and media database table
    /*--------------------------------------------------------------*/
-   function join_product_table_new()
-   {
-     global $db;
-     $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
-     $sql  .= " AS categorie,m.file_name AS image";
-     $sql  .= " FROM products p";
-     $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
-     $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
-     $sql  .= " ORDER BY p.id DESC";
-     $sql .= " LIMIT 6";
-     return find_by_sql($sql);
-   }
-   /*--------------------------------------------------------------*/
+function join_product_table_new()
+{
+  global $db;
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  .= " AS categorie,m.file_name AS image";
+  $sql  .= " FROM products p";
+  $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+  $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+  $sql  .= " ORDER BY p.id DESC";
+  $sql .= " LIMIT 6";
+  return find_by_sql($sql);
+}
+/*--------------------------------------------------------------*/
 /* Function for Finding all product name
    /* JOIN with categorie  and media database table
    /*--------------------------------------------------------------*/
-   function join_product_by_name($name)
-   {
-     global $db;
-     $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
-     $sql  .= " AS categorie,m.file_name AS image";
-     $sql  .= " FROM products p";
-     $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
-     $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
-     $sql .= " WHERE p.name like '%$name%'";
-     $sql  .= " ORDER BY p.id ASC";
+function join_product_by_name($name)
+{
+  global $db;
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  .= " AS categorie,m.file_name AS image";
+  $sql  .= " FROM products p";
+  $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+  $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
+  $sql .= " WHERE p.name like '%$name%'";
+  $sql  .= " ORDER BY p.id ASC";
 
-     return find_by_sql($sql);
-   }
+  return find_by_sql($sql);
+}
 /*--------------------------------------------------------------*/
 /* Function for Finding all product name
   /* Request coming from ajax.php for auto suggest
@@ -398,15 +412,15 @@ function update_product_qty($qty, $p_id)
 /*--------------------------------------------------------------*/
 /* Function for Update product base quantity
   /*--------------------------------------------------------------*/
-  function update_product_base_qty($qty, $p_id)
-  {
-    global $db;
-    $qty = (int) $qty;
-    $id  = (int)$p_id;
-    $sql = "UPDATE products SET quantity=quantity +'{$qty}' WHERE id = '{$id}'";
-    $result = $db->query($sql);
-    return ($db->affected_rows() === 1 ? true : false);
-  }
+function update_product_base_qty($qty, $p_id)
+{
+  global $db;
+  $qty = (int) $qty;
+  $id  = (int)$p_id;
+  $sql = "UPDATE products SET quantity=quantity +'{$qty}' WHERE id = '{$id}'";
+  $result = $db->query($sql);
+  return ($db->affected_rows() === 1 ? true : false);
+}
 /*--------------------------------------------------------------*/
 /* Function for Display Recent product Added
   /*--------------------------------------------------------------*/
@@ -449,26 +463,26 @@ function find_all_sale()
 /*--------------------------------------------------------------*/
 /* Function for find all sales by id
  /*--------------------------------------------------------------*/
- function find_all_sale_products_by_id($id)
- {
-   global $db;
-   $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,p.name";
-   $sql .= " AS name_product,p.quantity as quantity_available,p.sale_price as sale_price"; 
-   $sql .= " FROM sales_products sp";
-   $sql .= " LEFT JOIN products p ON sp.product_id = p.id";
-   $sql .= " WHERE sp.id = $id";
-   $sql .= " ORDER BY p.name ASC";
-   return find_by_sql($sql);
- }
- function find_all_sale_products()
- {
-   global $db;
-   $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
-   $sql .= " FROM sales_products s";
-   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
-   $sql .= " ORDER BY s.date DESC";
-   return find_by_sql($sql);
- }
+function find_all_sale_products_by_id($id)
+{
+  global $db;
+  $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,p.name";
+  $sql .= " AS name_product,p.quantity as quantity_available,p.sale_price as sale_price";
+  $sql .= " FROM sales_products sp";
+  $sql .= " LEFT JOIN products p ON sp.product_id = p.id";
+  $sql .= " WHERE sp.id = $id";
+  $sql .= " ORDER BY p.name ASC";
+  return find_by_sql($sql);
+}
+function find_all_sale_products()
+{
+  global $db;
+  $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
+  $sql .= " FROM sales_products s";
+  $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+  $sql .= " ORDER BY s.date DESC";
+  return find_by_sql($sql);
+}
 /*--------------------------------------------------------------*/
 /* Function for Display Recent sale
  /*--------------------------------------------------------------*/
