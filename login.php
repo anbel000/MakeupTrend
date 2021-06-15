@@ -68,7 +68,7 @@
 
 <?php
 require_once('includes/load.php');
-session_start();
+
 
 if ($_SESSION["loginUser"] == true) {
   redirect("viewcourse.php", false);

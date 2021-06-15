@@ -11,12 +11,17 @@ function sendEmail($email, $plantilla, $asunto){
     
     if($plantilla == "lyResetPassword.php"){
         $user = find_by_email_user($email);
-        echo $user;
-        $body = file_get_contents("assets/layaoutsEmail/".$plantilla);
-        $body = str_replace("{{urlPassword}}","www.sumadreencalzones.com",$body);
+
+        if(empty($user)){
+            return "0";
+        }else{
+            $body = file_get_contents("assets/layaoutsEmail/".$plantilla);
+            $body = str_replace("{{urlPassword}}","http://localhost:8080/MakeupTrend/resetnewpassword.php?id=".$user[0]['id'],$body);
+        }
+        
 
     }
-    /*$mail = new PHPMailer();
+    $mail = new PHPMailer();
       
     try {
         $mail->SMTPDebug = 2;                                       
@@ -37,10 +42,11 @@ function sendEmail($email, $plantilla, $asunto){
         $mail->Body    = $body;
         $mail->AltBody = 'Información enviada por Makeup Trend';
         $mail->send();
-        echo "Mail has been sent successfully!";
+        return "1";
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }**/
+        //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return "2";
+    }
 }
   
 ?>

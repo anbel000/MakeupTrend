@@ -62,14 +62,58 @@ require_once "sendemail.php";
 if(isset($_POST["resetpass"])){
   require_once('includes/load.php');
   
+  $response = sendEmail($_POST["email"], "lyResetPassword.php", "Restablecimiento de contraseña - Makeup Trend");
+  
+  if($response == "0"){
+    echo '
+      <script type="text/javascript">
 
-  $_SESSION["email"] = $_POST["email"];
-  $resposne = sendEmail($_POST["email"], "lyResetPassword.php", "Restablecimiento de contraseña - Makeup Trend");
+      $(document).ready(function(){
+      swal({
+          title: "Ha ocurrido un error",
+          text: "El correo electronico no existe",
+          type: "error",
+      }).then(function() {
+        window.location.href = "resetpassword.php";
+      });
+      })
 
-  if($response == true){
+      </script>
+      ';
+  }
+  if($response == "1"){
+    echo '
+      <script type="text/javascript">
 
-  }else{
+      $(document).ready(function(){
+      swal({
+          title: "Información enviada",
+          text: "La información para restablecer la contraseña ha sido enviada a su correo, por favor ingrese y siga los pasos.",
+          type: "success",
+      }).then(function() {
+        window.location.href = "login.php";
+      });
+      })
 
+      </script>
+      ';
+  }
+  if($response == "2"){
+    echo '
+      <script type="text/javascript">
+
+      $(document).ready(function(){
+      swal({
+          title: "Ha ocurrido un error",
+          text: "La información para restablecer la contraseña no ha podido ser enviada, por favor intente de nuevo.",
+          type: "error",
+      }).then(function() {
+        window.location.href = "resetpassword.php";
+      });
+      })
+
+      </script>
+      ';
   }
 }
 ?>

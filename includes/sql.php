@@ -20,8 +20,8 @@ function find_by_email_user($email)
   $email = $email;
   if (tableExists('users')) {
     $sql = "SELECT id";
-    $sql .= "FROM " . "users";
-    $sql .= " WHERE username=" . $email;
+    $sql .= " FROM " . "users";
+    $sql .= " WHERE username= '{$email}'";
     return find_by_sql($sql);
   } else {
     return "No existe";
@@ -558,4 +558,14 @@ function  get_id_sale_by_name($name)
   $sql  .= " ORDER BY s.id DESC";
   $sql .= " LIMIT 1";
   return find_by_sql($sql);
+}
+/*--------------------------------------------------------------*/
+/* Function for update password user
+/*--------------------------------------------------------------*/
+function updatePassword($user_id,$password)
+{
+  global $db;
+  $sql = "UPDATE users SET password='{$password}' WHERE id ='{$user_id}' LIMIT 1";
+  $result = $db->query($sql);
+  return ($result && $db->affected_rows() === 1 ? true : false);
 }
