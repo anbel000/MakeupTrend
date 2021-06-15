@@ -71,7 +71,7 @@ if(isset($_POST["resetpass"])){
       $(document).ready(function(){
       swal({
           title: "Ha ocurrido un error",
-          text: "El correo electronico no existe",
+          text: "El correo electronico no esta registrado en la plataforma.",
           type: "error",
       }).then(function() {
         window.location.href = "resetpassword.php";

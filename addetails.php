@@ -121,37 +121,36 @@
                         <?php foreach ($products as $product) : ?>
                             <div class="product-images">
                                 <main id="gallery">
-                                    <?php 
-                                        $path = "./assets/images/products/{$product['image']}";
-                                        $dir = opendir($path);
-                                        // Leo todos los ficheros de la carpeta
-                                        $flag = 0;
-                                        while ($elemento = readdir($dir)){
-                                            // Tratamos los elementos . y .. que tienen todas las carpetas
-                                            if( $elemento != "." && $elemento != ".."){
-                                                // Si es una carpeta
-                                                if( is_dir($path.$elemento) ){
-                                                    // Muestro la carpeta
-                                                    //echo "<p><strong>CARPETA: ". $elemento ."</strong></p>";
+                                    <?php
+                                    $path = "./assets/images/products/{$product['image']}";
+                                    $dir = opendir($path);
+                                    // Leo todos los ficheros de la carpeta
+                                    $flag = 0;
+                                    while ($elemento = readdir($dir)) {
+                                        // Tratamos los elementos . y .. que tienen todas las carpetas
+                                        if ($elemento != "." && $elemento != "..") {
+                                            // Si es una carpeta
+                                            if (is_dir($path . $elemento)) {
+                                                // Muestro la carpeta
+                                                //echo "<p><strong>CARPETA: ". $elemento ."</strong></p>";
                                                 // Si es un fichero
-                                                } else {
-                                                    // Muestro el fichero
-                                                    //echo "<br />". $elemento;
-                                                    $images[$flag] = $elemento;
-                                                    $flag++;
-                                                }
+                                            } else {
+                                                // Muestro el fichero
+                                                //echo "<br />". $elemento;
+                                                $images[$flag] = $elemento;
+                                                $flag++;
                                             }
-                                            
                                         }
+                                    }
                                     ?>
-                                    
+
                                     <div class="main-img">
-                                        
+
                                         <img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" id="current" style="height: 400px;" alt="#">
-                                        
+
                                     </div>
-                                    
-                                   
+
+
                                     <div class="images">
                                         <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" class="img" style="height: 80px;" alt="#">
                                         <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" class="img" style="height: 80px;" alt="#">
@@ -185,29 +184,28 @@
                                     <li><input type="number" style="width:80px;text-align: center;" id="qty" class="form-control" value="1" min="1" /></li>
                                 </ul>
                             </div>
-                        <?php endforeach; ?>
-                        <div class="contact-info">
-                            <?php if(validation_product_session($id_product)){ ?>
-                               <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">Ver carrito</button></a>
-                            <?php }else{ ?>
-                                <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
-                            <?php } ?>
-                            
-                            <!-- 4Vj8eK4rloUd272L48hsrarnUA~508029~PAGO01~30000~COP~12000 -->
-                        </div>
-                        <div class="social-share">
-                            <h4>Share Ad</h4>
-                            <ul>
-                                <li><a href="javascript:void(0)" class="facebook"><i class="lni lni-facebook-filled"></i></a></li>
-                                <li><a href="javascript:void(0)" class="twitter"><i class="lni lni-twitter-original"></i></a></li>
-                                <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i></a>
-                                </li>
-                                <li><a href="javascript:void(0)" class="linkedin"><i class="lni lni-linkedin-original"></i></a></li>
-                                <li><a href="javascript:void(0)" class="pinterest"><i class="lni lni-pinterest"></i></a></li>
-                            </ul>
-                        </div>
+                            <?php endforeach; ?>
+                            <div class="contact-info">
+                                <?php if (validation_product_session($id_product)) { ?>
+                                    <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">Ver carrito</button></a>
+                                    <?php } else {
+                                    if ($product['quantity'] > 0) {
+                                    ?>
+                                        <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
+                                    <?php
+                                    } else {
+                                    ?>
+
+                                <?php
+                                    }
+                                }
+                                ?>
+
+                                <!-- 4Vj8eK4rloUd272L48hsrarnUA~508029~PAGO01~30000~COP~12000 -->
+                            </div>
+
                         </div>
                     </div>
                 </div>

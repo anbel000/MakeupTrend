@@ -90,8 +90,10 @@ if ($_SESSION["loginUser"] == true) {
             $(document).ready(function(){
               swal({
                   title: "Inicio de sesión fallido",
-                  text: "Por favor vuelve a ingresar tus datos y verifica que esten bien, si el error persiste, comunicate por medio del chat que esta disponible en la página web.",
+                  text: "Por favor vuelve a ingresar tus datos y verifica que esten bien.",
                   type: "error",
+              }).then(function() {
+                window.location.href = "login.php";
               });
             })
 

@@ -1,7 +1,7 @@
 <?php
-if(isset($_GET["closeSession"])){
+if (isset($_GET["closeSession"])) {
     session_start();
-    if(isset($_SESSION["loginUser"])){
+    if (isset($_SESSION["loginUser"])) {
         $_SESSION["loginUser"] = false;
         var_dump($_SESSION["loginUser"]);
     }
@@ -265,17 +265,17 @@ if(isset($_GET["closeSession"])){
                     <?php foreach ($products as $product) : ?>
                         <input id="id" type="number" hidden value="<?php echo (int)$product['id']; ?>">
                         <input id="qty" type="number" hidden value="1">
-                       
+
                         <div class="col-lg-3 col-md-6">
-                            <figure class="card2 card2-product-grid card2-lg"> 
-                            <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
-                                <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg"> 
-                            </a>
-                            <!--<?php //if ($product['quantity'] == 0) { ?>
-                                        <div class="author">
-                                            <p class="sale">Agotado</p>
-                                        </div>
-                                    <?php //} ?>-->
+                            <figure class="card2 card2-product-grid card2-lg">
+                                <?php if ($product['quantity'] == 0) { ?>
+                                    <div class="author2">
+                                        <p class="sale">Agotado</p>
+                                    </div>
+                                <?php } ?>
+                                <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
+                                    <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg">
+                                </a>
                                 <figcaption class="info-wrap">
                                     <div class="row">
                                         <div class="col-md-9 col-xs-9">
@@ -306,10 +306,17 @@ if(isset($_GET["closeSession"])){
                                         <a href="shopping_cart.php" class="btn btn-primary float-right" data-abc="true">Ver carrito</a>
                                     <?php
                                     } else {
+                                        if($product['quantity'] > 0){
 
+                                       
                                     ?>
                                         <a onclick="agregarCarrito(<?php echo $product['id'] ?>, 1 ); return false;" class="btn btn-primary float-right" data-abc="true">Comprar</a>
                                     <?php
+                                        }else{
+                                         ?>
+                                         
+                                         <?php
+                                        }
                                     }
                                     ?>
                                 </div>
@@ -369,8 +376,6 @@ if(isset($_GET["closeSession"])){
 
 
     <script type="text/javascript">
-
-    
         function agregarCarrito(id, qty) {
 
             var formData = {
