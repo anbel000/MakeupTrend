@@ -191,28 +191,40 @@
                   <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                     <div class="row">
                       <?php foreach ($products as $product) : ?>
-                        <div class="col-lg-4 col-md-6 col-12">
-                          <div class="single-item-grid">
-                            <div class="image">
-                              <a href="addetails.php?id=<?php echo (int)$product['id']; ?>"><img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg" alt="#"></a>
-                              <?php if (remove_junk($product['quantity']) == 0) { ?>
-                                <span class="flat-badge sale">Agotado</span>
-                              <?php } ?>
+                        <div class="col-lg-4 col-md-6">
+                          <figure class="card2 card2-product-grid card2-lg" style="margin-top: 28px;">
+                            <?php if ($product['quantity'] == 0) { ?>
+                              <div class="author2">
+                                <p class="sale">Agotado</p>
+                              </div>
+                            <?php } ?>
+                            <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
+                              <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg">
+
+                            </a>
+                            <figcaption class="info-wrap">
+                              <div class="row">
+                                <div class="col-md-9 col-xs-9">
+                                  <span class="rated"><?php echo remove_junk($product['categorie']); ?></span>
+                                  <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" data-abc="true" style="font-size: 18px;"><?php echo remove_junk($product['name']); ?></a>
+                                </div>
+                              </div>
+                            </figcaption>
+                            <div class="bottom-wrap-payment">
+                              <figcaption class="info-wrap">
+                                <div class="row">
+                                  <div class="col-md-12 col-xs-12">
+                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" style="text-align: left;" data-abc="true">Unidades disponibles: <?php echo $product['quantity']; ?></a>
+                                  </div>
+                                  <div class="col-md-12 col-xs-12">
+                                    <span class="rated"></span>
+                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" data-abc="true">$<?php echo remove_junk($product['sale_price']); ?></a>
+                                  </div>
+
+                                </div>
+                              </figcaption>
                             </div>
-                            <div class="content">
-                              <p class="tag"><?php echo remove_junk($product['categorie']); ?></p>
-                              <h3 class="title">
-                                <a href="./addetails.php?id=<?php echo (int)$product['id']; ?>"><?php echo remove_junk($product['name']); ?></a>
-                              </h3>
-                              <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                  </i>Unidades disponibles: <?php echo remove_junk($product['quantity']); ?></a></p>
-                              <ul class="info">
-                                <li class="price"><?php echo remove_junk($product['sale_price']); ?></li>
-                                <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                          </figure>
                         </div>
                       <?php endforeach; ?>
                     </div>

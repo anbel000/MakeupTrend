@@ -275,6 +275,7 @@ if (isset($_GET["closeSession"])) {
                                 <?php } ?>
                                 <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
                                     <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg">
+                                    
                                 </a>
                                 <figcaption class="info-wrap">
                                     <div class="row">
