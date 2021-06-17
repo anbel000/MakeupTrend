@@ -17,12 +17,12 @@ if(empty($errors)){
 
   } else {
     $session->msg("d", "Nombre de usuario y/o contraseña incorrecto.");
-    redirect('index.php',false);
+    redirect('index_inventary.php',false);
   }
 
 } else {
    $session->msg("d", $errors);
-   redirect('index.php',false);
+   redirect('index_inventary.php',false);
 }
 
 ?>

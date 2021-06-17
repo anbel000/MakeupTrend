@@ -77,7 +77,7 @@ if ($_SESSION["loginUser"] == true) {
 
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $user_id = authenticate($email, $password);
+    $user_id = authenticateCourse($email, $password);
     if ($user_id) {
 
       $_SESSION["loginUser"] = true;

@@ -23,8 +23,6 @@ function find_by_email_user($email)
     $sql .= " FROM " . "users";
     $sql .= " WHERE username= '{$email}'";
     return find_by_sql($sql);
-  } else {
-    return "No existe";
   }
 }
 /*--------------------------------------------------------------*/
@@ -171,8 +169,30 @@ function authenticate($username = '', $password = '')
   if ($db->num_rows($result)) {
     $user = $db->fetch_assoc($result);
     $password_request = sha1($password);
-    if ($password_request === $user['password']) {
+    if ($password_request === $user['password'] && $user['user_level'] == 1) {
       return $user['id'];
+    }
+  }
+  return false;
+}
+/*--------------------------------------------------------------*/
+/* Login with the data provided in $_POST,
+ /* coming from the login form.
+/*--------------------------------------------------------------*/
+function authenticateCourse($username = '', $password = '')
+{
+  global $db;
+  $username = $db->escape($username);
+  $password = $db->escape($password);
+  $sql  = sprintf("SELECT id,username,password,user_level FROM users WHERE username ='%s' LIMIT 1", $username);
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $user = $db->fetch_assoc($result);
+    $password_request = sha1($password);
+    if ($password_request === $user['password'] && $user['user_level'] == 3) {
+      return $user['id'];
+    }else{
+      return false;
     }
   }
   return false;
@@ -279,13 +299,13 @@ function page_require_level($require_level)
   //if Group status Deactive
   elseif ($login_level['group_status'] === '0') :
     $session->msg('d', 'Este nivel de usaurio esta inactivo!');
-    redirect('home.php', false);
+    redirect('index.php', false);
   //cheackin log in User level and Require level is Less than or equal to
   elseif ($current_user['user_level'] <= (int)$require_level) :
     return true;
   else :
     $session->msg("d", "¡Lo siento!  no tienes permiso para ver la página.");
-    redirect('home.php', false);
+    redirect('index.php', false);
   endif;
 }
 /*--------------------------------------------------------------*/
@@ -460,6 +480,20 @@ function find_all_sale()
   $sql .= " ORDER BY s.id DESC";
   return find_by_sql($sql);
 }
+/*--------------------------------------------------------------*/
+/* Function for find sale
+ /*--------------------------------------------------------------*/
+ function find_sale($email)
+ {
+   global $db;
+   $sql  = "SELECT s.id,s.date,st.name";
+   $sql .= " AS state";
+   $sql .= " FROM sales s";
+   $sql .= " LEFT JOIN state_sale st ON s.state = st.id";
+   $sql .= " WHERE s.email = '$email'";
+   $sql .= " ORDER BY s.id DESC LIMIT 1";
+   return find_by_sql($sql);
+ }
 /*--------------------------------------------------------------*/
 /* Function for find all sales by id
  /*--------------------------------------------------------------*/

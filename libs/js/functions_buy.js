@@ -16,13 +16,14 @@ function pagar() {
         var datos = localStorage.getItem('informacion');
         informacion = JSON.parse(datos);
 
-
+        if (informacion == null) {
+            window.location="index.php"
+        }
 
         //console.log(informacion);
         if (informacion.tipoPago == "PayU") {
-            console.log("ENTRO A PAYU");
             respuesta = registrarVentaTemporal(informacion, 3);
-
+            respuesta = JSON.parse(respuesta);
             if (respuesta['error'] == true) {
                 swal({
                     title: "¡Error!",
@@ -36,6 +37,7 @@ function pagar() {
         } else {
             if (informacion.tipoPago == "Contra Entrega") {
                 respuesta = registrarVentaTemporal(informacion, 2);
+                respuesta = JSON.parse(respuesta);
                 if (respuesta['error'] == true) {
                     swal({
                         title: "¡Error!",
@@ -45,8 +47,9 @@ function pagar() {
                 } else {
 
                     if (informacion.total > 1) {
-                        $emailResponse = sendEmail();
-                        if ($emailResponse == true) {
+                        emailResponse = sendEmail();
+                        emailResponse = JSON.parse(emailResponse);
+                        if (emailResponse['error'] == false) {
                             localStorage.removeItem("informacion");
                             response = eliminarSession();
                             swal({
@@ -56,16 +59,29 @@ function pagar() {
                             }).then(function () {
                                 window.location.href = "index.php";
                             });
-                        }else{
-                            localStorage.removeItem("informacion");
-                            response = eliminarSession();
-                            swal({
-                                title: "Compra Realizada",
-                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
-                                type: "success",
-                            }).then(function () {
-                                window.location.href = "index.php";
-                            });
+                        } else {
+                            if (emailResponse['error'] == "5") {
+                                localStorage.removeItem("informacion");
+                                response = eliminarSession();
+                                swal({
+                                    title: "Compra Realizada",
+                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
+                                    type: "success",
+                                }).then(function () {
+                                    window.location.href = "index.php";
+                                });
+                            } else {
+                                localStorage.removeItem("informacion");
+                                response = eliminarSession();
+                                swal({
+                                    title: "Compra Realizada",
+                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
+                                    type: "success",
+                                }).then(function () {
+                                    window.location.href = "index.php";
+                                });
+                            }
+
                         }
                     } else {
                         localStorage.removeItem("informacion");
@@ -101,6 +117,13 @@ function pagar() {
 
 
 function registrarVentaTemporal(informacion, estado) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
 
     var formData = {
         'productos': informacion.productos,
@@ -116,7 +139,7 @@ function registrarVentaTemporal(informacion, estado) {
         'payment_method': informacion.tipoPago,
         'shipping_type': informacion.tipoEnvio,
         'state': estado,
-        'date': "2021-05-29"
+        'date': today
     };
 
     // process the form
@@ -133,8 +156,8 @@ function registrarVentaTemporal(informacion, estado) {
     }).fail(function (jqXHR, textStatus) {
         alert("Falta información para registrar la venta: " + textStatus);
     }).responseText;
-
-    return JSON.stringify(res);
+    return res;
+    //return JSON.stringify(res);
 }
 
 function payU(informacion) {
@@ -209,7 +232,8 @@ function sendEmail() {
         'sendaccount': "true",
         'email': document.getElementById('email').value,
         'plantilla': "lyNewAccount.php",
-        'asunto': "Cuenta de acceso para el curso - Makeup Trend"
+        'asunto': "Cuenta de acceso para el curso - Makeup Trend",
+        'nombre': document.getElementById('name_sale').value
     };
     // process the form
 
@@ -226,5 +250,7 @@ function sendEmail() {
     }).fail(function (jqXHR, textStatus) {
         result = false;
     }).responseText;
-    return result;
+    return res;
+    //return JSON.stringify(res);
+
 }
