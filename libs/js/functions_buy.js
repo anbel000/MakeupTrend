@@ -43,15 +43,43 @@ function pagar() {
                         type: "error",
                     });
                 } else {
-                    localStorage.removeItem("informacion");
-                    response = eliminarSession();
-                    swal({
-                        title: "Compra Realizada",
-                        text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
-                        type: "success",
-                    }).then(function () {
-                        window.location.href = "index.php";
-                    });
+
+                    if (informacion.total > 1) {
+                        $emailResponse = sendEmail();
+                        if ($emailResponse == true) {
+                            localStorage.removeItem("informacion");
+                            response = eliminarSession();
+                            swal({
+                                title: "Compra Realizada",
+                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Revisa tu correo para obtener acceso al curso.",
+                                type: "success",
+                            }).then(function () {
+                                window.location.href = "index.php";
+                            });
+                        }else{
+                            localStorage.removeItem("informacion");
+                            response = eliminarSession();
+                            swal({
+                                title: "Compra Realizada",
+                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
+                                type: "success",
+                            }).then(function () {
+                                window.location.href = "index.php";
+                            });
+                        }
+                    } else {
+                        localStorage.removeItem("informacion");
+                        response = eliminarSession();
+                        swal({
+                            title: "Compra Realizada",
+                            text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
+                            type: "success",
+                        }).then(function () {
+                            window.location.href = "index.php";
+                        });
+                    }
+
+
                 }
             } else {
                 swal({
@@ -111,10 +139,10 @@ function registrarVentaTemporal(informacion, estado) {
 
 function payU(informacion) {
 
-    refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1) ) + 1000;
+    refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
     descripcion = prepararDescripcion(informacion);
     //“ApiKey~merchantId~referenceCode~amount~currency”.
-    firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~"+refereceCode+"~" + informacion.total + "~COP"
+    firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~" + refereceCode + "~" + informacion.total + "~COP"
 
     document.getElementsByName("merchantId")[0].value = 508029;
     document.getElementsByName("accountId")[0].value = 512321;
@@ -161,16 +189,42 @@ function eliminarSession() {
 
 }
 
-function prepararDescripcion(informacion){
+function prepararDescripcion(informacion) {
 
     var descripcion = "Usted esta realizando la compra de:";
-    for(x = 0; x < informacion.productos.length; x++){
+    for (x = 0; x < informacion.productos.length; x++) {
         descripcion = descripcion + ' ' + informacion.productos[x].Cantidad + ' ' + informacion.productos[x].Nombre;
-        if(x+1 < informacion.productos.length){
+        if (x + 1 < informacion.productos.length) {
             descripcion = descripcion + ' +';
-        }else{
-           
+        } else {
+
         }
     }
     return descripcion;
+}
+
+function sendEmail() {
+
+    var formData = {
+        'sendaccount': "true",
+        'email': document.getElementById('email').value,
+        'plantilla': "lyNewAccount.php",
+        'asunto': "Cuenta de acceso para el curso - Makeup Trend"
+    };
+    // process the form
+
+    var res = $.ajax({
+        type: 'POST',
+        url: 'sendemail.php',
+        data: formData,
+        async: false,
+        dataType: 'json',
+        encode: true
+    }).done(function (respuesta) {
+        //Tratamos a respuesta según sea el tipo  y la estructura
+        result = true;
+    }).fail(function (jqXHR, textStatus) {
+        result = false;
+    }).responseText;
+    return result;
 }

@@ -1,6 +1,19 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 
+if(isset($_POST['sendaccount'])){
+    
+ $response = sendEmail($_POST['email'],$_POST['plantilla'], $_POST['asunto']);
+ if($response == "1"){
+    $json = array('error' => false, 'msg' => "Envio de cuenta exitoso");
+    $json_data = json_encode($json);
+    echo $json_data;
+ }else{
+    $json = array('error' => true, 'msg' => "Falló en el envio de la cuenta");
+    $json_data = json_encode($json);
+    echo $json_data;
+ }
+}
 function sendEmail($email, $plantilla, $asunto){
 
     
@@ -18,13 +31,15 @@ function sendEmail($email, $plantilla, $asunto){
             $body = file_get_contents("assets/layaoutsEmail/".$plantilla);
             $body = str_replace("{{urlPassword}}","http://localhost:8080/MakeupTrend/resetnewpassword.php?id=".$user[0]['id'],$body);
         }
-        
+    }
 
+    if($plantilla == "lyNewAccount.php"){
+        $body = "Que haces?";
     }
     $mail = new PHPMailer();
       
     try {
-        $mail->SMTPDebug = 2;                                       
+        $mail->SMTPDebug = 0;                                       
         $mail->isSMTP();                                            
         $mail->Host       = 'smtp.gmail.com;';                    
         $mail->SMTPAuth   = true;                             
@@ -48,5 +63,3 @@ function sendEmail($email, $plantilla, $asunto){
         return "2";
     }
 }
-  
-?>

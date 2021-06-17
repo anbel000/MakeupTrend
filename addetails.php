@@ -117,12 +117,12 @@
         <div class="container">
             <div class="top-area">
                 <div class="row">
-                
+
                     <div class="col-lg-5 col-md-12 col-12">
                         <?php foreach ($products as $product) : ?>
-                            <div class="product-images">
-                                <main id="gallery">
-                                    <?php
+
+                            <div class="xzoom-container">
+                            <?php
                                     $path = "./assets/images/products/{$product['image']}";
                                     $dir = opendir($path);
                                     // Leo todos los ficheros de la carpeta
@@ -144,21 +144,21 @@
                                         }
                                     }
                                     ?>
-
-                                    <div class="main-img">
-
-                                        <img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" id="current" style="height: 400px;" alt="#">
-
-                                    </div>
-
-
-                                    <div class="images">
-                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" class="img" style="height: 80px;" alt="#">
-                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" class="img" style="height: 80px;" alt="#">
-                                        <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>" class="img" style="height: 80px;" alt="#">
-                                    </div>
-                                </main>
+                                <img class="xzoom" id="xzoom-default" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xoriginal="././assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" />
+                                <div class="xzoom-thumbs">
+                                    <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>">
+                                        <img class="xzoom-gallery" width="80" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>">
+                                    </a>
+                                    <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>">
+                                        <img class="xzoom-gallery" width="80" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>">
+                                    </a>
+                                    <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>">
+                                        <img class="xzoom-gallery" width="80" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>">
+                                    </a>
+                                </div>
                             </div>
+
+                            
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-12">
@@ -185,27 +185,27 @@
                                     <li><input type="number" style="width:80px;text-align: center;" id="qty" class="form-control" value="1" min="1" /></li>
                                 </ul>
                             </div>
-                            <?php endforeach; ?>
-                            <div class="contact-info">
-                                <?php if (validation_product_session($id_product)) { ?>
-                                    <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                        <?php endforeach; ?>
+                        <div class="contact-info">
+                            <?php if (validation_product_session($id_product)) { ?>
+                                <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
                                                 background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">Ver carrito</button></a>
-                                    <?php } else {
-                                    if ($product['quantity'] > 0) {
-                                    ?>
-                                        <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
+                                <?php } else {
+                                if ($product['quantity'] > 0) {
+                                ?>
+                                    <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
                                                 background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
-                                    <?php
-                                    } else {
-                                    ?>
-
                                 <?php
-                                    }
-                                }
+                                } else {
                                 ?>
 
-                                <!-- 4Vj8eK4rloUd272L48hsrarnUA~508029~PAGO01~30000~COP~12000 -->
-                            </div>
+                            <?php
+                                }
+                            }
+                            ?>
+
+                            <!-- 4Vj8eK4rloUd272L48hsrarnUA~508029~PAGO01~30000~COP~12000 -->
+                        </div>
 
                         </div>
                     </div>
@@ -255,6 +255,10 @@
     <script src="./assets/js/tiny-slider.js"></script>
     <script src="./assets/js/glightbox.min.js"></script>
     <script src="./assets/js/main.js"></script>
+
+    <script src="./assets/js/jquery.js"></script>
+    <script type="text/javascript" src="./assets/js/xzoom.min.js"></script>
+    <script src="./assets/js/setup.js"></script>
 
     <script type="text/javascript">
         const current = document.getElementById("current");
