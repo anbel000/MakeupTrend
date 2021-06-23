@@ -35,12 +35,13 @@ create table products (
     id int(11) AUTO_INCREMENT primary key,
     name varchar(255) not null,
     quantity int(3) unsigned not null,
-    sale_price decimal(25,2) not null,
+    sale_price int(11) not null,
     categorie_id int(11) not null,
     media_id int(11) not null,
     date datetime not null,
     description varchar(5000) not null,
     brand_id int(11) not null,
+    offer int(11) not null,
     unique (id)
 );
 
@@ -64,7 +65,7 @@ create table sales_products (
     id int(11) not null,
     product_id int(11) not null,
     qty int(11) not null,
-    price decimal(25,2) not null
+    price int(11) not null
 );
 
 create table users (
@@ -142,8 +143,8 @@ insert into state_sale (name) values
 ('Pendiente'),
 ('Temporal');
 
-insert into products (name, quantity, sale_price, categorie_id, media_id, date, description, brand_id) values
-('Filtro de gasolina', 100, 10.00, 1, 1, '2017-06-16 07:03:16','Producto de comercialización, pureba número 1', 1);
+insert into products (name, quantity, sale_price, categorie_id, media_id, date, description, brand_id, offer) values
+('Filtro de gasolina', 100, 1000, 1, 1, '2017-06-16 07:03:16','Producto de comercialización, pureba número 1', 1, 0);
 
 insert into user_groups (group_name, group_level, group_status) values
 ('Admin', 1, 1),

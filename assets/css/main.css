@@ -1890,8 +1890,8 @@ ol {
 	background-position: center center;
 	background-repeat: no-repeat;
 	z-index: 2;
-	padding-top: 250px;
-	padding-bottom: 300px;
+	padding-top: 98px;
+	
 	z-index: 2
 }
 
@@ -6714,8 +6714,8 @@ blockquote .shape {
 		width: 460px
 	}
 	.hero-area {
-		padding-top: 170px;
-		padding-bottom: 200px
+		padding-top: 86px;
+		
 	}
 	.hero-area .hero-text h2 {
 		font-size: 38px
@@ -6781,8 +6781,8 @@ blockquote .shape {
 		margin-top: 8px
 	}
 	.hero-area {
-		padding-top: 135px;
-		padding-bottom: 185px
+		padding-top: 69px;
+		
 	}
 	.hero-area .hero-text h2 {
 		font-size: 38px
@@ -7097,8 +7097,8 @@ blockquote .shape {
 		margin-top: 8px
 	}
 	.hero-area {
-		padding-top: 135px;
-		padding-bottom: 185px
+		padding-top: 79px;
+		
 	}
 	.hero-area .hero-text h2 {
 		font-size: 32px;

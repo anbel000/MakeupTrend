@@ -132,18 +132,45 @@ if (isset($_GET["closeSession"])) {
 
     <!-- Start Hero Area -->
     <section class="hero-area overlay">
+
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/img1.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/img2.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/img6.png" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Start Content Past
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
-                    <div class="hero-text text-center">
-                        <!-- Start Hero Text -->
+                    <div class="hero-text text-center"> -->
+        <!-- Start Hero Text -->
+        <!-- Start Content Past
                         <div class="section-heading">
                             <h2 class="wow fadeInUp" data-wow-delay=".3s">Bienvenida a Makeup Trend</h2>
                             <p class="wow fadeInUp" data-wow-delay=".5s">Pon tu belleza, a cuidado de nosotros.<br>Encuentra
                                 productos de alta calidad y buen precio.</p>
-                        </div>
-                        <!-- End Search Form -->
-                        <!-- Start Search Form -->
+                        </div>-->
+        <!-- End Search Form -->
+        <!-- Start Search Form -->
+
+        <!-- Start Content Past
                         <div class="search-form wow fadeInUp" data-wow-delay=".7s">
                             <form action="search.php" method="get">
                                 <div class="row">
@@ -162,12 +189,13 @@ if (isset($_GET["closeSession"])) {
 
                                 </div>
                             </form>
-                        </div>
-                        <!-- End Search Form -->
+                        </div>-->
+        <!-- End Search Form -->
+        <!-- Start Content Past
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </section>
     <!-- End Hero Area -->
 
@@ -275,7 +303,7 @@ if (isset($_GET["closeSession"])) {
                                 <?php } ?>
                                 <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
                                     <img src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/1.jpg">
-                                    
+
                                 </a>
                                 <figcaption class="info-wrap">
                                     <div class="row">
@@ -305,18 +333,18 @@ if (isset($_GET["closeSession"])) {
                                     if ($validation == true) {
                                     ?>
                                         <a href="shopping_cart.php" class="btn btn-primary float-right" data-abc="true">Ver carrito</a>
-                                    <?php
+                                        <?php
                                     } else {
-                                        if($product['quantity'] > 0){
+                                        if ($product['quantity'] > 0) {
 
-                                       
-                                    ?>
-                                        <a onclick="agregarCarrito(<?php echo $product['id'] ?>, 1 ); return false;" class="btn btn-primary float-right" data-abc="true">Comprar</a>
+
+                                        ?>
+                                            <a onclick="agregarCarrito(<?php echo $product['id'] ?>, 1 ); return false;" class="btn btn-primary float-right" data-abc="true">Comprar</a>
+                                        <?php
+                                        } else {
+                                        ?>
+
                                     <?php
-                                        }else{
-                                         ?>
-                                         
-                                         <?php
                                         }
                                     }
                                     ?>

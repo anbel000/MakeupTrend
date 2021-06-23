@@ -26,6 +26,7 @@ if (isset($_POST['product'])) {
     $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
     $p_desc   = remove_junk($db->escape($_POST['description']));
     $p_brand   = remove_junk($db->escape($_POST['brand']));
+    $p_sale_offer  = remove_junk($db->escape($_POST['saleing-price-offer']));
     if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
       $media_id = '0';
     } else {
@@ -33,7 +34,7 @@ if (isset($_POST['product'])) {
     }
     $query   = "UPDATE products SET";
     $query  .= " name ='{$p_name}', quantity ='{$p_qty}',";
-    $query  .= " sale_price ='{$p_sale}', categorie_id ='{$p_cat}', description ='{$p_desc}', brand_id ='{$p_brand}',  media_id='{$media_id}'";
+    $query  .= " sale_price ='{$p_sale}', categorie_id ='{$p_cat}', description ='{$p_desc}', brand_id ='{$p_brand}',  media_id='{$media_id}',  offer='{$p_sale_offer}'";
     $query  .= " WHERE id ='{$product['id']}'";
     $result = $db->query($query);
     if ($result && $db->affected_rows() === 1) {
@@ -120,7 +121,7 @@ if (isset($_POST['product'])) {
 
           <div class="form-group">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="qty">Cantidad</label>
                   <div class="input-group">
@@ -131,7 +132,7 @@ if (isset($_POST['product'])) {
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="qty">Precio de venta</label>
                   <div class="input-group">
@@ -139,7 +140,17 @@ if (isset($_POST['product'])) {
                       <i class="glyphicon glyphicon-usd"></i>
                     </span>
                     <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product['sale_price']); ?>">
-                    <span class="input-group-addon">.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="qty">Precio descuento</label>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-usd"></i>
+                    </span>
+                    <input type="number" class="form-control" name="saleing-price-offer" value="<?php echo remove_junk($product['offer']); ?>">
                   </div>
                 </div>
               </div>

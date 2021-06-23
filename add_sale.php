@@ -128,7 +128,7 @@ if (isset($_POST['add_sale']) == false) {
 
 
 
-          <button name="add_sale" class="btn btn-danger" onclick="registrarVenta(); return false;">Agregar producto</button>
+          <button name="add_sale" class="btn btn-danger" onclick="registrarVenta(); return false;">Agregar venta</button>
         </form>
       </div>
     </div>
