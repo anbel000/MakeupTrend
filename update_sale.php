@@ -9,7 +9,7 @@ page_require_level(3);
 
 if (isset($_POST['update_sale'])) {
     if (isset($_POST['productos'])) {
-        $req_fields = array('id', 'name_sale', 'cel_phone', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'state', 'date');
+        $req_fields = array('id', 'name_sale', 'cel_phone', 'email', 'department', 'city', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'shipping_type', 'state', 'date');
         validate_fields($req_fields);
         if (empty($errors)) {
 
@@ -34,15 +34,19 @@ if (isset($_POST['update_sale'])) {
                 $id      = $db->escape($_POST['id']);
                 $name_sale      = $db->escape($_POST['name_sale']);
                 $cel_phone     = $db->escape((int)$_POST['cel_phone']);
+                $email     = $db->escape($_POST['email']);
+                $department     = $db->escape($_POST['department']);
+                $city     = $db->escape($_POST['city']);
                 $direction   = $db->escape($_POST['direction']);
                 $neighborhood      = $db->escape($_POST['neighborhood']);
                 $type_ubication    = $db->escape($_POST['type_ubication']);
                 $payment_method      = $db->escape($_POST['payment_method']);
+                $shipping_type      = $db->escape($_POST['shipping_type']);
                 $state      = $db->escape($_POST['state']);
                 $date      = $db->escape($_POST['date']);
 
                 $sql  = "UPDATE sales SET";
-                $sql .= " name= '{$name_sale}',cel_phone= '{$cel_phone}',direction= '{$direction}',neighborhood= '{$neighborhood}',type_ubication= '{$type_ubication}',payment_method= '{$payment_method}',state= '{$state}',date= '{$date}'";
+                $sql .= " name= '{$name_sale}',cel_phone= '{$cel_phone}',email= '{$email}',department= '{$department}',city= '{$city}',direction= '{$direction}',neighborhood= '{$neighborhood}',type_ubication= '{$type_ubication}',payment_method= '{$payment_method}',shipping_type= '{$shipping_type}',state= '{$state}',date= '{$date}'";
                 $sql .= " WHERE id ={$id}";
                 $result = $db->query($sql);
 
@@ -56,7 +60,7 @@ if (isset($_POST['update_sale'])) {
                         $s_qty_available      = $db->escape((int)$result['Cantidad Disponible']);
                         $s_qty     = $db->escape((int)$result['Cantidad']);
                         $s_total   = $db->escape((int)$result['Total']);
-                        
+
                         $sql  = "UPDATE sales_products SET";
                         $sql .= " qty={$s_qty},price={$s_total}";
                         $sql .= " WHERE id = {$id} AND product_id = {$p_id}";
@@ -72,7 +76,7 @@ if (isset($_POST['update_sale'])) {
                         } else {
                             //$session->msg('d', 'Falló al actualizar la venta');
                             //redirect('sales.php', false);
-                            $json = array('error' => false, 'msg' => "Lo siento, la actualización de la venta falló");
+                            $json = array('error' => true, 'msg' => "Lo siento, la actualización de la venta falló");
                             $json_data = json_encode($json);
                             break;
                         }

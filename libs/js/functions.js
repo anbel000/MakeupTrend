@@ -185,10 +185,14 @@ function actualizarVenta() {
         'id': $('[name="id"]')[0].value,
         'name_sale': $('[name="name_sale"]')[0].value,
         'cel_phone': $('[name="cel_phone"]')[0].value,
+        'email': $('[name="email"]')[0].value,
+        'department': $('[name="departamento"]')[0].value,
+        'city': $('[name="ciudad"]')[0].value,
         'direction': $('[name="direction"]')[0].value,
         'neighborhood': $('[name="neighborhood"]')[0].value,
         'type_ubication': $('[name="type_ubication"]')[0].value,
         'payment_method': $('[name="payment_method"]')[0].value,
+        'shipping_type': $('[name="tipo_envio"]')[0].value,
         'state': $('[name="state"]')[0].value,
         'date': $('[name="date"]')[0].value
     };
@@ -204,9 +208,26 @@ function actualizarVenta() {
             console.log(respuesta['msg']);
             alert(respuesta['msg']);
         } else {
-            console.log(respuesta['msg']);
-            alert(respuesta['msg']);
-            location.reload();
+            emailResponse = sendEmail();
+            console.log(emailResponse);
+            //emailResponse = JSON.parse(emailResponse);
+            if (emailResponse['error'] == false) {
+                console.log(respuesta['msg']);
+                alert(respuesta['msg'], " y envio del curso exitoso");
+                location.reload();
+            } else {
+                if (emailResponse['error'] == "5") {
+                    console.log(respuesta['msg'], ", este usuario ya tiene acceso al curso");
+                    alert(respuesta['msg']);
+                    location.reload();
+                } else {
+                    console.log(respuesta['msg']);
+                    alert(respuesta['msg'], " pero ha ocurrido un error en el envio del curso");
+                    location.reload();
+                }
+
+            }
+
         }
         //Tratamos a respuesta según sea el tipo  y la estructura               
     }).fail(function (jqXHR, textStatus) {
@@ -214,4 +235,42 @@ function actualizarVenta() {
     });
 
 
+}
+
+
+function sendEmail() {
+
+
+
+
+    
+    var formData = {
+        'sendaccount': "true",
+        'email': $('[name="email"]')[0].value,
+        'plantilla': "lyNewAccount.php",
+        'asunto': "Cuenta de acceso para el curso - Makeup Trend",
+        'nombre': $('[name="name_sale"]')[0].value
+    };
+    // process the form
+    $.ajax({
+        type: 'POST',
+        url: 'sendemail.php',
+        data: formData,
+        dataType: 'json',
+        encode: true
+    }).done(function (respuesta) {
+        if (respuesta['error'] == true) {
+            console.log(respuesta['msg']);
+            
+        } else {
+            console.log(respuesta['msg']);
+            
+            
+        }
+
+        //Tratamos a respuesta según sea el tipo  y la estructura               
+    }).fail(function (jqXHR, textStatus) {
+        alert("Falta ");
+    });
+    
 }

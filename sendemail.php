@@ -3,30 +3,37 @@
 use PHPMailer\PHPMailer\PHPMailer;
 
 if (isset($_POST['sendaccount'])) {
-    
-    require_once('includes/load.php');
-    if(isset($_SESSION["permit_session"]) && $_SESSION["permit_session"] == true){
 
-    }else{
+    require_once('includes/load.php');
+    if (isset($_SESSION["permit_session"]) && $_SESSION["permit_session"] == true) {
+
+      
+    } else {
+       
         page_require_level(3);
     }
-    
+
     $email = $_POST['email'];
     $asunto = $_POST['asunto'];
     $plantilla = $_POST['plantilla'];
     $nombre = $_POST['nombre'];
 
     $sale = find_sale($email);
+     
+        
     $hoy = getdate();
     $hoy = $hoy["year"] . "-0" . $hoy["mon"] . "-" . $hoy["mday"];
     foreach ($sale as $sale1) {
-        if ($sale1['date'] == $hoy && $sale1["state"] == "Pendiente") {
+        if ($sale1['date'] == $hoy && $sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
             $flag = true;
         } else {
             $flag = false;
         }
     }
-
+    $json = array('error' => true, 'msg' => $flag);
+        $json_data = json_encode($json);
+        echo $json_data;
+         /* 
     if ($flag == true) {
         $user = find_by_email_user($email);
         if (empty($user)) {
@@ -64,8 +71,14 @@ if (isset($_POST['sendaccount'])) {
             $json_data = json_encode($json);
             echo $json_data;
         }
-    }
+    }*/
+} else {
+    $json = array('error' => false, 'msg' => "Envio de asdasdasd exitoso");
+    $json_data = json_encode($json);
+    echo $json_data;
 }
+
+
 function sendEmail($email, $plantilla, $asunto)
 {
 

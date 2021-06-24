@@ -9,7 +9,7 @@ page_require_level(3);
 $states = find_all('state_sale');
 
 if (isset($_POST['add_sale']) == false) {
-  if(isset($_SESSION["datosTabla"]) == true){
+  if (isset($_SESSION["datosTabla"]) == true) {
     $_SESSION["datosTabla"] = array();
   }
 }
@@ -95,14 +95,14 @@ if (isset($_POST['add_sale']) == false) {
 
           <div class="form-group">
             <div class="row">
-            <div class="col-md-4">
+              <div class="col-md-4">
                 <input type="text" class="form-control" name="email" placeholder="Correo Electronico">
               </div>
               <div class="col-md-4">
                 <select class="form-control" name="state" id="state">
                   <option value="">Selecciona el estado de la venta</option>
-                  <?php foreach($states as $state): ?>
-                  <option value="<?php echo (int)$state['id'] ?>"><?php echo $state['name'] ?></option>
+                  <?php foreach ($states as $state) : ?>
+                    <option value="<?php echo (int)$state['id'] ?>"><?php echo $state['name'] ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>

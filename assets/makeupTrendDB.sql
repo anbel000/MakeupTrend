@@ -65,7 +65,8 @@ create table sales_products (
     id int(11) not null,
     product_id int(11) not null,
     qty int(11) not null,
-    price int(11) not null
+    price int(11) not null,
+    price_product int(11) not null
 );
 
 create table users (

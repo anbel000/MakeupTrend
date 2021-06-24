@@ -59,11 +59,12 @@ if (isset($_POST['add_sale'])) {
             $p_id      = $db->escape((int)$result['ID']);
             $s_qty     = $db->escape((int)$result['Cantidad']);
             $s_total   = $db->escape((int)$result['Total']);
+            $s_precio   = $db->escape((int)$result['Precio']);
 
             $sql  = "INSERT INTO sales_products (";
-            $sql .= "id,product_id,qty,price";
+            $sql .= "id,product_id,qty,price,price_product";
             $sql .= ") VALUES (";
-            $sql .= "'{$id_sale[0]['id']}','{$p_id}','{$s_qty}','{$s_total}'";
+            $sql .= "'{$id_sale[0]['id']}','{$p_id}','{$s_qty}','{$s_total}','{$s_precio}'";
             $sql .= ");";
 
             if ($db->query($sql)) {

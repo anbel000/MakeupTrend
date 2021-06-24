@@ -60,6 +60,20 @@ if (!$sale) {
           <div class="form-group">
             <div class="row">
               <div class="col-md-4">
+                <input type="text" class="form-control" name="departamento" placeholder="Departamento" value="<?php echo $sale["department"]; ?>">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="ciudad" placeholder="Ciudad" value="<?php echo $sale["city"]; ?>">
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="tipo_envio" placeholder="Tipo de envío" value="<?php echo $sale["shipping_type"]; ?>">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
                 <input type="text" class="form-control" name="neighborhood" placeholder="Barrio" value="<?php echo $sale["neighborhood"]; ?>">
               </div>
               <div class="col-md-4">
@@ -73,6 +87,9 @@ if (!$sale) {
 
           <div class="form-group">
             <div class="row">
+              <div class="col-md-4">
+                <input type="text" class="form-control" name="email" placeholder="Correo Electronico" value="<?php echo $sale["email"]; ?>">
+              </div>
               <div class="col-md-4">
                 <select class="form-control" name="state" id="state">
                   <option value="">Selecciona el estado de la venta</option>
@@ -100,17 +117,17 @@ if (!$sale) {
               <th> Total </th>
             </thead>
             <tbody id="product_info">
-            <?php $indice = 0;?>
+              <?php $indice = 0; ?>
               <?php foreach ($products as $product) : ?>
                 <tr>
                   <td><?php echo remove_junk($product['product_id']); ?></td>
                   <td><?php echo remove_junk($product['qty']); ?></td>
                   <td id="s_name"><?php echo remove_junk($product['name_product']); ?></td>
                   <td>
-                    <input type="text" disabled class="form-control" name="price" tipo="price<?php echo $indice; ?>" value="<?php echo remove_junk($product['sale_price']); ?>">
+                    <input type="text" disabled class="form-control" name="price" tipo="price<?php echo $indice; ?>" value="<?php echo remove_junk($product['price_product']); ?>">
                   </td>
                   <td id="s_qty">
-                    <input type="number" class="form-control" name="quantity"tipo="quantity<?php echo $indice; ?>"  value="<?php echo remove_junk($product['qty']); ?>">
+                    <input type="number" class="form-control" name="quantity" tipo="quantity<?php echo $indice; ?>" value="<?php echo remove_junk($product['qty']); ?>">
                   </td>
                   <td id="quantity_available"><?php echo remove_junk($product['quantity_available']); ?></td>
                   <td>
@@ -119,7 +136,7 @@ if (!$sale) {
                 </tr>
                 <?php $indice = $indice + 1; ?>
               <?php endforeach; ?>
-                
+
             </tbody>
           </table>
           <button type="submit" name="update_sale" class="btn btn-danger" onclick="actualizarVenta(); return false;">Actualizar venta</button>

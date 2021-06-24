@@ -500,7 +500,7 @@ function find_all_sale()
 function find_all_sale_products_by_id($id)
 {
   global $db;
-  $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,p.name";
+  $sql  = "SELECT sp.id,sp.product_id,sp.qty,sp.price,sp.price_product,p.name";
   $sql .= " AS name_product,p.quantity as quantity_available,p.sale_price as sale_price";
   $sql .= " FROM sales_products sp";
   $sql .= " LEFT JOIN products p ON sp.product_id = p.id";
