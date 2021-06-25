@@ -124,125 +124,136 @@ function quitar(id) {
 
 function registrarVenta() {
 
-    var productos = $('#tablaProductos').tableToJSON({
-        extractor: function (cellIndex, $cell) {
-            return $cell.find('span').text() || $cell.text() || $($cell[0]).children()[0].value;
-        }
-    });
-
-    var formData = {
-        'productos': productos,
-        'add_sale': 'guardar',
-        'name_sale': $('[name="name_sale"]')[0].value,
-        'cel_phone': $('[name="cel_phone"]')[0].value,
-        'email': $('[name="email"]')[0].value,
-        'department': $('[name="departamento"]')[0].value,
-        'city': $('[name="ciudad"]')[0].value,
-        'direction': $('[name="direction"]')[0].value,
-        'neighborhood': $('[name="neighborhood"]')[0].value,
-        'type_ubication': $('[name="type_ubication"]')[0].value,
-        'payment_method': $('[name="payment_method"]')[0].value,
-        'shipping_type': $('[name="tipo_envio"]')[0].value,
-        'state': $('[name="state"]')[0].value,
-        'date': $('[name="date"]')[0].value
-    };
-    // process the form
-    $.ajax({
-        type: 'POST',
-        url: 'insert_sale.php',
-        data: formData,
-        dataType: 'json',
-        encode: true
-    }).done(function (respuesta) {
-        if (respuesta['error'] == true) {
-            console.log(respuesta['msg']);
-            alert(respuesta['msg']);
-        } else {
-            console.log(respuesta['msg']);
-            alert(respuesta['msg']);
-            location.reload();
-        }
-
-        //Tratamos a respuesta según sea el tipo  y la estructura               
-    }).fail(function (jqXHR, textStatus) {
-        alert("Falta información para registrar la venta");
-    });
-
-
-}
-
-function actualizarVenta() {
-
-    var productos = $('#tablaProductos').tableToJSON({
-        extractor: function (cellIndex, $cell) {
-            return ($($cell[0]).children()[0] ? $($cell[0]).children()[0].value : null) || $cell.find('span').text() || $cell.text();
-        }
-    });
-
-    var formData = {
-        'productos': productos,
-        'update_sale': 'guardar',
-        'id': $('[name="id"]')[0].value,
-        'name_sale': $('[name="name_sale"]')[0].value,
-        'cel_phone': $('[name="cel_phone"]')[0].value,
-        'email': $('[name="email"]')[0].value,
-        'department': $('[name="departamento"]')[0].value,
-        'city': $('[name="ciudad"]')[0].value,
-        'direction': $('[name="direction"]')[0].value,
-        'neighborhood': $('[name="neighborhood"]')[0].value,
-        'type_ubication': $('[name="type_ubication"]')[0].value,
-        'payment_method': $('[name="payment_method"]')[0].value,
-        'shipping_type': $('[name="tipo_envio"]')[0].value,
-        'state': $('[name="state"]')[0].value,
-        'date': $('[name="date"]')[0].value
-    };
-    // process the form
-    $.ajax({
-        type: 'POST',
-        url: 'update_sale.php',
-        data: formData,
-        dataType: 'json',
-        encode: true
-    }).done(function (respuesta) {
-        if (respuesta['error'] == true) {
-            console.log(respuesta['msg']);
-            alert(respuesta['msg']);
-        } else {
-            emailResponse = sendEmail();
-            console.log(emailResponse);
-            //emailResponse = JSON.parse(emailResponse);
-            if (emailResponse['error'] == false) {
-                console.log(respuesta['msg']);
-                alert(respuesta['msg'], " y envio del curso exitoso");
-                location.reload();
+    if($('[name="state"]')[0].value == 3){
+        alert("La venta no puede ser registrada con el estado Temporal");
+    }else{
+        var productos = $('#tablaProductos').tableToJSON({
+            extractor: function (cellIndex, $cell) {
+                return $cell.find('span').text() || $cell.text() || $($cell[0]).children()[0].value;
+            }
+        });
+    
+        var formData = {
+            'productos': productos,
+            'add_sale': 'guardar',
+            'name_sale': $('[name="name_sale"]')[0].value,
+            'cel_phone': $('[name="cel_phone"]')[0].value,
+            'email': $('[name="email"]')[0].value,
+            'department': $('[name="departamento"]')[0].value,
+            'city': $('[name="ciudad"]')[0].value,
+            'direction': $('[name="direction"]')[0].value,
+            'neighborhood': $('[name="neighborhood"]')[0].value,
+            'type_ubication': $('[name="type_ubication"]')[0].value,
+            'payment_method': $('[name="payment_method"]')[0].value,
+            'shipping_type': $('[name="tipo_envio"]')[0].value,
+            'state': $('[name="state"]')[0].value,
+            'date': $('[name="date"]')[0].value
+        };
+        // process the form
+        $.ajax({
+            type: 'POST',
+            url: 'insert_sale.php',
+            data: formData,
+            dataType: 'json',
+            encode: true
+        }).done(function (respuesta) {
+            if (respuesta['error'] == true) {
+                console.log('--->',respuesta['msg']);
+                alert(respuesta['msg']);
             } else {
-                if (emailResponse['error'] == "5") {
-                    console.log(respuesta['msg'], ", este usuario ya tiene acceso al curso");
-                    alert(respuesta['msg']);
+                emailResponse = sendEmail();
+                emailResponse = JSON.parse(emailResponse);
+                console.log('-->',emailResponse["msg"]);
+                if (emailResponse['error'] == false) {
+                    alert(respuesta['msg']+" y envio del curso exitoso");
                     location.reload();
                 } else {
-                    console.log(respuesta['msg']);
-                    alert(respuesta['msg'], " pero ha ocurrido un error en el envio del curso");
-                    location.reload();
+                    if (emailResponse['error'] == "5") {
+                        alert(respuesta['msg']+", este usuario ya tiene acceso al curso");
+                        location.reload();
+                    } else {
+                        alert(respuesta['msg']+", pero ha ocurrido un error en el envio del curso");
+                        location.reload();
+                    }
+    
                 }
-
             }
+    
+            //Tratamos a respuesta según sea el tipo  y la estructura               
+        }).fail(function (jqXHR, textStatus) {
+            alert("Falta información para registrar la venta");
+        });
+    }
+}
 
-        }
-        //Tratamos a respuesta según sea el tipo  y la estructura               
-    }).fail(function (jqXHR, textStatus) {
-        alert("Falta información para actualizar la venta" + textStatus);
-    });
 
+function actualizarVenta() {
+    if($('[name="state"]')[0].value == 3){
+        alert("La venta no puede ser actualizada con el estado Temporal");
+    }else{
+        var productos = $('#tablaProductos').tableToJSON({
+            extractor: function (cellIndex, $cell) {
+                return ($($cell[0]).children()[0] ? $($cell[0]).children()[0].value : null) || $cell.find('span').text() || $cell.text();
+            }
+        });
+    
+        var formData = {
+            'productos': productos,
+            'update_sale': 'guardar',
+            'id': $('[name="id"]')[0].value,
+            'name_sale': $('[name="name_sale"]')[0].value,
+            'cel_phone': $('[name="cel_phone"]')[0].value,
+            'email': $('[name="email"]')[0].value,
+            'department': $('[name="departamento"]')[0].value,
+            'city': $('[name="ciudad"]')[0].value,
+            'direction': $('[name="direction"]')[0].value,
+            'neighborhood': $('[name="neighborhood"]')[0].value,
+            'type_ubication': $('[name="type_ubication"]')[0].value,
+            'payment_method': $('[name="payment_method"]')[0].value,
+            'shipping_type': $('[name="tipo_envio"]')[0].value,
+            'state': $('[name="state"]')[0].value,
+            'date': $('[name="date"]')[0].value
+        };
+        // process the form
+        $.ajax({
+            type: 'POST',
+            url: 'update_sale.php',
+            data: formData,
+            dataType: 'json',
+            encode: true
+        }).done(function (respuesta) {
+            if (respuesta['error'] == true) {
+                console.log(respuesta['msg']);
+                alert(respuesta['msg']);
+            } else {
+                emailResponse = sendEmail();
+                emailResponse = JSON.parse(emailResponse);
+                console.log('-->',emailResponse["msg"]);
+                if (emailResponse['error'] == false) {
+                    alert(respuesta['msg']+" y envio del curso exitoso");
+                    location.reload();
+                } else {
+                    if (emailResponse['error'] == "5") {
+                        alert(respuesta['msg']+", este usuario ya tiene acceso al curso");
+                        location.reload();
+                    } else {
+                        alert(respuesta['msg']+", pero ha ocurrido un error en el envio del curso");
+                        location.reload();
+                    }
+    
+                }
+    
+            }
+            //Tratamos a respuesta según sea el tipo  y la estructura               
+        }).fail(function (jqXHR, textStatus) {
+            alert("Falta información para actualizar la venta" + textStatus);
+        });
+    }
 
 }
 
 
 function sendEmail() {
-
-
-
-
     
     var formData = {
         'sendaccount': "true",
@@ -252,25 +263,20 @@ function sendEmail() {
         'nombre': $('[name="name_sale"]')[0].value
     };
     // process the form
-    $.ajax({
+   
+    var res = $.ajax({
         type: 'POST',
         url: 'sendemail.php',
         data: formData,
+        async: false,
         dataType: 'json',
         encode: true
     }).done(function (respuesta) {
-        if (respuesta['error'] == true) {
-            console.log(respuesta['msg']);
-            
-        } else {
-            console.log(respuesta['msg']);
-            
-            
-        }
-
-        //Tratamos a respuesta según sea el tipo  y la estructura               
+        //Tratamos a respuesta según sea el tipo  y la estructura
+        result = true;
     }).fail(function (jqXHR, textStatus) {
-        alert("Falta ");
-    });
-    
+        result = false;
+        alert("Proceso dañado, elimine y reanude");
+    }).responseText;
+    return res;
 }

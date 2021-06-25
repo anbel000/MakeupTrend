@@ -6,10 +6,8 @@ if (isset($_POST['sendaccount'])) {
 
     require_once('includes/load.php');
     if (isset($_SESSION["permit_session"]) && $_SESSION["permit_session"] == true) {
-
       
     } else {
-       
         page_require_level(3);
     }
 
@@ -19,10 +17,16 @@ if (isset($_POST['sendaccount'])) {
     $nombre = $_POST['nombre'];
 
     $sale = find_sale($email);
-     
+    date_default_timezone_set('America/Bogota');
         
     $hoy = getdate();
-    $hoy = $hoy["year"] . "-0" . $hoy["mon"] . "-" . $hoy["mday"];
+    
+    if(mb_strlen($hoy["mon"]) == 1){
+        $hoy = $hoy["year"] . "-0" . $hoy["mon"] . "-" . $hoy["mday"];
+    }else{
+        $hoy = $hoy["year"] . "-" . $hoy["mon"] . "-" . $hoy["mday"];
+    }
+    
     foreach ($sale as $sale1) {
         if ($sale1['date'] == $hoy && $sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
             $flag = true;
@@ -30,10 +34,7 @@ if (isset($_POST['sendaccount'])) {
             $flag = false;
         }
     }
-    $json = array('error' => true, 'msg' => $flag);
-        $json_data = json_encode($json);
-        echo $json_data;
-         /* 
+    
     if ($flag == true) {
         $user = find_by_email_user($email);
         if (empty($user)) {
@@ -71,13 +72,8 @@ if (isset($_POST['sendaccount'])) {
             $json_data = json_encode($json);
             echo $json_data;
         }
-    }*/
-} else {
-    $json = array('error' => false, 'msg' => "Envio de asdasdasd exitoso");
-    $json_data = json_encode($json);
-    echo $json_data;
-}
-
+    }
+} 
 
 function sendEmail($email, $plantilla, $asunto)
 {

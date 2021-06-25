@@ -321,7 +321,7 @@ function join_product_table()
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
   $sql  .= " LEFT JOIN brands b ON b.id = p.brand_id";
-  $sql  .= " ORDER BY p.id ASC";
+  $sql  .= " ORDER BY p.id DESC";
   return find_by_sql($sql);
 }
 /*--------------------------------------------------------------*/
@@ -338,7 +338,7 @@ function join_product_table_by_id($id)
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
   $sql  .= " LEFT JOIN brands b ON b.id = p.brand_id";
   $sql .= " WHERE p.id=" . $db->escape($id);
-  $sql  .= " ORDER BY p.id ASC";
+  $sql  .= " ORDER BY p.id DESC";
   return find_by_sql($sql);
 }
 /*--------------------------------------------------------------*/
@@ -354,7 +354,7 @@ function join_product_table_by_id_category($id)
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
   $sql .= " WHERE p.categorie_id=" . $db->escape($id);
-  $sql  .= " ORDER BY p.id ASC";
+  $sql  .= " ORDER BY p.id DESC";
   return find_by_sql($sql);
 }
 /*--------------------------------------------------------------*/
