@@ -6146,12 +6146,13 @@ blockquote .shape {
 }
 
 .item-details .product-info .price {
-	color: #5830e0;
-	display: block
+	color: #2f2e33;
+	display: block;
+	font-size: 26px;
 }
 
 .item-details .product-info .list-info {
-	border-top: 5px solid rgb(218, 3, 158);
+	border-top: 2px solid rgb(253 162 228);
 	margin-top: 30px;
 	padding-top: 30px
 }
@@ -8437,7 +8438,7 @@ blockquote .shape {
 }
 
 .title {
-    /*margin-bottom: 5vh*/
+    margin-bottom: 3vh
 }
 
 .card {
@@ -8454,7 +8455,8 @@ blockquote .shape {
 
 @media(max-width:767px) {
     .card {
-        margin: 30vh auto
+        margin: 15vh auto;
+		width: 100%;
     }
 }
 
@@ -8515,9 +8517,7 @@ blockquote .shape {
     padding: 0 1vh
 }
 
-.card a {
-    padding: 0 1vh
-}
+
 
 .close {
     margin-left: auto;
@@ -8577,8 +8577,10 @@ blockquote .shape {
     opacity: .9;
     color: white;
     width: 100%;
-    font-size: 0.7rem;
+    font-size: 14px;
     margin-top: 4vh;
+	border-color: white;
+	font-weight: 400;
 }
 
 .card .btn:focus {

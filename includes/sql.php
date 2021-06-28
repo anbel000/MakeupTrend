@@ -331,7 +331,7 @@ function join_product_table()
 function join_product_table_by_id($id)
 {
   global $db;
-  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,p.offer,c.name";
   $sql  .= " AS categorie,b.name as brand,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
@@ -348,7 +348,7 @@ function join_product_table_by_id($id)
 function join_product_table_by_id_category($id)
 {
   global $db;
-  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,p.offer,c.name";
   $sql  .= " AS categorie,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
@@ -364,7 +364,7 @@ function join_product_table_by_id_category($id)
 function join_product_table_new()
 {
   global $db;
-  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,p.offer,c.name";
   $sql  .= " AS categorie,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
@@ -380,7 +380,7 @@ function join_product_table_new()
 function join_product_by_name($name)
 {
   global $db;
-  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,c.name";
+  $sql  = " SELECT p.id,p.name,p.quantity,p.sale_price,p.media_id,p.date,p.description,p.offer,c.name";
   $sql  .= " AS categorie,m.file_name AS image";
   $sql  .= " FROM products p";
   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";

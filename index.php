@@ -154,48 +154,6 @@ if (isset($_GET["closeSession"])) {
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
-        <!-- Start Content Past
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
-                    <div class="hero-text text-center"> -->
-        <!-- Start Hero Text -->
-        <!-- Start Content Past
-                        <div class="section-heading">
-                            <h2 class="wow fadeInUp" data-wow-delay=".3s">Bienvenida a Makeup Trend</h2>
-                            <p class="wow fadeInUp" data-wow-delay=".5s">Pon tu belleza, a cuidado de nosotros.<br>Encuentra
-                                productos de alta calidad y buen precio.</p>
-                        </div>-->
-        <!-- End Search Form -->
-        <!-- Start Search Form -->
-
-        <!-- Start Content Past
-                        <div class="search-form wow fadeInUp" data-wow-delay=".7s">
-                            <form action="search.php" method="get">
-                                <div class="row">
-
-                                    <div class="col-lg-10 col-md-10 col-12 p-0">
-                                        <div class="search-input">
-                                            <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                            <input type="text" name="keyword" id="keyword" placeholder="Buscar un producto">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-2 col-12 p-0">
-                                        <div class="search-btn button">
-                                            <button class="btn"><i class="lni lni-search-alt"></i>Search</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>-->
-        <!-- End Search Form -->
-        <!-- Start Content Past
-                    </div>
-                </div>
-            </div>
-        </div>-->
     </section>
     <!-- End Hero Area -->
 
@@ -316,13 +274,18 @@ if (isset($_GET["closeSession"])) {
                                 <div class="bottom-wrap-payment">
                                     <figcaption class="info-wrap">
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-9">
-                                                <span class="rated">Precio</span>
-                                                <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" data-abc="true">$<?php echo remove_junk($product['sale_price']); ?></a>
-                                            </div>
-                                            <div class="col-md-8 col-xs-3">
-                                                <span class="rated">Unidades disponibles</span>
-                                                <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" style="text-align: center;" data-abc="true"><?php echo $product['quantity']; ?></a>
+                                            <div class="col-md-12 col-xs-12">
+                                                <?php
+                                                if ($product['offer'] == 0) {
+                                                ?>
+                                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" style="text-align: center; font-size:20px" class="title" data-abc="true">$<?php echo number_format($product['sale_price'], 0, ",", "."); ?></a>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" style="text-align: center; font-size:20px;" data-abc="true">$<s><?php echo number_format($product['sale_price'], 0, ",", "."); ?></s> -- $<?php echo number_format($product['offer'], 0, ",", "."); ?></a>
+                                                <?php
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </figcaption>
@@ -351,7 +314,9 @@ if (isset($_GET["closeSession"])) {
                                 </div>
                             </figure>
                         </div>
-                    <?php endforeach; ?>
+                    <?php
+                    endforeach;
+                    ?>
 
 
 

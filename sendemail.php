@@ -17,7 +17,7 @@ if (isset($_POST['sendaccount'])) {
     $nombre = $_POST['nombre'];
 
     $sale = find_sale($email);
-    date_default_timezone_set('America/Bogota');
+    /*date_default_timezone_set('America/Bogota');
         
     $hoy = getdate();
     
@@ -25,10 +25,10 @@ if (isset($_POST['sendaccount'])) {
         $hoy = $hoy["year"] . "-0" . $hoy["mon"] . "-" . $hoy["mday"];
     }else{
         $hoy = $hoy["year"] . "-" . $hoy["mon"] . "-" . $hoy["mday"];
-    }
+    }*/
     
     foreach ($sale as $sale1) {
-        if ($sale1['date'] == $hoy && $sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
+        if ($sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
             $flag = true;
         } else {
             $flag = false;

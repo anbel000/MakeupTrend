@@ -166,7 +166,17 @@
                             <input id="id" type="number" hidden value="<?php echo remove_junk($product['id']); ?>">
                             <?php $id_product = $product['id']; ?>
                             <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
-                            <h3 class="price">$<?php echo remove_junk($product['sale_price']); ?></h3>
+                            <?php
+                                    if ($product['offer'] == 0) {
+                                    ?>
+                                      <h3 class="price">$<?php echo number_format($product['sale_price'], 0, ",", "."); ?></h3>
+                                    <?php
+                                    } else {
+                                    ?>
+                                      <h3 class="price">$<s><?php echo number_format($product['sale_price'], 0, ",", "."); ?></s> - $<?php echo number_format($product['offer'], 0, ",", "."); ?></h3>
+                                    <?php
+                                    }
+                                    ?>
                             <div class="list-info">
                                 <h4>Información</h4>
                                 <ul>
@@ -175,7 +185,6 @@
                             </div>
                             <div class="list-info">
                                 <ul>
-                                    <li><span>Cantidades disponibles:</span><?php echo remove_junk($product['quantity']); ?></li>
                                     <li><span>Marca:</span><?php echo remove_junk($product['brand']); ?></li>
                                     <li><span>Categoria:</span><?php echo remove_junk($product['categorie']); ?></li>
                                 </ul>
@@ -189,12 +198,12 @@
                         <div class="contact-info">
                             <?php if (validation_product_session($id_product)) { ?>
                                 <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">Ver carrito</button></a>
+                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); border-color:white; font-weight:400">Ver carrito</button></a>
                                 <?php } else {
                                 if ($product['quantity'] > 0) {
                                 ?>
                                     <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
+                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); border-color:white; font-weight:400" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
                                 <?php
                                 } else {
                                 ?>

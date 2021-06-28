@@ -132,39 +132,6 @@
                 <?php endforeach; ?>
               </ul>
             </div>
-
-
-            <div class="single-widget range">
-              <h3>Rango de precio</h3>
-              <input type="range" class="form-range" name="range" step="1" min="100" max="10000" value="10" onchange="rangePrimary.value=value">
-              <div class="range-inner">
-                <label>$</label>
-                <input type="text" id="rangePrimary" placeholder="100">
-              </div>
-            </div>
-
-
-            <div class="single-widget condition">
-              <h3>Condición</h3>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                <label class="form-check-label" for="flexCheckDefault1">
-                  Todas
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                <label class="form-check-label" for="flexCheckDefault2">
-                  Nuevo
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                <label class="form-check-label" for="flexCheckDefault3">
-                  Usado
-                </label>
-              </div>
-            </div>
           </div>
         </div>
         <div class="col-lg-9 col-md-8 col-12">
@@ -194,7 +161,7 @@
                 <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                     <div class="row">
-                    <?php foreach ($products as $product) : ?>
+                      <?php foreach ($products as $product) : ?>
                         <div class="col-lg-4 col-md-6">
                           <figure class="card2 card2-product-grid card2-lg" style="margin-top: 28px;">
                             <?php if ($product['quantity'] == 0) { ?>
@@ -218,13 +185,18 @@
                               <figcaption class="info-wrap">
                                 <div class="row">
                                   <div class="col-md-12 col-xs-12">
-                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" style="text-align: left;" data-abc="true">Unidades disponibles: <?php echo $product['quantity']; ?></a>
+                                    <?php
+                                    if ($product['offer'] == 0) {
+                                    ?>
+                                      <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" style="text-align: center; font-size:20px; padding-bottom:4px" class="title" data-abc="true">$<?php echo number_format($product['sale_price'], 0, ",", "."); ?></a>
+                                    <?php
+                                    } else {
+                                    ?>
+                                      <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" style="text-align: center; font-size:20px; padding-bottom:4px" data-abc="true">$<s><?php echo number_format($product['sale_price'], 0, ",", "."); ?></s> - $<?php echo number_format($product['offer'], 0, ",", "."); ?></a>
+                                    <?php
+                                    }
+                                    ?>
                                   </div>
-                                  <div class="col-md-12 col-xs-12">
-                                    <span class="rated"></span>
-                                    <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="title" data-abc="true">$<?php echo remove_junk($product['sale_price']); ?></a>
-                                  </div>
-
                                 </div>
                               </figcaption>
                             </div>

@@ -5,11 +5,16 @@ const formatterPeso = new Intl.NumberFormat('es-CO', {
 })
 
 function calculo(count) {
-    subTotal = 0;
-    total = 0;
+    var subTotal = 0;
+    var total = 0;
     for (x = 1; x <= count; x++) {
-        valorProducto = document.getElementById("qty" + x).value * document.getElementById("price" + x).textContent.substr(2,);
-        subTotal = parseInt(subTotal) + parseInt(valorProducto);
+        
+        cantidad = document.getElementById("qty" + x).value;
+        precioProducto = document.getElementById("price" + x).textContent.substr(2,);
+
+        valorProductoTotal = cantidad * precioProducto.replace(/\./g, '');
+        subTotal = parseInt(subTotal) + parseInt(valorProductoTotal);
+        
     }
     document.getElementById("subTotal").innerHTML = formatterPeso.format(subTotal);
     total = parseInt(subTotal) + parseInt(document.getElementById("type_send").value);

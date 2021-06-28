@@ -41,7 +41,7 @@
     //page_require_level(2);
     $categories = find_all("categories");
 
-    session_start();
+    //session_start();
 
 
     ?>
@@ -123,15 +123,24 @@
                                     <input hidden type="numer" id="id<?php echo $count; ?>" value="<?php echo $result["id"] ?>">
                                     <input hidden type="numer" id="qtyDisponible<?php echo $count; ?>" value="<?php echo $result["quantity"] ?>">
                                     
-                                    <div class="col-md-2 col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
-                                    <div class="col-md-4 col">
+                                    <div class="col-md-2 col-2"><img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($result['image']); ?>/1.jpg"></div>
+                                    <div class="col-md-4 col-3">
                                         <div class="row text-muted"><?php echo $result["categorie"] ?></div>
                                         <div class="row" id="name_product<?php echo $count; ?>"><?php echo $result["name"] ?></div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-2">
                                         <input type="number" onchange="calculo2()" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" min="1" />
                                     </div>
-                                    <div class="col" id="price<?php echo $count; ?>">$ <?php echo $result["sale_price"] ?></div>
+                                    <div class="col-3" id="price<?php echo $count; ?>">$ 
+                                        <?php 
+                                            if($result['offer'] == 0){
+                                                echo number_format($result['sale_price'], 0, ",", "."); 
+                                            }else{
+                                                echo number_format($result['offer'], 0, ",", "."); 
+                                            }
+                                            
+                                        ?>
+                                    </div>
                                     <div class="col">
                                         <span class="close"><a href="javascript:quitarProducto(<?php echo $result["id"] ?>);">&#10005;</a></span>
                                     </div>
