@@ -14,18 +14,21 @@ if (isset($_POST['update_sale'])) {
         if (empty($errors)) {
 
             foreach ($_POST["productos"] as $result) {
-                $p_id      = $db->escape((int)$result['ID']);
-                $s_qty_base      = $db->escape((int)$result['Qty']);
-                $s_qty_available      = $db->escape((int)$result['Cantidad Disponible']);
-                $s_qty     = $db->escape((int)$result['Cantidad']);
-                $qty_Condition = $s_qty_available + $s_qty_base;
-                if ($s_qty > 0 && $s_qty <= $qty_Condition) {
-                    $disponibilidad = true;
-                } else {
-                    $disponibilidad = false;
-                    $json = array('error' => true, 'msg' => "El producto con ID " . $p_id . " no se puede registrar por la cantidad de productos");
-                    $json_data = json_encode($json);
-                    break;
+                $product = product_qty_by_id($result['ID']);
+
+                foreach ($product as $result2) {
+
+                    $s_qty     = $db->escape((int)$result['Cantidad']);
+                    $qty_Condition = (int)$result2['quantity'] + (int)$result['Qty'];
+                    if ($s_qty > 0 && $s_qty <= $qty_Condition) {
+                        $disponibilidad = true;
+                    } else {
+                        $disponibilidad = false;
+                        $json = array('error' => true, 'msg' => "El producto " . $result2['name'] . " no se puede registrar por la cantidad de productos");
+                        $json_data = json_encode($json);
+                        break;
+                    }
+
                 }
             }
 

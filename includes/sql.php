@@ -345,6 +345,32 @@ function join_product_table_by_id($id)
 /* Function for Finding all product name
    /* JOIN with categorie  and media database table
    /*--------------------------------------------------------------*/
+   function product_qty_by_id($id)
+   {
+     global $db;
+     $sql  = " SELECT p.name,p.quantity";
+     $sql  .= " FROM products p";
+     $sql .= " WHERE p.id=" . $db->escape($id);
+     $sql  .= " ORDER BY p.id ASC";
+     return find_by_sql($sql);
+   }
+   /*--------------------------------------------------------------*/
+/* Function for Finding all product name
+   /* JOIN with categorie  and media database table
+   /*--------------------------------------------------------------*/
+   function product_shopping_by_id($id)
+   {
+     global $db;
+     $sql  = " SELECT p.sale_price,p.offer";
+     $sql  .= " FROM products p";
+     $sql .= " WHERE p.id=" . $db->escape($id);
+     $sql  .= " ORDER BY p.id ASC";
+     return find_by_sql($sql);
+   }
+/*--------------------------------------------------------------*/
+/* Function for Finding all product name
+   /* JOIN with categorie  and media database table
+   /*--------------------------------------------------------------*/
 function join_product_table_by_id_category($id)
 {
   global $db;

@@ -22,7 +22,7 @@ function pagar() {
 
         //console.log(informacion);
         if (informacion.tipoPago == "PayU") {
-            respuesta = registrarVentaTemporal(informacion, 3);
+            respuesta = registrarVentaTemporal(3);
             respuesta = JSON.parse(respuesta);
             if (respuesta['error'] == true) {
                 swal({
@@ -36,7 +36,7 @@ function pagar() {
 
         } else {
             if (informacion.tipoPago == "Contra Entrega") {
-                respuesta = registrarVentaTemporal(informacion, 2);
+                respuesta = registrarVentaTemporal(2);
                 respuesta = JSON.parse(respuesta);
                 if (respuesta['error'] == true) {
                     swal({
@@ -116,7 +116,7 @@ function pagar() {
 }
 
 
-function registrarVentaTemporal(informacion, estado) {
+function registrarVentaTemporal(estado) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -126,18 +126,13 @@ function registrarVentaTemporal(informacion, estado) {
 
 
     var formData = {
-        'productos': informacion.productos,
-        'add_sale': 'guardar',
+        'add_sale_online': 'guardar',
         'name_sale': document.getElementById('name_sale').value,
         'cel_phone': document.getElementById('cel_phone').value,
         'email': document.getElementById('email').value,
-        'department': informacion.departamento,
-        'city': informacion.ciudad,
         'direction': document.getElementById('direction').value,
         'neighborhood': document.getElementById('neighborhood').value,
         'type_ubication': document.getElementById('type_ubication').value,
-        'payment_method': informacion.tipoPago,
-        'shipping_type': informacion.tipoEnvio,
         'state': estado,
         'date': today
     };
@@ -164,7 +159,7 @@ function payU(informacion) {
 
     refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
     descripcion = prepararDescripcion(informacion);
-    //“ApiKey~merchantId~referenceCode~amount~currency”.
+    //“ApiKey~merchantId~referenceCode~amount~currency”. 
     firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~" + refereceCode + "~" + informacion.total + "~COP"
 
     document.getElementsByName("merchantId")[0].value = 508029;

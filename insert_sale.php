@@ -20,14 +20,17 @@ if (isset($_POST['add_sale'])) {
     if (empty($errors)) {
 
       foreach ($_POST["productos"] as $result) {
-        $p_id      = $db->escape((int)$result['ID']);
-        if ((int)$result['Cantidad'] > 0 && (int)$result['Cantidad'] <= (int)$result['Cantidad Disponible']) {
-          $disponibilidad = true;
-        } else {
-          $disponibilidad = false;
-          $json = array('error' => true, 'msg' => "El producto con ID " . $p_id . " no se puede registrar por la cantidad de productos");
-          $json_data = json_encode($json);
-          break;
+        
+        $product = product_qty_by_id($result['ID']);
+        foreach($product as $result2){
+          if ((int)$result['Cantidad'] > 0 && (int)$result['Cantidad'] <= (int)$result2['quantity']) {
+            $disponibilidad = true;
+          } else {
+            $disponibilidad = false;
+            $json = array('error' => true, 'msg' => "El producto " . $result2['name'] . " no se puede registrar por la cantidad de productos");
+            $json_data = json_encode($json);
+            break;
+          }
         }
       }
 

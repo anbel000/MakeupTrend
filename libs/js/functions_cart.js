@@ -189,21 +189,16 @@ function almacenarInfo(count) {
 
         var productos = [];
 
-        function agregarEntrada(id_producto, qty, total, qtyProducto, nombre) {
+        function agregarEntrada(id_producto, qty) {
             productos.push({
                 ID: id_producto,
                 Cantidad: qty,
-                "Cantidad Disponible": qtyProducto,
-                Total: total,
-                Nombre: nombre
             });
         }
 
         for (x = 1; x <= count; x++) {
             agregarEntrada(document.getElementById('id' + x).value, 
-            document.getElementById('qty' + x).value, 
-            parseInt(document.getElementById('qty' + x).value) * parseInt(document.getElementById("price" + x).textContent.substr(2,))
-            ,document.getElementById('qtyDisponible' + x).value,document.getElementById('name_product' + x).textContent);
+            document.getElementById('qty' + x).value);
 
         }
         var el = document.getElementById('departamentos');
@@ -212,16 +207,43 @@ function almacenarInfo(count) {
         var text2 = el2.options[el2.selectedIndex].innerHTML;
 
         var infoVenta = {
+            infoCart: 'true',
             productos: productos,
             departamento: text,
             ciudad: document.getElementById('ciudades').value,
             tipoEnvio: text2,
             tipoPago: document.getElementById('tipo_pago').value,
-            total: document.getElementById('total').textContent.substr(2,)
         }
 
-        localStorage.setItem('informacion', JSON.stringify(infoVenta));
-        window.location.replace("buy_cart.php");
+        var informacion = {
+            tipoPago: document.getElementById('tipo_pago').value
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: 'info_cart.php',
+            data: infoVenta,
+            dataType: 'json',
+            encode: true
+        }).done(function(respuesta){
+            if(respuesta['error'] == false){
+                localStorage.setItem('informacion', JSON.stringify(informacion));
+                window.location.replace("buy_cart.php");
+            }else{
+                if(respuesta['error'] == true){
+                    alert('Error: '+ respuesta['msg']);
+                }else{
+                    if(respuesta['error'] == 1){
+                        window.location.replace("shopping_cart.php");
+                    }
+                }
+            }
+            
+            console.log('--> ', respuesta);
+        }).fail(function (jqXHR, textStatus) {
+            alert("Error al almacenar información: " + textStatus);
+        });
+        
 
 
     }else{
