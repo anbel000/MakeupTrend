@@ -215,9 +215,7 @@ function almacenarInfo(count) {
             tipoPago: document.getElementById('tipo_pago').value,
         }
 
-        var informacion = {
-            tipoPago: document.getElementById('tipo_pago').value
-        }
+      
 
         $.ajax({
             type: 'POST',
@@ -227,7 +225,6 @@ function almacenarInfo(count) {
             encode: true
         }).done(function(respuesta){
             if(respuesta['error'] == false){
-                localStorage.setItem('informacion', JSON.stringify(informacion));
                 window.location.replace("buy_cart.php");
             }else{
                 if(respuesta['error'] == true){

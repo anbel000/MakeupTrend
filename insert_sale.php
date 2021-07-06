@@ -96,3 +96,92 @@ if (isset($_POST['add_sale'])) {
     }
   }
 }
+
+
+if (isset($_POST['add_sale_online'])) {
+  if (isset($_SESSION['products_sale'])) {
+    $req_fields = array('name_sale', 'cel_phone', 'email', 'direction', 'neighborhood', 'type_ubication', 'date');
+    validate_fields($req_fields);
+    if (empty($errors)) {
+      $descripcion = "";
+      foreach ($_SESSION['products_sale'] as $result) {
+        $product = product_qty_by_id($result['product_id']);
+        foreach($product as $result2){
+          if ((int)$result['qty'] > 0 && (int)$result['qty'] <= (int)$result2['quantity']) {
+            $disponibilidad = true;
+            $descripcion = $descripcion . $result['qty'] . ' ' . $result2['name'] . ' + ';
+          } else {
+            $disponibilidad = false;
+            $json = array('error' => true, 'msg' => "El producto " . $result2['name'] . " no se puede registrar por la cantidad de productos");
+            $json_data = json_encode($json);
+            break;
+          }
+        }
+      }
+
+      if ($disponibilidad == true) {
+
+        if($_SESSION["tipoPago"] == "PayU"){
+          $state = 3;
+        }else{
+          $state = 2;
+        }
+        $name_sale      = $db->escape($_POST['name_sale']);
+        $cel_phone     = $db->escape($_POST['cel_phone']);
+        $email     = $db->escape($_POST['email']);
+        $department     = $_SESSION["departamento"];
+        $city     = $_SESSION["ciudad"];
+        $direction   = $db->escape($_POST['direction']);
+        $neighborhood      = $db->escape($_POST['neighborhood']);
+        $type_ubication    = $db->escape($_POST['type_ubication']);
+        $payment_method      = $_SESSION["tipoPago"];
+        $shipping_type      = $_SESSION["tipoEnvio"];
+        $date    = $db->escape($_POST['date']);
+
+
+        $sql  = "INSERT INTO sales (";
+        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,date";
+        $sql .= ") VALUES (";
+        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$date}'";
+        $sql .= ")";
+
+        if ($db->query($sql)) {
+          foreach ($_SESSION['products_sale'] as $result) {
+            $id_sale = get_id_sale_by_name($name_sale);
+            $p_id      = $result['product_id'];
+            $s_qty     = $result['qty'];
+            $s_total   = $result['price'];
+            $s_precio  = $result['price_product'];
+
+            $sql  = "INSERT INTO sales_products (";
+            $sql .= "id,product_id,qty,price,price_product";
+            $sql .= ") VALUES (";
+            $sql .= "'{$id_sale[0]['id']}','{$p_id}','{$s_qty}','{$s_total}','{$s_precio}'";
+            $sql .= ");";
+
+            if ($db->query($sql)) {
+              $json = array('error' => false, 'msg' => "Venta Agregada", 'descripcion' => $descripcion, 'valor' => $_SESSION["totalCompra"], 'subvalor' => $_SESSION["subTotalCompra"], 'tpPago' => $payment_method);
+              $json_data = json_encode($json);
+              update_product_qty($s_qty, $p_id);
+              //redirect('add_sale.php', false);
+            } else {
+              $json = array('error' => true, 'msg' => "Lo siento, el registro de la venta falló");
+              $json_data = json_encode($json);
+              //redirect('add_sale.php', false);
+            }
+          }
+        } else {
+          $json = array('error' => true, 'msg' => "Falló en la creación del cliente");
+          $json_data = json_encode($json);
+          //redirect('add_sale.php', false);
+        }
+      }
+
+
+      echo $json_data;
+    } else {
+      echo ($errors);
+      //redirect('add_sale.php', false);
+    }
+  }
+}

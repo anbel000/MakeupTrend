@@ -75,9 +75,51 @@ if (isset($_POST['sendaccount'])) {
     }
 } 
 
-function sendEmail($email, $plantilla, $asunto)
-{
 
+if (isset($_POST['sendbuy'])) {
+
+    require_once('includes/load.php');
+    if (isset($_SESSION["permit_session"]) && $_SESSION["permit_session"] == true) {
+      
+    } else {
+        page_require_level(3);
+    }
+
+    $email = $_POST['email'];
+    $asunto = $_POST['asunto'];
+    $plantilla = $_POST['plantilla'];
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $total = $_POST['total'];
+
+    $sale = find_sale($email);
+    
+    
+    foreach ($sale as $sale1) {
+        if ($sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
+            $flag = true;
+        } else {
+            $flag = false;
+        }
+    }
+    
+    if ($flag == true) {
+        $response = sendEmail($email, $plantilla, $asunto, $descripcion, $total);
+        if($response == "1"){
+            $json = array('error' => false, 'msg' => "Envio de compra exitoso");
+            $json_data = json_encode($json);
+            echo $json_data;
+        }else{
+            
+            $json = array('error' => true, 'msg' => "Falló en el envio de la compra");
+            $json_data = json_encode($json);
+            echo $json_data;
+        }
+    }
+} 
+
+function sendEmail($email, $plantilla, $asunto, $descripcion = "", $total = 0)
+{
 
     require_once "libs/PHPMailer/PHPMailer.php";
     require_once "libs/PHPMailer/SMTP.php";
@@ -98,6 +140,11 @@ function sendEmail($email, $plantilla, $asunto)
     if ($plantilla == "lyNewAccount.php") {
         $body = "Correo: $email <br> Contraseña: makeup@2021";
     }
+
+    if ($plantilla == "lyNewBuy.php") {
+        $body = "Haz realizado la compra de: $descripcion <br> El total es: $total";
+    }
+
     $mail = new PHPMailer();
 
     try {

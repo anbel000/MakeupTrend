@@ -1,8 +1,4 @@
-if (localStorage.getItem('informacion')) {
 
-} else {
-    window.location.replace("index.php");
-}
 
 function pagar() {
     if (document.getElementById('name_sale').value !== "" &&
@@ -13,15 +9,89 @@ function pagar() {
         document.getElementById('email').value !== "") {
 
 
-        var datos = localStorage.getItem('informacion');
-        informacion = JSON.parse(datos);
+        name_sale = document.getElementById('name_sale').value;
+        cel_phone = document.getElementById('cel_phone').value;
+        direction = document.getElementById('direction').value;
+        neighborhood = document.getElementById('neighborhood').value;
+        type_ubication = document.getElementById('type_ubication').value;
+        email = document.getElementById('email').value;
 
-        if (informacion == null) {
-            window.location="index.php"
+        registro = registrarVentaTemporal();
+        registro = JSON.parse(registro);
+        if (registro['error'] == true) {
+            //console.log('--', registro);
+            swal({
+                title: "¡Error!",
+                text: registro['msg'],
+                type: "error",
+            });
+        } else {
+            if (registro['error'] == false) {
+                console.log('-->', registro);
+                if (registro['tpPago'] == "PayU") {
+                    payU();
+                } else {
+                    if (registro['subvalor'] > 1) {
+                        emailBuyResponse = sendEmailBuy();
+                        emailBuyResponse = JSON.parse(emailBuyResponse);
+
+                        /*if (emailBuyResponse['error'] == false) {
+                            console.log('--->', emailBuyResponse['msg']);
+
+
+                        } else {
+                            console.log('--', emailBuyResponse['msg']);
+                        }*/
+
+                        emailAccountResponse = sendEmailAccount();
+                        emailAccountResponse = JSON.parse(emailAccountResponse);
+                        if (emailAccountResponse['error'] == false) {
+                           // response = eliminarSession();
+                            swal({
+                                title: "Compra Realizada",
+                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Revisa tu correo para obtener acceso al curso.",
+                                type: "success",
+                            }).then(function () {
+                                //window.location.href = "index.php";
+                            });
+                        } else {
+                            if (emailAccountResponse['error'] == "5") {
+                               // response = eliminarSession();
+                                swal({
+                                    title: "Compra Realizada",
+                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
+                                    type: "success",
+                                }).then(function () {
+                                    //window.location.href = "index.php";
+                                });
+                            } else {
+                               // response = eliminarSession();
+                                swal({
+                                    title: "Compra Realizada",
+                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
+                                    type: "success",
+                                }).then(function () {
+                                    //window.location.href = "index.php";
+                                });
+                            }
+
+                        }
+                    } else {
+
+                    }
+                }
+                /*swal({
+                    title: "¡Error!",
+                    text: registro['descripcion'],
+                    type: "error",
+                });*/
+            }
         }
 
+
+
         //console.log(informacion);
-        if (informacion.tipoPago == "PayU") {
+        /*if (informacion.tipoPago == "PayU") {
             respuesta = registrarVentaTemporal(3);
             respuesta = JSON.parse(respuesta);
             if (respuesta['error'] == true) {
@@ -104,7 +174,10 @@ function pagar() {
                     type: "error",
                 });
             }
-        }
+        }*/
+
+
+
 
     } else {
         swal({
@@ -113,139 +186,165 @@ function pagar() {
             type: "error",
         });
     }
-}
 
 
-function registrarVentaTemporal(estado) {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
 
-    today = yyyy + '-' + mm + '-' + dd;
+    function registrarVentaTemporal() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
 
-
-    var formData = {
-        'add_sale_online': 'guardar',
-        'name_sale': document.getElementById('name_sale').value,
-        'cel_phone': document.getElementById('cel_phone').value,
-        'email': document.getElementById('email').value,
-        'direction': document.getElementById('direction').value,
-        'neighborhood': document.getElementById('neighborhood').value,
-        'type_ubication': document.getElementById('type_ubication').value,
-        'state': estado,
-        'date': today
-    };
-
-    // process the form
-
-    var res = $.ajax({
-        type: 'POST',
-        url: 'insert_sale.php',
-        data: formData,
-        async: false,
-        dataType: 'json',
-        encode: true
-    }).done(function (respuesta) {
-        //Tratamos a respuesta según sea el tipo  y la estructura               
-    }).fail(function (jqXHR, textStatus) {
-        alert("Falta información para registrar la venta: " + textStatus);
-    }).responseText;
-    return res;
-    //return JSON.stringify(res);
-}
-
-function payU(informacion) {
-
-    refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-    descripcion = prepararDescripcion(informacion);
-    //“ApiKey~merchantId~referenceCode~amount~currency”. 
-    firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~" + refereceCode + "~" + informacion.total + "~COP"
-
-    document.getElementsByName("merchantId")[0].value = 508029;
-    document.getElementsByName("accountId")[0].value = 512321;
-    document.getElementById("description").value = descripcion;
-    document.getElementsByName("referenceCode")[0].value = refereceCode;
-    document.getElementsByName("amount")[0].value = informacion.total;
-    document.getElementsByName("tax")[0].value = 0;
-    document.getElementsByName("taxReturnBase")[0].value = 0;
-    document.getElementsByName("currency")[0].value = "COP";
-    document.getElementsByName("signature")[0].value = CryptoJS.MD5(firma);
-    document.getElementsByName("test")[0].value = 1;
-    document.getElementsByName("buyerEmail")[0].value = document.getElementById('email').value;
-    document.getElementsByName("buyerFullName")[0].value = document.getElementById('name_sale').value;
-    document.getElementsByName("mobilePhone")[0].value = document.getElementById('cel_phone').value;
+        today = yyyy + '-' + mm + '-' + dd;
 
 
-    document.getElementById("payment").click();
+        var formData = {
+            'add_sale_online': 'guardar',
+            'name_sale': name_sale,
+            'cel_phone': cel_phone,
+            'email': email,
+            'direction': direction,
+            'neighborhood': neighborhood,
+            'type_ubication': type_ubication,
+            'date': today
+        };
 
-}
+        // process the form
 
-function eliminarSession() {
-
-
-    var formData = {
-        'eliminarSession': "eliminarSession"
-    };
-    // process the form
-
-    var res = $.ajax({
-        type: 'POST',
-        url: 'add_shopping_cart.php',
-        data: formData,
-        async: false,
-        dataType: 'json',
-        encode: true
-    }).done(function (respuesta) {
-        //Tratamos a respuesta según sea el tipo  y la estructura               
-    }).fail(function (jqXHR, textStatus) {
-        alert("Ha ocurrido un error inesperado, no te preocupes. Ponte en contacto con nostros para verificar el estado de tu pedido.");
-    }).responseText;
-
-    return JSON.parse(res);
-
-
-}
-
-function prepararDescripcion(informacion) {
-
-    var descripcion = "Usted esta realizando la compra de:";
-    for (x = 0; x < informacion.productos.length; x++) {
-        descripcion = descripcion + ' ' + informacion.productos[x].Cantidad + ' ' + informacion.productos[x].Nombre;
-        if (x + 1 < informacion.productos.length) {
-            descripcion = descripcion + ' +';
-        } else {
-
-        }
+        var res = $.ajax({
+            type: 'POST',
+            url: 'insert_sale.php',
+            data: formData,
+            async: false,
+            dataType: 'json',
+            encode: true
+        }).done(function (respuesta) {
+            //Tratamos a respuesta según sea el tipo  y la estructura               
+        }).fail(function (jqXHR, textStatus) {
+            alert("Falta información para registrar la venta: " + textStatus);
+        }).responseText;
+        return res;
+        //return JSON.stringify(res);
     }
-    return descripcion;
+
+    function payU() {
+
+        refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+        //“ApiKey~merchantId~referenceCode~amount~currency”. 
+        firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~" + refereceCode + "~" + registro['valor'] + "~COP"
+
+        document.getElementsByName("merchantId")[0].value = 508029;
+        document.getElementsByName("accountId")[0].value = 512321;
+        document.getElementById("description").value = registro['descripcion'];
+        document.getElementsByName("referenceCode")[0].value = refereceCode;
+        document.getElementsByName("amount")[0].value = registro['valor'];
+        document.getElementsByName("tax")[0].value = 0;
+        document.getElementsByName("taxReturnBase")[0].value = 0;
+        document.getElementsByName("currency")[0].value = "COP";
+        document.getElementsByName("signature")[0].value = CryptoJS.MD5(firma);
+        document.getElementsByName("test")[0].value = 1;
+        document.getElementsByName("buyerEmail")[0].value = email;
+        document.getElementsByName("buyerFullName")[0].value = name_sale;
+        document.getElementsByName("mobilePhone")[0].value = cel_phone;
+
+
+        document.getElementById("payment").click();
+
+    }
+
+    function sendEmailBuy() {
+
+        var formData = {
+            'sendbuy': "true",
+            'email': email,
+            'plantilla': "lyNewBuy.php",
+            'asunto': "Compra realizada - Makeup Trend",
+            'nombre': name_sale,
+            'descripcion': registro['descripcion'],
+            'total': registro['valor']
+        };
+        // process the form
+
+        var res = $.ajax({
+            type: 'POST',
+            url: 'sendemail.php',
+            data: formData,
+            async: false,
+            dataType: 'json',
+            encode: true
+        }).done(function (respuesta) {
+            //Tratamos a respuesta según sea el tipo  y la estructura
+            result = true;
+        }).fail(function (jqXHR, textStatus) {
+            result = false;
+        }).responseText;
+        return res;
+        //return JSON.stringify(res);
+
+    }
+
+    function sendEmailAccount() {
+
+        var formData = {
+            'sendaccount': "true",
+            'email': email,
+            'plantilla': "lyNewAccount.php",
+            'asunto': "Cuenta de acceso para el curso - Makeup Trend",
+            'nombre': name_sale
+        };
+        // process the form
+
+        var res = $.ajax({
+            type: 'POST',
+            url: 'sendemail.php',
+            data: formData,
+            async: false,
+            dataType: 'json',
+            encode: true
+        }).done(function (respuesta) {
+            //Tratamos a respuesta según sea el tipo  y la estructura
+            result = true;
+        }).fail(function (jqXHR, textStatus) {
+            result = false;
+        }).responseText;
+        return res;
+        //return JSON.stringify(res);
+
+    }
+
+    function eliminarSession() {
+
+
+        var formData = {
+            'eliminarSession': "eliminarSession"
+        };
+        // process the form
+    
+        var res = $.ajax({
+            type: 'POST',
+            url: 'add_shopping_cart.php',
+            data: formData,
+            async: false,
+            dataType: 'json',
+            encode: true
+        }).done(function (respuesta) {
+            //Tratamos a respuesta según sea el tipo  y la estructura               
+        }).fail(function (jqXHR, textStatus) {
+            alert("Ha ocurrido un error inesperado, no te preocupes. Ponte en contacto con nostros para verificar el estado de tu pedido.");
+        }).responseText;
+    
+        return JSON.parse(res);
+    
+    
+    }
+
 }
 
-function sendEmail() {
 
-    var formData = {
-        'sendaccount': "true",
-        'email': document.getElementById('email').value,
-        'plantilla': "lyNewAccount.php",
-        'asunto': "Cuenta de acceso para el curso - Makeup Trend",
-        'nombre': document.getElementById('name_sale').value
-    };
-    // process the form
 
-    var res = $.ajax({
-        type: 'POST',
-        url: 'sendemail.php',
-        data: formData,
-        async: false,
-        dataType: 'json',
-        encode: true
-    }).done(function (respuesta) {
-        //Tratamos a respuesta según sea el tipo  y la estructura
-        result = true;
-    }).fail(function (jqXHR, textStatus) {
-        result = false;
-    }).responseText;
-    return res;
-    //return JSON.stringify(res);
 
-}
+
+
+
+
+
