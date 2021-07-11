@@ -55,7 +55,7 @@ if ($_POST['infoCart'] == 'true' && isset($_POST['productos']) && isset($_POST['
             $_SESSION["totalCompra"] = $total_compra;
             $_SESSION["subTotalCompra"] = $total_compra;
         }else{
-            if($total_compra > 100000){
+            if($total_compra >= 100000){
                 $_SESSION["totalCompra"] = $total_compra;
                 $_SESSION["subTotalCompra"] = $total_compra;
             }else{
@@ -64,7 +64,6 @@ if ($_POST['infoCart'] == 'true' && isset($_POST['productos']) && isset($_POST['
             }
         }
         
-
         $json = array('error' => false, 'msg' => 'Exitoso');
         $json_data = json_encode($json);
         echo $json_data;

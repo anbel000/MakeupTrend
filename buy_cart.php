@@ -38,6 +38,10 @@
 
     <?php
     require_once('includes/load.php');
+    if(!isset($_SESSION['products_sale'])){
+        header("Location: index.php");
+        die();
+    }
     // Checkin What level user has permission to view this page
     //spage_require_level(3);
     $categories = find_all("categories");

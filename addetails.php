@@ -122,28 +122,28 @@
                         <?php foreach ($products as $product) : ?>
 
                             <div class="xzoom-container">
-                            <?php
-                                    $path = "./assets/images/products/{$product['image']}";
-                                    $dir = opendir($path);
-                                    // Leo todos los ficheros de la carpeta
-                                    $flag = 0;
-                                    while ($elemento = readdir($dir)) {
-                                        // Tratamos los elementos . y .. que tienen todas las carpetas
-                                        if ($elemento != "." && $elemento != "..") {
-                                            // Si es una carpeta
-                                            if (is_dir($path . $elemento)) {
-                                                // Muestro la carpeta
-                                                //echo "<p><strong>CARPETA: ". $elemento ."</strong></p>";
-                                                // Si es un fichero
-                                            } else {
-                                                // Muestro el fichero
-                                                //echo "<br />". $elemento;
-                                                $images[$flag] = $elemento;
-                                                $flag++;
-                                            }
+                                <?php
+                                $path = "./assets/images/products/{$product['image']}";
+                                $dir = opendir($path);
+                                // Leo todos los ficheros de la carpeta
+                                $flag = 0;
+                                while ($elemento = readdir($dir)) {
+                                    // Tratamos los elementos . y .. que tienen todas las carpetas
+                                    if ($elemento != "." && $elemento != "..") {
+                                        // Si es una carpeta
+                                        if (is_dir($path . $elemento)) {
+                                            // Muestro la carpeta
+                                            //echo "<p><strong>CARPETA: ". $elemento ."</strong></p>";
+                                            // Si es un fichero
+                                        } else {
+                                            // Muestro el fichero
+                                            //echo "<br />". $elemento;
+                                            $images[$flag] = $elemento;
+                                            $flag++;
                                         }
                                     }
-                                    ?>
+                                }
+                                ?>
                                 <img class="xzoom" id="xzoom-default" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xoriginal="././assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" />
                                 <div class="xzoom-thumbs">
                                     <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>">
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
 
-                            
+
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-12">
@@ -167,16 +167,16 @@
                             <?php $id_product = $product['id']; ?>
                             <h2 class="title"><?php echo remove_junk($product['name']); ?></h2>
                             <?php
-                                    if ($product['offer'] == 0) {
-                                    ?>
-                                      <h3 class="price">$<?php echo number_format($product['sale_price'], 0, ",", "."); ?></h3>
-                                    <?php
-                                    } else {
-                                    ?>
-                                      <h3 class="price">$<s><?php echo number_format($product['sale_price'], 0, ",", "."); ?></s> - $<?php echo number_format($product['offer'], 0, ",", "."); ?></h3>
-                                    <?php
-                                    }
-                                    ?>
+                            if ($product['offer'] == 0) {
+                            ?>
+                                <h3 class="price">$<?php echo number_format($product['sale_price'], 0, ",", "."); ?></h3>
+                            <?php
+                            } else {
+                            ?>
+                                <h3 class="price">$<s><?php echo number_format($product['sale_price'], 0, ",", "."); ?></s> - $<?php echo number_format($product['offer'], 0, ",", "."); ?></h3>
+                            <?php
+                            }
+                            ?>
                             <div class="list-info">
                                 <h4>Información</h4>
                                 <ul>

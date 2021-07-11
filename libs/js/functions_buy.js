@@ -27,100 +27,17 @@ function pagar() {
             });
         } else {
             if (registro['error'] == false) {
-                console.log('-->', registro);
+                //console.log('-->', registro);
                 if (registro['tpPago'] == "PayU") {
                     payU();
                 } else {
-                    if (registro['subvalor'] > 1) {
+                    if (registro['subvalor'] >= 60000) {
                         emailBuyResponse = sendEmailBuy();
-                        emailBuyResponse = JSON.parse(emailBuyResponse);
-
-                        /*if (emailBuyResponse['error'] == false) {
-                            console.log('--->', emailBuyResponse['msg']);
-
-
-                        } else {
-                            console.log('--', emailBuyResponse['msg']);
-                        }*/
+                        //emailBuyResponse = JSON.parse(emailBuyResponse);
 
                         emailAccountResponse = sendEmailAccount();
                         emailAccountResponse = JSON.parse(emailAccountResponse);
                         if (emailAccountResponse['error'] == false) {
-                           // response = eliminarSession();
-                            swal({
-                                title: "Compra Realizada",
-                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Revisa tu correo para obtener acceso al curso.",
-                                type: "success",
-                            }).then(function () {
-                                //window.location.href = "index.php";
-                            });
-                        } else {
-                            if (emailAccountResponse['error'] == "5") {
-                               // response = eliminarSession();
-                                swal({
-                                    title: "Compra Realizada",
-                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
-                                    type: "success",
-                                }).then(function () {
-                                    //window.location.href = "index.php";
-                                });
-                            } else {
-                               // response = eliminarSession();
-                                swal({
-                                    title: "Compra Realizada",
-                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
-                                    type: "success",
-                                }).then(function () {
-                                    //window.location.href = "index.php";
-                                });
-                            }
-
-                        }
-                    } else {
-
-                    }
-                }
-                /*swal({
-                    title: "¡Error!",
-                    text: registro['descripcion'],
-                    type: "error",
-                });*/
-            }
-        }
-
-
-
-        //console.log(informacion);
-        /*if (informacion.tipoPago == "PayU") {
-            respuesta = registrarVentaTemporal(3);
-            respuesta = JSON.parse(respuesta);
-            if (respuesta['error'] == true) {
-                swal({
-                    title: "¡Error!",
-                    text: respuesta['msg'],
-                    type: "error",
-                });
-            } else {
-                payU(informacion);
-            }
-
-        } else {
-            if (informacion.tipoPago == "Contra Entrega") {
-                respuesta = registrarVentaTemporal(2);
-                respuesta = JSON.parse(respuesta);
-                if (respuesta['error'] == true) {
-                    swal({
-                        title: "¡Error!",
-                        text: respuesta['msg'],
-                        type: "error",
-                    });
-                } else {
-
-                    if (informacion.total > 1) {
-                        emailResponse = sendEmail();
-                        emailResponse = JSON.parse(emailResponse);
-                        if (emailResponse['error'] == false) {
-                            localStorage.removeItem("informacion");
                             response = eliminarSession();
                             swal({
                                 title: "Compra Realizada",
@@ -130,8 +47,7 @@ function pagar() {
                                 window.location.href = "index.php";
                             });
                         } else {
-                            if (emailResponse['error'] == "5") {
-                                localStorage.removeItem("informacion");
+                            if (emailAccountResponse['error'] == "5") {
                                 response = eliminarSession();
                                 swal({
                                     title: "Compra Realizada",
@@ -141,7 +57,6 @@ function pagar() {
                                     window.location.href = "index.php";
                                 });
                             } else {
-                                localStorage.removeItem("informacion");
                                 response = eliminarSession();
                                 swal({
                                     title: "Compra Realizada",
@@ -154,7 +69,7 @@ function pagar() {
 
                         }
                     } else {
-                        localStorage.removeItem("informacion");
+                        emailBuyResponse = sendEmailBuy();
                         response = eliminarSession();
                         swal({
                             title: "Compra Realizada",
@@ -164,20 +79,9 @@ function pagar() {
                             window.location.href = "index.php";
                         });
                     }
-
-
                 }
-            } else {
-                swal({
-                    title: "¡Error!",
-                    text: "Lo sentimos, ha ocurrido un error al procesar el pedido",
-                    type: "error",
-                });
             }
-        }*/
-
-
-
+        }
 
     } else {
         swal({
@@ -230,6 +134,8 @@ function pagar() {
     function payU() {
 
         refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+        refereceCode = registro['idSale'] + '' + refereceCode;
+        
         //“ApiKey~merchantId~referenceCode~amount~currency”. 
         firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~" + refereceCode + "~" + registro['valor'] + "~COP"
 
@@ -319,7 +225,7 @@ function pagar() {
             'eliminarSession': "eliminarSession"
         };
         // process the form
-    
+
         var res = $.ajax({
             type: 'POST',
             url: 'add_shopping_cart.php',
@@ -330,12 +236,12 @@ function pagar() {
         }).done(function (respuesta) {
             //Tratamos a respuesta según sea el tipo  y la estructura               
         }).fail(function (jqXHR, textStatus) {
-            alert("Ha ocurrido un error inesperado, no te preocupes. Ponte en contacto con nostros para verificar el estado de tu pedido.");
+            alert("Ha ocurrido un error inesperado, no te preocupes.");
         }).responseText;
-    
+
         return JSON.parse(res);
-    
-    
+
+
     }
 
 }

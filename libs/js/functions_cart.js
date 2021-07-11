@@ -8,13 +8,13 @@ function calculo(count) {
     var subTotal = 0;
     var total = 0;
     for (x = 1; x <= count; x++) {
-        
+
         cantidad = document.getElementById("qty" + x).value;
         precioProducto = document.getElementById("price" + x).textContent.substr(2,);
 
         valorProductoTotal = cantidad * precioProducto.replace(/\./g, '');
         subTotal = parseInt(subTotal) + parseInt(valorProductoTotal);
-        
+
     }
     document.getElementById("subTotal").innerHTML = formatterPeso.format(subTotal);
     total = parseInt(subTotal) + parseInt(document.getElementById("type_send").value);
@@ -119,11 +119,19 @@ function cargarEnvios() {
     tipoEnvioSelect.add(opcion3)
 
     if (document.getElementById("ciudades").value == "Bogotá") {
+        sub = document.getElementById("subTotal").textContent.substr(2,);
 
-        let opcion = document.createElement('option')
-        opcion.value = 7000
-        opcion.text = "A Domicilio"
-        tipoEnvioSelect.add(opcion)
+        if (sub.replace(/\./g, '') >= 100000) {
+            let opcion = document.createElement('option')
+            opcion.value = 0
+            opcion.text = "A Domicilio"
+            tipoEnvioSelect.add(opcion)
+        } else {
+            let opcion = document.createElement('option')
+            opcion.value = 7000
+            opcion.text = "A Domicilio"
+            tipoEnvioSelect.add(opcion)
+        }
 
         let opcion2 = document.createElement('option')
         opcion2.value = 0
@@ -151,7 +159,10 @@ function cargarPagos() {
     opcion.text = "Seleccione el tipo de pago"
     tipoPagoSelect.add(opcion)
 
-    if (document.getElementById("type_send").value == 7000) {
+    var combo = document.getElementById("type_send");
+    var selected = combo.options[combo.selectedIndex].text;
+
+    if (selected == "A Domicilio") {
 
         let opcion = document.createElement('option')
         opcion.value = "Contra Entrega"
@@ -197,53 +208,73 @@ function almacenarInfo(count) {
         }
 
         for (x = 1; x <= count; x++) {
-            agregarEntrada(document.getElementById('id' + x).value, 
-            document.getElementById('qty' + x).value);
+
+            id = document.getElementById('id' + x).value;
+            qty = parseInt(document.getElementById('qty' + x).value);
+            qtyMin = parseInt(document.getElementById('qty' + x).min);
+            qtyMax = parseInt(document.getElementById('qty' + x).max);
+            if (qty >= qtyMin && qty <= qtyMax) {
+                dispo = true;
+                agregarEntrada(id, qty);
+            } else {
+                dispo = false;
+                break;
+            }
 
         }
-        var el = document.getElementById('departamentos');
-        var text = el.options[el.selectedIndex].innerHTML;
-        var el2 = document.getElementById('type_send');
-        var text2 = el2.options[el2.selectedIndex].innerHTML;
+        if (dispo == true) {
 
-        var infoVenta = {
-            infoCart: 'true',
-            productos: productos,
-            departamento: text,
-            ciudad: document.getElementById('ciudades').value,
-            tipoEnvio: text2,
-            tipoPago: document.getElementById('tipo_pago').value,
-        }
+            var el = document.getElementById('departamentos');
+            var text = el.options[el.selectedIndex].innerHTML;
+            var el2 = document.getElementById('type_send');
+            var text2 = el2.options[el2.selectedIndex].innerHTML;
 
-      
+            var infoVenta = {
+                infoCart: 'true',
+                productos: productos,
+                departamento: text,
+                ciudad: document.getElementById('ciudades').value,
+                tipoEnvio: text2,
+                tipoPago: document.getElementById('tipo_pago').value,
+            }
 
-        $.ajax({
-            type: 'POST',
-            url: 'info_cart.php',
-            data: infoVenta,
-            dataType: 'json',
-            encode: true
-        }).done(function(respuesta){
-            if(respuesta['error'] == false){
-                window.location.replace("buy_cart.php");
-            }else{
-                if(respuesta['error'] == true){
-                    alert('Error: '+ respuesta['msg']);
-                }else{
-                    if(respuesta['error'] == 1){
-                        window.location.replace("shopping_cart.php");
+
+
+            $.ajax({
+                type: 'POST',
+                url: 'info_cart.php',
+                data: infoVenta,
+                dataType: 'json',
+                encode: true
+            }).done(function (respuesta) {
+                if (respuesta['error'] == false) {
+                    window.location.replace("buy_cart.php");
+                } else {
+                    if (respuesta['error'] == true) {
+                        alert('Error: ' + respuesta['msg']);
+                    } else {
+                        if (respuesta['error'] == 1) {
+                            window.location.replace("shopping_cart.php");
+                        }
                     }
                 }
-            }
-            
-            console.log('--> ', respuesta);
-        }).fail(function (jqXHR, textStatus) {
-            alert("Error al almacenar información: " + textStatus);
-        });
-        
+
+                console.log('--> ', respuesta);
+            }).fail(function (jqXHR, textStatus) {
+                alert("Error al almacenar información: " + textStatus);
+            });
+        } else {
+            swal({
+                title: "¡Error!",
+                text: "Uno de los productos tiene una cantidad no permitida, por favor revisa y corrige.",
+                type: "error",
+            });
+        }
 
 
-    }else{
+
+
+    } else {
         console.log("Hace falta información para continuar");
         swal({
             title: "¡Error!",
@@ -251,7 +282,7 @@ function almacenarInfo(count) {
             type: "error",
         });
     }
-    
+
 
     //console.log('----->', infoVenta.productos[0]['id_producto']);
 

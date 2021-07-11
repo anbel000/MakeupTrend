@@ -124,8 +124,12 @@ if (isset($_POST['add_sale_online'])) {
         if($_SESSION["tipoPago"] == "PayU"){
           $state = 3;
         }else{
-          $state = 2;
+          if($_SESSION["tipoPago"] == "Contra Entrega"){
+            $state = 2;
+          }
         }
+       
+        
         $name_sale      = $db->escape($_POST['name_sale']);
         $cel_phone     = $db->escape($_POST['cel_phone']);
         $email     = $db->escape($_POST['email']);
@@ -146,8 +150,8 @@ if (isset($_POST['add_sale_online'])) {
         $sql .= ")";
 
         if ($db->query($sql)) {
+          $id_sale = get_id_sale_by_name($name_sale);
           foreach ($_SESSION['products_sale'] as $result) {
-            $id_sale = get_id_sale_by_name($name_sale);
             $p_id      = $result['product_id'];
             $s_qty     = $result['qty'];
             $s_total   = $result['price'];
@@ -160,7 +164,7 @@ if (isset($_POST['add_sale_online'])) {
             $sql .= ");";
 
             if ($db->query($sql)) {
-              $json = array('error' => false, 'msg' => "Venta Agregada", 'descripcion' => $descripcion, 'valor' => $_SESSION["totalCompra"], 'subvalor' => $_SESSION["subTotalCompra"], 'tpPago' => $payment_method);
+              $json = array('error' => false, 'msg' => "Venta Agregada", 'descripcion' => $descripcion, 'valor' => $_SESSION["totalCompra"], 'subvalor' => $_SESSION["subTotalCompra"], 'tpPago' => $payment_method, 'idSale' => $id_sale[0]['id']);
               $json_data = json_encode($json);
               update_product_qty($s_qty, $p_id);
               //redirect('add_sale.php', false);

@@ -110,6 +110,7 @@
                         </div>
                     </div>
                 </div>
+                <form style="display: contents;" action="#">
                 <?php
                 $count = 0;
                 if (isset($_SESSION["products_shoppingCart"]) && !empty($_SESSION["products_shoppingCart"])) {
@@ -122,23 +123,25 @@
                                 <div class="row main align-items-center">
                                     <input hidden type="numer" id="id<?php echo $count; ?>" value="<?php echo $result["id"] ?>">
                                     <input hidden type="numer" id="qtyDisponible<?php echo $count; ?>" value="<?php echo $result["quantity"] ?>">
-                                    
+
                                     <div class="col-md-2 col-2"><img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($result['image']); ?>/1.jpg"></div>
                                     <div class="col-md-4 col-3">
-                                        <div class="row text-muted"><?php echo $result["categorie"] ?></div>
                                         <div class="row" id="name_product<?php echo $count; ?>"><?php echo $result["name"] ?></div>
                                     </div>
-                                    <div class="col-2">
-                                        <input type="number" onchange="calculo2()" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" min="1" />
-                                    </div>
-                                    <div class="col-3" id="price<?php echo $count; ?>">$ 
-                                        <?php 
-                                            if($result['offer'] == 0){
-                                                echo number_format($result['sale_price'], 0, ",", "."); 
-                                            }else{
-                                                echo number_format($result['offer'], 0, ",", "."); 
-                                            }
-                                            
+                                    
+                                        <div class="col-2">
+                                            <input type="number" onchange="document.getElementById('qtyDisp').click(); calculo2()" min="1" max="<?php echo $result["quantity"] ?>" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" />
+                                        </div>
+                                        <input type="submit" id="qtyDisp" hidden>
+                                    
+                                    <div class="col-3" id="price<?php echo $count; ?>">$
+                                        <?php
+                                        if ($result['offer'] == 0) {
+                                            echo number_format($result['sale_price'], 0, ",", ".");
+                                        } else {
+                                            echo number_format($result['offer'], 0, ",", ".");
+                                        }
+
                                         ?>
                                     </div>
                                     <div class="col">
@@ -151,6 +154,7 @@
                     }
                 } else {
                     ?>
+                    </form>
                     <div class="row">
                         <div class="col-12">
                             <p>NO EXISTEN PRODUCTOS AGREGADOS AL CARRITO</p>
@@ -252,17 +256,21 @@
 
     <script type="text/javascript">
         type_send.oninput = function() {
-
-            if (document.getElementById("type_send").value == 0) {
-                info.innerHTML = "La compra sera enviada a través de Inter Rapidisimo, el costo de envío lo asume el cliente. Dicho costo sera enviado al correo electronico al momento de realizar el envío.";
+            sub = document.getElementById("subTotal").textContent.substr(2, );
+            if (sub.replace(/\./g, '') >= 100000) {
+                info.innerHTML = "El envio sera asumido por Makeup Trend, no te preocupes por el costo.";
             } else {
-                if (document.getElementById("type_send").value == 7000) {
-                    info.innerHTML = "La compra sera enviada a domicilio, con un costo de $7.000 COP";
+                if (document.getElementById("type_send").value == 0) {
+                    info.innerHTML = "La compra sera enviada a través de Inter Rapidisimo, el costo de envío lo asume el cliente. Dicho costo sera enviado al correo electronico al momento de realizar el envío.";
                 } else {
-                    info.innerHTML = "Escoja un tipo de envío";
+                    if (document.getElementById("type_send").value == 7000) {
+                        info.innerHTML = "La compra sera enviada a domicilio, con un costo de $7.000 COP";
+                    } else {
+                        info.innerHTML = "Escoja un tipo de envío";
+                    }
                 }
-
             }
+
         };
 
         calculo(<?php echo $count; ?>);
