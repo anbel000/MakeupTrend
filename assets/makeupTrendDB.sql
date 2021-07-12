@@ -58,6 +58,8 @@ create table sales (
     payment_method varchar(200) not null,
     shipping_type varchar(200) not null,
     state int(11) not null,
+    shipping varchar(11) not null,
+    channel varchar(30) not null,
     date date not null
 );
 
@@ -140,9 +142,11 @@ insert into media (file_name, file_type) values
 ('filter.jpg','image/jpeg');
 
 insert into state_sale (name) values
-('Pagado'),
-('Pendiente'),
-('Temporal');
+('Completada'),
+('Pago Pendiente'),
+('Pago Exitoso'),
+('Pago Rechazado'),
+('Cancelada');
 
 insert into products (name, quantity, sale_price, categorie_id, media_id, date, description, brand_id, offer) values
 ('Filtro de gasolina', 100, 1000, 1, 1, '2017-06-16 07:03:16','Producto de comercialización, pureba número 1', 1, 0);

@@ -15,7 +15,7 @@ if(isset($_SESSION["permit_session"]) && $_SESSION["permit_session"] == true){
 
 if (isset($_POST['add_sale'])) {
   if (isset($_POST['productos'])) {
-    $req_fields = array('name_sale', 'cel_phone', 'email', 'department', 'city', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'shipping_type', 'state', 'date');
+    $req_fields = array('name_sale', 'cel_phone', 'email', 'department', 'city', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'shipping_type', 'state', 'shipping', 'channel', 'date');
     validate_fields($req_fields);
     if (empty($errors)) {
 
@@ -46,13 +46,15 @@ if (isset($_POST['add_sale'])) {
         $payment_method      = $db->escape($_POST['payment_method']);
         $shipping_type      = $db->escape($_POST['shipping_type']);
         $state      = $db->escape($_POST['state']);
+        $shipping      = $db->escape($_POST['shipping']);
+        $channel      = $db->escape($_POST['channel']);
         $date    = $db->escape($_POST['date']);
 
 
         $sql  = "INSERT INTO sales (";
-        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,date";
+        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,shipping,channel,date";
         $sql .= ") VALUES (";
-        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$date}'";
+        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$shipping}','{$channel}','{$date}'";
         $sql .= ")";
 
         if ($db->query($sql)) {

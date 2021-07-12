@@ -66,7 +66,15 @@ if (!$sale) {
                 <input type="text" class="form-control" name="ciudad" placeholder="Ciudad" value="<?php echo $sale["city"]; ?>">
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" name="tipo_envio" placeholder="Tipo de envío" value="<?php echo $sale["shipping_type"]; ?>">
+                <select class="form-control" name="tipo_envio" id="tipo_envio">
+                  <option value="<?php echo $sale["shipping_type"]; ?>" selected><?php echo $sale["shipping_type"]; ?></option>
+                  <?php
+                  if ($sale["shipping_type"] == "Contra Entrega") { ?>
+                    <option value="Inter Rapidisimo">Inter Rapidisimo</option>
+                  <?php } else { ?>
+                    <option value="Contra Entrega">Contra Entrega</option>
+                  <?php } ?>
+                </select>
               </div>
             </div>
           </div>
@@ -80,7 +88,54 @@ if (!$sale) {
                 <input type="text" class="form-control" name="type_ubication" placeholder="Apto o Casa" value="<?php echo $sale["type_ubication"]; ?>">
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" name="payment_method" placeholder="Método de pago" value="<?php echo $sale["payment_method"]; ?>">
+                <select class="form-control" name="payment_method" id="payment_method">
+                  <option value="<?php echo $sale["payment_method"]; ?>" selected><?php echo $sale["payment_method"]; ?></option>
+                  <?php if ($sale["payment_method"] == "Efecty") { ?>
+                    <option value="Daviplata">Daviplata</option>
+                    <option value="Nequi">Nequi</option>
+                    <option value="Bancolombia">Bancolombia</option>
+                    <option value="PayU">PayU</option>
+                    <option value="Contra Entrega">Contra Entrega</option>
+                    <?php } else {
+                    if ($sale["payment_method"] == "Daviplata") { ?>
+                      <option value="Efecty">Efecty</option>
+                      <option value="Nequi">Nequi</option>
+                      <option value="Bancolombia">Bancolombia</option>
+                      <option value="PayU">PayU</option>
+                      <option value="Contra Entrega">Contra Entrega</option>
+                      <?php } else {
+                      if ($sale["payment_method"] == "Nequi") { ?>
+                        <option value="Efecty">Efecty</option>
+                        <option value="Daviplata">Daviplata</option>
+                        <option value="Bancolombia">Bancolombia</option>
+                        <option value="PayU">PayU</option>
+                        <option value="Contra Entrega">Contra Entrega</option>
+                        <?php } else {
+                        if ($sale["payment_method"] == "Bancolombia") { ?>
+                          <option value="Efecty">Efecty</option>
+                          <option value="Daviplata">Daviplata</option>
+                          <option value="Nequi">Nequi</option>
+                          <option value="PayU">PayU</option>
+                          <option value="Contra Entrega">Contra Entrega</option>
+                          <?php } else {
+                          if ($sale["payment_method"] == "PayU") { ?>
+                            <option value="Efecty">Efecty</option>
+                            <option value="Daviplata">Daviplata</option>
+                            <option value="Nequi">Nequi</option>
+                            <option value="Bancolombia">Bancolombia</option>
+                            <option value="Contra Entrega">Contra Entrega</option>
+                          <?php } else { ?>
+                            <option value="Efecty">Efecty</option>
+                            <option value="Daviplata">Daviplata</option>
+                            <option value="Nequi">Nequi</option>
+                            <option value="Bancolombia">Bancolombia</option>
+                            <option value="PayU">PayU</option>
+                  <?php  }
+                        }
+                      }
+                    }
+                  } ?>
+                </select>
               </div>
             </div>
           </div>
@@ -102,6 +157,22 @@ if (!$sale) {
               </div>
               <div class="col-md-4">
                 <input type="date" class="form-control" value="<?php echo $sale["date"]; ?>" name="date" data-date data-date-format="yyyy-mm-dd">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <select class="form-control" name="shipping" id="shipping">
+                  <option value="<?php echo $sale["shipping"]; ?>" selected><?php echo $sale["shipping"]; ?></option>
+                  <?php
+                  if ($sale["shipping"] == "Si") { ?>
+                    <option value="No">No</option>
+                  <?php } else { ?>
+                    <option value="Si">Si</option>
+                  <?php } ?>
+                </select>
               </div>
             </div>
           </div>

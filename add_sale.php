@@ -74,7 +74,11 @@ if (isset($_POST['add_sale']) == false) {
                 <input type="text" class="form-control" name="ciudad" placeholder="Ciudad">
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" name="tipo_envio" placeholder="Tipo de envío">
+                <select class="form-control" name="tipo_envio" id="tipo_envio">
+                    <option value="">Selecciona el tipo de envío</option>
+                    <option value="Contra Entrega">Contra Entrega</option>
+                    <option value="Inter Rapidisimo">Inter Rapidisimo</option>
+                </select>
               </div>
             </div>
           </div>
@@ -88,7 +92,13 @@ if (isset($_POST['add_sale']) == false) {
                 <input type="text" class="form-control" name="type_ubication" placeholder="Apto o Casa">
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" name="payment_method" placeholder="Método de pago">
+                <select class="form-control" name="payment_method" id="payment_method">
+                    <option value="">Selecciona el método de pago</option>
+                    <option value="Efecty">Efecty</option>
+                    <option value="Daviplata">Daviplata</option>
+                    <option value="Nequi">Nequi</option>
+                    <option value="Bancolombia">Bancolombia</option>
+                </select>
               </div>
             </div>
           </div>
@@ -111,7 +121,18 @@ if (isset($_POST['add_sale']) == false) {
               </div>
             </div>
           </div>
-
+          
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <select class="form-control" name="shipping" id="shipping">
+                    <option value="">Selecciona si ya fue enviado</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
           <table class="table table-bordered" id="tablaProductos">
             <thead>

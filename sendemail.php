@@ -28,7 +28,7 @@ if (isset($_POST['sendaccount'])) {
     }*/
     
     foreach ($sale as $sale1) {
-        if ($sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
+        if ($sale1["state"] == "Completada" || $sale1["state"] == "Pago Exitoso") {
             $flag = true;
         } else {
             $flag = false;
@@ -96,7 +96,7 @@ if (isset($_POST['sendbuy'])) {
     
     
     foreach ($sale as $sale1) {
-        if ($sale1["state"] == "Pendiente" || $sale1["state"] == "Pagado") {
+        if ($sale1["state"] == "Completada" || $sale1["state"] == "Pago Exitoso" || $sale1["state"] == "Pago Pendiente") {
             $flag = true;
         } else {
             $flag = false;

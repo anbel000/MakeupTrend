@@ -29,13 +29,15 @@ $sales = find_all_sale();
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th class="text-center" style="width: 50px;">Id</th>
+                <th class="text-center" >Id</th>
                 <th> Nombre del cliente </th>
-                <th class="text-center" style="width: 15%;"> Número Celular</th>
-                <th class="text-center" style="width: 15%;"> Dirección </th>
-                <th class="text-center" style="width: 15%;"> Estado </th>
-                <th class="text-center" style="width: 15%;"> Fecha </th>
-                <th class="text-center" style="width: 100px;"> Acciones </th>
+                <th class="text-center" > Número Celular</th>
+                <th class="text-center" > Dirección </th>
+                <th class="text-center" > Estado </th>
+                <th class="text-center" > Enviado </th>
+                <th class="text-center" > Canal </th>
+                <th class="text-center" > Fecha </th>
+                <th class="text-center" > Acciones </th>
              </tr>
             </thead>
            <tbody>
@@ -46,6 +48,8 @@ $sales = find_all_sale();
                <td class="text-center"><?php echo remove_junk($sale['cel_phone']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['direction']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['state']); ?></td>
+               <td class="text-center"><?php echo remove_junk($sale['shipping']); ?></td>
+               <td class="text-center"><?php echo remove_junk($sale['channel']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['date']); ?></td>
                <td class="text-center">
                   <div class="btn-group">

@@ -124,15 +124,15 @@ function quitar(id) {
 
 function registrarVenta() {
 
-    if($('[name="state"]')[0].value == 3){
-        alert("La venta no puede ser registrada con el estado Temporal");
-    }else{
+    if ($('[name="state"]')[0].value == 4 || $('[name="state"]')[0].value == 5) {
+        alert("La venta no puede ser registrada con ese estado");
+    } else {
         var productos = $('#tablaProductos').tableToJSON({
             extractor: function (cellIndex, $cell) {
                 return $cell.find('span').text() || $cell.text() || $($cell[0]).children()[0].value;
             }
         });
-    
+
         var formData = {
             'productos': productos,
             'add_sale': 'guardar',
@@ -147,6 +147,8 @@ function registrarVenta() {
             'payment_method': $('[name="payment_method"]')[0].value,
             'shipping_type': $('[name="tipo_envio"]')[0].value,
             'state': $('[name="state"]')[0].value,
+            'shipping': $('[name="shipping"]')[0].value,
+            'channel': 'Sistema',
             'date': $('[name="date"]')[0].value
         };
         // process the form
@@ -158,27 +160,47 @@ function registrarVenta() {
             encode: true
         }).done(function (respuesta) {
             if (respuesta['error'] == true) {
-                console.log('--->',respuesta['msg']);
+                console.log('--->', respuesta['msg']);
                 alert(respuesta['msg']);
             } else {
-                emailResponse = sendEmail();
-                emailResponse = JSON.parse(emailResponse);
-                console.log('-->',emailResponse["msg"]);
-                if (emailResponse['error'] == false) {
-                    alert(respuesta['msg']+" y envio del curso exitoso");
-                    location.reload();
-                } else {
-                    if (emailResponse['error'] == "5") {
-                        alert(respuesta['msg']+", este usuario ya tiene acceso al curso");
-                        location.reload();
-                    } else {
-                        alert(respuesta['msg']+", pero ha ocurrido un error en el envio del curso");
+                valorTotal = 0;
+                descripcion = "";
+                for (var x = 0; x < productos.length; x++) {
+                    precioProducto = parseInt(productos[x]["Total"]);
+                    valorTotal = valorTotal + precioProducto;
+
+                    descripcion = descripcion + productos[x]["Cantidad"] + " " + productos[x]["Producto"] + " + ";
+                }
+                if ($('[name="state"]')[0].value == 1 || $('[name="state"]')[0].value == 2 || $('[name="state"]')[0].value == 3) {
+                    sendEmailBuy(descripcion, valorTotal);
+                    if (valorTotal >= 60000 && ($('[name="state"]')[0].value == 1 || $('[name="state"]')[0].value == 3)) {
+                        emailResponse = sendEmail();
+                        emailResponse = JSON.parse(emailResponse);
+                        console.log('-->', emailResponse["msg"]);
+                        if (emailResponse['error'] == false) {
+                            alert(respuesta['msg'] + " y envio del curso exitoso");
+                            location.reload();
+                        } else {
+                            if (emailResponse['error'] == "5") {
+                                alert(respuesta['msg'] + ", este usuario ya tiene acceso al curso");
+                                location.reload();
+                            } else {
+                                alert(respuesta['msg'] + ", pero ha ocurrido un error en el envio del curso");
+                                location.reload();
+                            }
+
+                        }
+                    }else{
+                        alert(respuesta['msg']);
                         location.reload();
                     }
-    
+                } else {
+                    alert(respuesta['msg']);
+                    location.reload();
                 }
+
             }
-    
+
             //Tratamos a respuesta según sea el tipo  y la estructura               
         }).fail(function (jqXHR, textStatus) {
             alert("Falta información para registrar la venta");
@@ -188,15 +210,15 @@ function registrarVenta() {
 
 
 function actualizarVenta() {
-    if($('[name="state"]')[0].value == 3){
-        alert("La venta no puede ser actualizada con el estado Temporal");
-    }else{
+    if ($('[name="state"]')[0].value == 4 || $('[name="state"]')[0].value == 5) {
+        alert("La venta no puede ser actualizada con ese estado");
+    } else {
         var productos = $('#tablaProductos').tableToJSON({
             extractor: function (cellIndex, $cell) {
                 return ($($cell[0]).children()[0] ? $($cell[0]).children()[0].value : null) || $cell.find('span').text() || $cell.text();
             }
         });
-    
+
         var formData = {
             'productos': productos,
             'update_sale': 'guardar',
@@ -212,6 +234,7 @@ function actualizarVenta() {
             'payment_method': $('[name="payment_method"]')[0].value,
             'shipping_type': $('[name="tipo_envio"]')[0].value,
             'state': $('[name="state"]')[0].value,
+            'shipping': $('[name="shipping"]')[0].value,
             'date': $('[name="date"]')[0].value
         };
         // process the form
@@ -228,21 +251,21 @@ function actualizarVenta() {
             } else {
                 emailResponse = sendEmail();
                 emailResponse = JSON.parse(emailResponse);
-                console.log('-->',emailResponse["msg"]);
+                console.log('-->', emailResponse["msg"]);
                 if (emailResponse['error'] == false) {
-                    alert(respuesta['msg']+" y envio del curso exitoso");
+                    alert(respuesta['msg'] + " y envio del curso exitoso");
                     location.reload();
                 } else {
                     if (emailResponse['error'] == "5") {
-                        alert(respuesta['msg']+", este usuario ya tiene acceso al curso");
+                        alert(respuesta['msg'] + ", este usuario ya tiene acceso al curso");
                         location.reload();
                     } else {
-                        alert(respuesta['msg']+", pero ha ocurrido un error en el envio del curso");
+                        alert(respuesta['msg'] + ", pero ha ocurrido un error en el envio del curso");
                         location.reload();
                     }
-    
+
                 }
-    
+
             }
             //Tratamos a respuesta según sea el tipo  y la estructura               
         }).fail(function (jqXHR, textStatus) {
@@ -254,7 +277,7 @@ function actualizarVenta() {
 
 
 function sendEmail() {
-    
+
     var formData = {
         'sendaccount': "true",
         'email': $('[name="email"]')[0].value,
@@ -263,7 +286,38 @@ function sendEmail() {
         'nombre': $('[name="name_sale"]')[0].value
     };
     // process the form
-   
+
+    var res = $.ajax({
+        type: 'POST',
+        url: 'sendemail.php',
+        data: formData,
+        async: false,
+        dataType: 'json',
+        encode: true
+    }).done(function (respuesta) {
+        //Tratamos a respuesta según sea el tipo  y la estructura
+        result = true;
+    }).fail(function (jqXHR, textStatus) {
+        result = false;
+        alert("Proceso dañado, elimine y reanude");
+    }).responseText;
+    return res;
+}
+
+
+function sendEmailBuy(descripcion, total) {
+
+    var formData = {
+        'sendbuy': "true",
+        'email': $('[name="email"]')[0].value,
+        'plantilla': "lyNewBuy.php",
+        'asunto': "Compra realizada - Makeup Trend",
+        'nombre': $('[name="name_sale"]')[0].value,
+        'descripcion': descripcion,
+        'total': total
+    };
+    // process the form
+
     var res = $.ajax({
         type: 'POST',
         url: 'sendemail.php',

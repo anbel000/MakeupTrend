@@ -189,10 +189,15 @@
                                     <li><span>Categoria:</span><?php echo remove_junk($product['categorie']); ?></li>
                                 </ul>
                                 <BR></BR>
-                                <ul>
-                                    <li>Cantidad</li>
-                                    <li><input type="number" style="width:80px;text-align: center;" id="qty" class="form-control" value="1" min="1" /></li>
-                                </ul>
+                                <form style="display: contents;" action="javascript::none">
+                                    <ul>
+                                        <li>Cantidad</li>
+                                        <li>
+                                            <input type="number" style="width:80px;text-align: center;" onchange="document.getElementById('qtyDisp').click()" id="qty" class="form-control" value="1" min="1" max="<?php echo $product['quantity']; ?>" />
+                                        </li>
+                                    </ul>
+                                    <input type="submit" hidden id="qtyDisp">
+                                </form>
                             </div>
                         <?php endforeach; ?>
                         <div class="contact-info">
@@ -292,48 +297,63 @@
     <script type="text/javascript">
         function agregarCarrito() {
 
-            var formData = {
-                'id': document.getElementById("id").value,
-                'qty': document.getElementById("qty").value
-            };
-            // process the form
-            $.ajax({
-                type: 'POST',
-                url: 'add_shopping_cart.php',
-                data: formData,
-                dataType: 'json',
-                encode: true
-            }).done(function(respuesta) {
-                if (respuesta['error'] == true) {
-                    swal({
-                        title: "¡Error!",
-                        text: respuesta['msg'],
-                        type: "error",
-                    });
-                } else {
-                    swal({
-                        title: "",
-                        showCancelButton: true,
-                        confirmButtonText: `Ir a pagar`,
-                        cancelButtonText: `Seguir comprando`,
-                        text: respuesta['msg'],
-                        type: "success",
-                    }).then(function() {
-                        window.location.href = "shopping_cart.php";
+            id = document.getElementById("id").value;
+            qty = parseInt(document.getElementById("qty").value);
+            qtyMin = parseInt(document.getElementById("qty").min);
+            qtyMax = parseInt(document.getElementById("qty").max);
 
-                    }, function(dismiss) {
-                        if (dismiss === 'cancel') {
+            if (qty >= qtyMin && qty <= qtyMax) {
 
-                            location.reload();
+                var formData = {
+                    id,
+                    qty
+                };
+                // process the form
+                $.ajax({
+                    type: 'POST',
+                    url: 'add_shopping_cart.php',
+                    data: formData,
+                    dataType: 'json',
+                    encode: true
+                }).done(function(respuesta) {
+                    if (respuesta['error'] == true) {
+                        swal({
+                            title: "¡Error!",
+                            text: respuesta['msg'],
+                            type: "error",
+                        });
+                    } else {
+                        swal({
+                            title: "",
+                            showCancelButton: true,
+                            confirmButtonText: `Ir a pagar`,
+                            cancelButtonText: `Seguir comprando`,
+                            text: respuesta['msg'],
+                            type: "success",
+                        }).then(function() {
+                            window.location.href = "shopping_cart.php";
 
-                        }
-                    });
+                        }, function(dismiss) {
+                            if (dismiss === 'cancel') {
 
-                }
-                //Tratamos a respuesta según sea el tipo  y la estructura               
-            }).fail(function(jqXHR, textStatus) {
-                alert("Falta información para agregar");
-            });
+                                location.reload();
+
+                            }
+                        });
+
+                    }
+                    //Tratamos a respuesta según sea el tipo  y la estructura               
+                }).fail(function(jqXHR, textStatus) {
+                    alert("Falta información para agregar");
+                });
+
+            } else {
+                swal({
+                    title: "¡Error!",
+                    text: "Uno de los productos tiene una cantidad no permitida, por favor revisa y corrige.",
+                    type: "error",
+                });
+            }
 
 
         }

@@ -499,7 +499,7 @@ function find_higest_saleing_product($limit)
 function find_all_sale()
 {
   global $db;
-  $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.date,st.name";
+  $sql  = "SELECT s.id,s.name,s.cel_phone,s.direction,s.shipping,s.channel,s.date,st.name";
   $sql .= " AS state";
   $sql .= " FROM sales s";
   $sql .= " LEFT JOIN state_sale st ON s.state = st.id";

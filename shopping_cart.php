@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-                <form style="display: contents;" action="#">
+                <form style="display: contents;" action="javascript::none">
                 <?php
                 $count = 0;
                 if (isset($_SESSION["products_shoppingCart"]) && !empty($_SESSION["products_shoppingCart"])) {

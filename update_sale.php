@@ -9,7 +9,7 @@ page_require_level(3);
 
 if (isset($_POST['update_sale'])) {
     if (isset($_POST['productos'])) {
-        $req_fields = array('id', 'name_sale', 'cel_phone', 'email', 'department', 'city', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'shipping_type', 'state', 'date');
+        $req_fields = array('id', 'name_sale', 'cel_phone', 'email', 'department', 'city', 'direction', 'neighborhood', 'type_ubication', 'payment_method', 'shipping_type', 'state', 'shipping', 'date');
         validate_fields($req_fields);
         if (empty($errors)) {
 
@@ -46,10 +46,11 @@ if (isset($_POST['update_sale'])) {
                 $payment_method      = $db->escape($_POST['payment_method']);
                 $shipping_type      = $db->escape($_POST['shipping_type']);
                 $state      = $db->escape($_POST['state']);
+                $shipping      = $db->escape($_POST['shipping']);
                 $date      = $db->escape($_POST['date']);
 
                 $sql  = "UPDATE sales SET";
-                $sql .= " name= '{$name_sale}',cel_phone= '{$cel_phone}',email= '{$email}',department= '{$department}',city= '{$city}',direction= '{$direction}',neighborhood= '{$neighborhood}',type_ubication= '{$type_ubication}',payment_method= '{$payment_method}',shipping_type= '{$shipping_type}',state= '{$state}',date= '{$date}'";
+                $sql .= " name= '{$name_sale}',cel_phone= '{$cel_phone}',email= '{$email}',department= '{$department}',city= '{$city}',direction= '{$direction}',neighborhood= '{$neighborhood}',type_ubication= '{$type_ubication}',payment_method= '{$payment_method}',shipping_type= '{$shipping_type}',state= '{$state}',shipping= '{$shipping}',date= '{$date}'";
                 $sql .= " WHERE id ={$id}";
                 $result = $db->query($sql);
 
