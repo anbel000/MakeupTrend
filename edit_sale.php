@@ -69,10 +69,10 @@ if (!$sale) {
                 <select class="form-control" name="tipo_envio" id="tipo_envio">
                   <option value="<?php echo $sale["shipping_type"]; ?>" selected><?php echo $sale["shipping_type"]; ?></option>
                   <?php
-                  if ($sale["shipping_type"] == "Contra Entrega") { ?>
+                  if ($sale["shipping_type"] == "A Domicilio") { ?>
                     <option value="Inter Rapidisimo">Inter Rapidisimo</option>
                   <?php } else { ?>
-                    <option value="Contra Entrega">Contra Entrega</option>
+                    <option value="A Domicilio">A Domicilio</option>
                   <?php } ?>
                 </select>
               </div>

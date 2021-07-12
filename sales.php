@@ -47,7 +47,38 @@ $sales = find_all_sale();
                <td><?php echo remove_junk($sale['name']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['cel_phone']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['direction']); ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['state']); ?></td>
+               <?php 
+                  if($sale['state'] == "Completada"){?>
+                    <td class="text-center" style="color: #3c763d;
+                    background-color: #dff0d8;
+                    border-color: #d6e9c6;"><?php echo remove_junk($sale['state']); ?></td>
+                  <?php }else{
+                    if($sale['state'] == "Pago Pendiente"){?>
+                      <td class="text-center" style="color: #75763c;
+                      background-color: #fcff33d1;
+                      border-color: #fcff33d1;"><?php echo remove_junk($sale['state']); ?></td>
+                    <?php }else{
+                      if($sale['state'] == "Pago Exitoso"){?>
+                        <td class="text-center" style="color: #3c763d;
+                        background-color: #dff0d8;
+                        border-color: #d6e9c6;"><?php echo remove_junk($sale['state']); ?></td>
+                      <?php }else{
+                        if($sale['state'] == "Pago Rechazado"){ ?>
+                          <td class="text-center" style="color: #a94442;
+                          background-color: #f2dede;
+                          border-color: #ebccd1;"><?php echo remove_junk($sale['state']); ?></td>
+                        <?php }else{
+                          if($sale['state'] == "Cancelada"){?>
+                            <td class="text-center" style="color: #a94442;
+                            background-color: #f2dede;
+                            border-color: #ebccd1;"><?php echo remove_junk($sale['state']); ?></td>
+                          <?php }
+                        }
+                      }
+                    }
+                  }
+                  
+               ?>
                <td class="text-center"><?php echo remove_junk($sale['shipping']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['channel']); ?></td>
                <td class="text-center"><?php echo remove_junk($sale['date']); ?></td>

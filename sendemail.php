@@ -139,11 +139,19 @@ function sendEmail($email, $plantilla, $asunto, $descripcion = "", $total = 0)
 
     if ($plantilla == "lyNewAccount.php") {
         $body = "Correo: $email <br> Contraseña: makeup@2021";
+    }else{
+        if ($plantilla == "lyNewBuy.php") {
+            $body = "Haz realizado la compra de: $descripcion <br> El total es: $total";
+        }else{
+            if ($plantilla == "lyActBuy.php") {
+                $body = "Tu compra ha sido actualizada, ahora haz realizado la compra de: $descripcion <br> El total es: $total";
+            }
+        }
     }
 
-    if ($plantilla == "lyNewBuy.php") {
-        $body = "Haz realizado la compra de: $descripcion <br> El total es: $total";
-    }
+   
+
+   
 
     $mail = new PHPMailer();
 

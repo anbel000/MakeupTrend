@@ -190,7 +190,7 @@ function registrarVenta() {
                             }
 
                         }
-                    }else{
+                    } else {
                         alert(respuesta['msg']);
                         location.reload();
                     }
@@ -249,23 +249,45 @@ function actualizarVenta() {
                 console.log(respuesta['msg']);
                 alert(respuesta['msg']);
             } else {
-                emailResponse = sendEmail();
-                emailResponse = JSON.parse(emailResponse);
-                console.log('-->', emailResponse["msg"]);
-                if (emailResponse['error'] == false) {
-                    alert(respuesta['msg'] + " y envio del curso exitoso");
-                    location.reload();
-                } else {
-                    if (emailResponse['error'] == "5") {
-                        alert(respuesta['msg'] + ", este usuario ya tiene acceso al curso");
-                        location.reload();
-                    } else {
-                        alert(respuesta['msg'] + ", pero ha ocurrido un error en el envio del curso");
-                        location.reload();
+                valorTotal = 0;
+                descripcion = "";
+                productosModificados = false;
+                for (var x = 0; x < productos.length; x++) {
+                    if (parseInt(productos[x]["Qty"]) != parseInt(productos[x]["Cantidad"])) {
+                        productosModificados = true;
                     }
-
+                    precioProducto = parseInt(productos[x]["Total"]);
+                    valorTotal = valorTotal + precioProducto;
+                    descripcion = descripcion + productos[x]["Cantidad"] + " " + productos[x]["Producto"] + " + ";
                 }
-
+                if (productosModificados == true) {
+                    if ($('[name="state"]')[0].value == 1 || $('[name="state"]')[0].value == 2 || $('[name="state"]')[0].value == 3) {
+                        sendEmailBuyAct(descripcion, valorTotal);
+                        if (valorTotal >= 60000 && ($('[name="state"]')[0].value == 1 || $('[name="state"]')[0].value == 3)) {
+                            emailResponse = sendEmail();
+                            emailResponse = JSON.parse(emailResponse);
+                            console.log('-->', emailResponse["msg"]);
+                            if (emailResponse['error'] == false) {
+                                alert(respuesta['msg'] + " y envio del curso exitoso");
+                                location.reload();
+                            } else {
+                                if (emailResponse['error'] == "5") {
+                                    alert(respuesta['msg'] + ", este usuario ya tiene acceso al curso");
+                                    location.reload();
+                                } else {
+                                    alert(respuesta['msg'] + ", pero ha ocurrido un error en el envio del curso");
+                                    location.reload();
+                                }
+                            }
+                        } else {
+                            alert(respuesta['msg']);
+                            location.reload();
+                        }
+                    }
+                } else {
+                    alert(respuesta['msg']);
+                    location.reload();
+                }
             }
             //Tratamos a respuesta según sea el tipo  y la estructura               
         }).fail(function (jqXHR, textStatus) {
@@ -312,6 +334,36 @@ function sendEmailBuy(descripcion, total) {
         'email': $('[name="email"]')[0].value,
         'plantilla': "lyNewBuy.php",
         'asunto': "Compra realizada - Makeup Trend",
+        'nombre': $('[name="name_sale"]')[0].value,
+        'descripcion': descripcion,
+        'total': total
+    };
+    // process the form
+
+    var res = $.ajax({
+        type: 'POST',
+        url: 'sendemail.php',
+        data: formData,
+        async: false,
+        dataType: 'json',
+        encode: true
+    }).done(function (respuesta) {
+        //Tratamos a respuesta según sea el tipo  y la estructura
+        result = true;
+    }).fail(function (jqXHR, textStatus) {
+        result = false;
+        alert("Proceso dañado, elimine y reanude");
+    }).responseText;
+    return res;
+}
+
+function sendEmailBuyAct(descripcion, total) {
+
+    var formData = {
+        'sendbuy': "true",
+        'email': $('[name="email"]')[0].value,
+        'plantilla': "lyActBuy.php",
+        'asunto': "Compra Actualizada - Makeup Trend",
         'nombre': $('[name="name_sale"]')[0].value,
         'descripcion': descripcion,
         'total': total

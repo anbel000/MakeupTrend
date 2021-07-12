@@ -57,6 +57,33 @@ function find_by_id($table, $id)
       return null;
   }
 }
+
+function find_by_id_sale($id)
+{
+  global $db;
+  $id = (int)$id;
+  if (tableExists('sales')) {
+    $sql = $db->query("SELECT state FROM sales WHERE id='{$db->escape($id)}' LIMIT 1");
+    if ($result = $db->fetch_assoc($sql))
+      return $result;
+    else
+      return null;
+  }
+}
+
+function update_state($id, $state)
+{
+  global $db;
+  $id = (int)$id;
+  $state = (int)$state;
+  if (tableExists('sales')) {
+    $sql = $db->query("UPDATE sales SET state='{$db->escape($state)}' WHERE id='{$db->escape($id)}' LIMIT 1");
+    if ($result = $db->fetch_assoc($sql))
+      return $result;
+    else
+      return null;
+  }
+}
 /*--------------------------------------------------------------*/
 /*  Function for Find all data from table by id 
 /*--------------------------------------------------------------*/
@@ -104,12 +131,11 @@ function delete_by_name($table, $name)
 /*--------------------------------------------------------------*/
 /* Function for Delete data from table by id
 /*--------------------------------------------------------------*/
-function delete_sales_by_id($table, $id)
+function delete_sale($table, $id)
 {
   global $db;
   if (tableExists($table)) {
-    $sql = "DELETE FROM " . $db->escape($table);
-    $sql .= " WHERE id=" . $db->escape($id);
+    $sql = "UPDATE $table SET state=5, shipping = 'No' WHERE id ='{$id}' LIMIT 1";
     $db->query($sql);
     return ($db->affected_rows() > 0) ? true : false;
   }

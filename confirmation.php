@@ -21,10 +21,12 @@ if (
     $y = strlen($reference_sale);
     $v = ($y + 2) - $y;
     $idSale = substr($reference_sale, 0, $v);
+    $respuesta = find_by_id_sale($idSale);
 
     if ($state_pol == 4) {
-
-
+         if($respuesta['state'] == 2){
+             
+         }
         $sql  = "UPDATE sales SET";
         $sql .= " state= '2'";
         $sql .= " WHERE id ={$idSale}";
@@ -70,3 +72,6 @@ if (
         }
     }
 }
+
+$respuesta = find_by_id_sale(1);
+var_dump($respuesta['state']);

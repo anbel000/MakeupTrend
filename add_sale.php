@@ -76,7 +76,7 @@ if (isset($_POST['add_sale']) == false) {
               <div class="col-md-4">
                 <select class="form-control" name="tipo_envio" id="tipo_envio">
                     <option value="">Selecciona el tipo de envío</option>
-                    <option value="Contra Entrega">Contra Entrega</option>
+                    <option value="Contra Entrega">A Domicilio</option>
                     <option value="Inter Rapidisimo">Inter Rapidisimo</option>
                 </select>
               </div>
@@ -98,6 +98,7 @@ if (isset($_POST['add_sale']) == false) {
                     <option value="Daviplata">Daviplata</option>
                     <option value="Nequi">Nequi</option>
                     <option value="Bancolombia">Bancolombia</option>
+                    <option value="Contra Entrega">Contra Entrega</option>
                 </select>
               </div>
             </div>

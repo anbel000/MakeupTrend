@@ -121,16 +121,7 @@ if (isset($_POST['add_sale_online'])) {
         }
       }
 
-      if ($disponibilidad == true) {
-
-        if($_SESSION["tipoPago"] == "PayU"){
-          $state = 3;
-        }else{
-          if($_SESSION["tipoPago"] == "Contra Entrega"){
-            $state = 2;
-          }
-        }
-       
+      if ($disponibilidad == true) {       
         
         $name_sale      = $db->escape($_POST['name_sale']);
         $cel_phone     = $db->escape($_POST['cel_phone']);
@@ -142,13 +133,16 @@ if (isset($_POST['add_sale_online'])) {
         $type_ubication    = $db->escape($_POST['type_ubication']);
         $payment_method      = $_SESSION["tipoPago"];
         $shipping_type      = $_SESSION["tipoEnvio"];
+        $state = 2;
+        $shipping = "No";
+        $channel = "Página";
         $date    = $db->escape($_POST['date']);
 
 
         $sql  = "INSERT INTO sales (";
-        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,date";
+        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,shipping,channel,date";
         $sql .= ") VALUES (";
-        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$date}'";
+        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$shipping}','{$channel}','{$date}'";
         $sql .= ")";
 
         if ($db->query($sql)) {

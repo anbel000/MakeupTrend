@@ -11,16 +11,13 @@
   }
 ?>
 <?php
-  $delete_products_id = delete_sales_by_id('sales_products',(int)$_GET['id']);
+  $delete_products_id = delete_sale('sales',(int)$_GET['id']);
   if($delete_products_id){
-    $delete_sale = delete_by_id('sales',(int)$_GET['id']);
-    if ($delete_sale) {
-      foreach($d_sale as $result){
-        update_product_base_qty($result['qty'], $result['product_id']);
-      }
-      $session->msg("s","Venta eliminada");
-      redirect('sales.php');
+    foreach($d_sale as $result){
+      update_product_base_qty($result['qty'], $result['product_id']);
     }
+    $session->msg("s","Venta eliminada");
+    redirect('sales.php');
   } else {
       $session->msg("d","Falló la eliminación de los productos");
       redirect('sales.php');
