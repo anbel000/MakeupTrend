@@ -22,20 +22,20 @@ if (
     $v = ($y + 2) - $y;
     $idSale = substr($reference_sale, 0, $v);
     $respuesta = find_by_id_sale($idSale);
-
+    $idSale = 9;
     if ($state_pol == 4) {
-         if($respuesta['state'] == 2){
-             
-         }
-        $sql  = "UPDATE sales SET";
-        $sql .= " state= '2'";
-        $sql .= " WHERE id ={$idSale}";
-        $result = $db->query($sql);
 
-        if ($result && $db->affected_rows() === 1) {
+        if ($respuesta['state'] == 2) {
 
-            //Envio de correo elctronico con la compra y la cuenta
-            
+            $sql  = "UPDATE sales SET";
+            $sql .= " state= '3'";
+            $sql .= " WHERE id ={$idSale}";
+            $result = $db->query($sql);
+
+            if ($result && $db->affected_rows() === 1) {
+
+                //Envio de correo elctronico con la compra y la cuenta
+
                 sendEmail($email, 'lyNewBuy.php', 'Compra realizada - Makeup Trend', $descripcion, $value);
 
                 $user = find_by_email_user($email);
@@ -45,30 +45,82 @@ if (
                     $password   = "makeup@2021";
                     $user_level = 3;
                     $password = sha1($password);
-        
+
                     $query = "INSERT INTO users (";
                     $query .= "name,username,password,user_level,status";
                     $query .= ") VALUES (";
                     $query .= " '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
                     $query .= ")";
-        
+
                     if ($db->query($query)) {
-                        sendEmail($email, 'lyNewAccount.php', 'Cuenta de acceso para el curso - Makeup Trend');  
+                        sendEmail($email, 'lyNewAccount.php', 'Cuenta de acceso para el curso - Makeup Trend');
                     }
                 }
-            
-            //Fin del correo con la compra y la cuenta
-            
+
+                //Fin del correo con la compra y la cuenta
+            }
+        }else{
+            if ($respuesta['state'] == 4) {
+
+                $d_sale = find_sales_by_id('sales_products', $idSale);
+                foreach($d_sale as $result){
+                    update_product_qty($result['qty'], $result['product_id']);
+                }
+
+                $sql  = "UPDATE sales SET";
+                $sql .= " state= '3'";
+                $sql .= " WHERE id ={$idSale}";
+                $result = $db->query($sql);
+    
+                if ($result && $db->affected_rows() === 1) {
+    
+                    //Envio de correo elctronico con la compra y la cuenta
+    
+                    sendEmail($email, 'lyNewBuy.php', 'Compra realizada - Makeup Trend', $descripcion, $value);
+    
+                    $user = find_by_email_user($email);
+                    if (empty($user)) {
+                        $name   = $name_sale;
+                        $username   = $email;
+                        $password   = "makeup@2021";
+                        $user_level = 3;
+                        $password = sha1($password);
+    
+                        $query = "INSERT INTO users (";
+                        $query .= "name,username,password,user_level,status";
+                        $query .= ") VALUES (";
+                        $query .= " '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
+                        $query .= ")";
+    
+                        if ($db->query($query)) {
+                            sendEmail($email, 'lyNewAccount.php', 'Cuenta de acceso para el curso - Makeup Trend');
+                        }
+                    }
+    
+                    //Fin del correo con la compra y la cuenta
+                }
+            } 
         }
     } else {
         if ($state_pol == 6) {
+            if ($respuesta['state'] == 2) {
 
-        } else {
-            if ($state_pol == 104) {
-            } else {
-                if ($state_pol == 7) {
+                $d_sale = find_sales_by_id('sales_products', $idSale);
+                foreach($d_sale as $result){
+                    update_product_base_qty($result['qty'], $result['product_id']);
                 }
+
+                $sql  = "UPDATE sales SET";
+                $sql .= " state= '4'";
+                $sql .= " WHERE id ={$idSale}";
+                $result = $db->query($sql);
+    
             }
+           
+        } else {
+            if ($state_pol == 5) {
+
+            } 
         }
     }
 }
