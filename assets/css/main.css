@@ -6053,15 +6053,15 @@ blockquote .shape {
 	border-radius: 50%;
 	-webkit-transition: all .4s ease;
 	transition: all .4s ease;
-	background-color: #5830e0;
+	background-color: #fd7695;
 	color: #fff;
 	border: 4px solid transparent
 }
 
 .why-choose .choose-content .single-list:hover i {
-	color: #5830e0;
+	color: #c976fd;
 	background-color: transparent;
-	border-color: #5830e0
+	border-color: #c976fd
 }
 
 .why-choose .choose-content .single-list h4 {
@@ -7213,7 +7213,7 @@ blockquote .shape {
 		width: 35px
 	}
 	.items-grid.custom-padding {
-		padding-top: 150px
+		/*padding-top: 150px*/
 	}
 	.items-grid .section-title {
 		margin-bottom: 30px
@@ -8392,7 +8392,7 @@ blockquote .shape {
 }
 
 .footer .footer-bottom .footer-social {
-	margin-top: 40px
+	padding-bottom: 10px;
 }
 
 .footer .footer-bottom .footer-social li {
@@ -8573,7 +8573,7 @@ blockquote .shape {
 
 .card .btn {
     background: rgb(223,3,152);
-    background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);
+    
     opacity: .9;
     color: white;
     width: 100%;
@@ -8726,8 +8726,8 @@ blockquote .shape {
 
 .btn-primary {
 	color: #fff;
-	background-color: #3167eb;
-	border-color: #3167eb
+	background-color: rgb(223,3,152);
+	border-color: rgb(223,3,152)
 }
 
 

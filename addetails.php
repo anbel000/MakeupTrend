@@ -23,6 +23,29 @@
 
 </head>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/60b6e2756699c7280daa333d/1f75696sg';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<style>
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<!--End of Tawk.to Script-->
+
 <body>
     <!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -80,7 +103,10 @@
                                         </li>
                                     <?php endforeach; ?>
                                     <li class="nav-item">
-                                        <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
+                                        <a href="login.php" aria-label="Toggle navigation">Cursos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
@@ -203,12 +229,12 @@
                         <div class="contact-info">
                             <?php if (validation_product_session($id_product)) { ?>
                                 <a href="shopping_cart.php"><button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); border-color:white; font-weight:400">Ver carrito</button></a>
+                                                border-color:white; font-weight:400">Ver carrito</button></a>
                                 <?php } else {
                                 if ($product['quantity'] > 0) {
                                 ?>
                                     <button type="button" class="btn btn-primary" style="background: rgb(223,3,152);
-                                                background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%); border-color:white; font-weight:400" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
+                                                border-color:white; font-weight:400" onclick="agregarCarrito(); return false;">Añadir al carrito</button>
                                 <?php
                                 } else {
                                 ?>
@@ -239,13 +265,15 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="content">
-                                <p class="copyright-text">@MakeupTrend2021</p>
                                 <ul class="footer-social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                    <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                                    <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                                            <ion-icon name="logo-tiktok"></ion-icon>
+                                        </a></li>
+                                    <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                                 </ul>
+                                <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
                             </div>
                         </div>
                     </div>
@@ -257,9 +285,9 @@
     <!--/ End Footer Area -->
 
 
-    <a href="#" class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
-    </a>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/table-to-json@1.0.0/lib/jquery.tabletojson.min.js" integrity="sha256-H8xrCe0tZFi/C2CgxkmiGksqVaxhW0PFcUKZJZo1yNU=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

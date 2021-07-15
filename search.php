@@ -20,6 +20,29 @@
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/60b6e2756699c7280daa333d/1f75696sg';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<style>
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<!--End of Tawk.to Script-->
+
 <body>
   <!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -73,7 +96,10 @@
                     </li>
                   <?php endforeach; ?>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
+                    <a href="login.php" aria-label="Toggle navigation">Cursos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
                   </li>
                 </ul>
               </div> <!-- navbar collapse -->
@@ -145,14 +171,13 @@
                         <h3 class="title" style="color: red;">NO SE ENCONTRO NINGÚN PRODUCTO</h3>
 
                       <?php } else { ?>
-                        <h3 class="title">Showing 1-12 of 21 ads found</h3>
+                        <h3 class="title">Productos encontrados</h3>
                       <?php }; ?>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                       <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                           <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="true"><i class="lni lni-grid-alt"></i></button>
-                          <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="false"><i class="lni lni-list"></i></button>
                         </div>
                       </nav>
                     </div>
@@ -204,195 +229,6 @@
                         </div>
                       <?php endforeach; ?>
                     </div>
-                    <div class="row" style="padding-bottom: 50px;">
-                      <div class="col-12">
-
-                        <div class="pagination left">
-                          <ul class="pagination-list">
-                            <li><a href="javascript:void(0)">1</a></li>
-                            <li class="active"><a href="javascript:void(0)">2</a></li>
-                            <li><a href="javascript:void(0)">3</a></li>
-                            <li><a href="javascript:void(0)">4</a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-                    <div class="row">
-                      <div class="col-lg-12 col-md-12 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="row align-items-center">
-                            <div class="col-lg-5 col-md-7 col-12">
-                              <div class="image">
-                                <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img src="./assets/images/items-grid/item-2.jpg" alt="#"></a>
-                                <i class=" cross-badge lni lni-bolt"></i>
-                                <span class="flat-badge sale">Sale</span>
-                              </div>
-                            </div>
-                            <div class="col-lg-7 col-md-5 col-12">
-                              <div class="content">
-                                <a href="javascript:void(0)" class="tag">Others</a>
-                                <h3 class="title">
-                                  <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Travel
-                                    Kit</a>
-                                </h3>
-                                <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                    </i>San Francisco</a></p>
-                                <ul class="info">
-                                  <li class="price">$580.00</li>
-                                  <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-12 col-md-12 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="row align-items-center">
-                            <div class="col-lg-5 col-md-7 col-12">
-                              <div class="image">
-                                <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img src="./assets/images/items-grid/item-3.jpg" alt="#"></a>
-                                <i class=" cross-badge lni lni-bolt"></i>
-                                <span class="flat-badge sale">Sale</span>
-                              </div>
-                            </div>
-                            <div class="col-lg-7 col-md-5 col-12">
-                              <div class="content">
-                                <a href="javascript:void(0)" class="tag">Electronic</a>
-                                <h3 class="title">
-                                  <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Nikon
-                                    DSLR Camera</a>
-                                </h3>
-                                <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                    </i>Alaska, USA</a></p>
-                                <ul class="info">
-                                  <li class="price">$560.00</li>
-                                  <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-12 col-md-12 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="row align-items-center">
-                            <div class="col-lg-5 col-md-7 col-12">
-                              <div class="image">
-                                <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img src="./assets/images/items-grid/item-1.jpg" alt="#"></a>
-                                <i class=" cross-badge lni lni-bolt"></i>
-                                <span class="flat-badge sale">Sale</span>
-                              </div>
-                            </div>
-                            <div class="col-lg-7 col-md-5 col-12">
-                              <div class="content">
-                                <a href="javascript:void(0)" class="tag">Mobile</a>
-                                <h3 class="title">
-                                  <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Apple
-                                    Iphone X</a>
-                                </h3>
-                                <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                    </i>Boston</a></p>
-                                <ul class="info">
-                                  <li class="price">$890.00</li>
-                                  <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-12 col-md-12 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="row align-items-center">
-                            <div class="col-lg-5 col-md-7 col-12">
-                              <div class="image">
-                                <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img src="./assets/images/items-grid/item-4.jpg" alt="#"></a>
-                                <i class=" cross-badge lni lni-bolt"></i>
-                                <span class="flat-badge sale">Sale</span>
-                              </div>
-                            </div>
-                            <div class="col-lg-7 col-md-5 col-12">
-                              <div class="content">
-                                <a href="javascript:void(0)" class="tag">Furniture</a>
-                                <h3 class="title">
-                                  <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Poster
-                                    Paint</a>
-                                </h3>
-                                <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                    </i>Las Vegas</a></p>
-                                <ul class="info">
-                                  <li class="price">$85.00</li>
-                                  <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                      <div class="col-lg-12 col-md-12 col-12">
-
-                        <div class="single-item-grid">
-                          <div class="row align-items-center">
-                            <div class="col-lg-5 col-md-7 col-12">
-                              <div class="image">
-                                <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html"><img src="./assets/images/items-grid/item-6.jpg" alt="#"></a>
-                                <i class=" cross-badge lni lni-bolt"></i>
-                                <span class="flat-badge rent">Rent</span>
-                              </div>
-                            </div>
-                            <div class="col-lg-7 col-md-5 col-12">
-                              <div class="content">
-                                <a href="javascript:void(0)" class="tag">Books &amp; Magazine</a>
-                                <h3 class="title">
-                                  <a href="https://demo.graygrids.com/themes/classigrids-demo/item-details.html">Story
-                                    Book</a>
-                                </h3>
-                                <p class="location"><a href="javascript:void(0)"><i class="lni lni-map-marker">
-                                    </i>New York, USA</a></p>
-                                <ul class="info">
-                                  <li class="price">$120.00</li>
-                                  <li class="like"><a href="javascript:void(0)"><i class="lni lni-heart"></i></a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-                    <div class="row" style="padding-bottom: 500x;">
-                      <div class="col-12">
-
-                        <div class="pagination left">
-                          <ul class="pagination-list">
-                            <li><a href="javascript:void(0)">1</a></li>
-                            <li class="active"><a href="javascript:void(0)">2</a></li>
-                            <li><a href="javascript:void(0)">3</a></li>
-                            <li><a href="javascript:void(0)">4</a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -408,19 +244,21 @@
   <footer class="footer">
     <!-- Start Footer Bottom -->
     <div class="footer-bottom" style="background: rgb(223,3,152);
-  background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">
+        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">
       <div class="container">
         <div class="inner">
           <div class="row">
             <div class="col-12">
               <div class="content">
-                <p class="copyright-text">@MakeupTrend2021</p>
                 <ul class="footer-social">
-                  <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                  <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                  <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                  <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                      <ion-icon name="logo-tiktok"></ion-icon>
+                    </a></li>
+                  <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                 </ul>
+                <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
               </div>
             </div>
           </div>
@@ -431,11 +269,10 @@
   </footer>
   <!-- End footer -->
 
-  <a href="#" class="scroll-top btn-hover" style="display: none;">
-    <i class="lni lni-chevron-up"></i>
-  </a>
-
   <!-- ========================== SCRIPTS HERE =========================-->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
   <script src="./assets/js/bootstrap.min.js"></script>
   <script src="./assets/js/wow.min.js"></script>
   <script src="./assets/js/tiny-slider.js"></script>

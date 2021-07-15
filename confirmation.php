@@ -119,11 +119,21 @@ if (
            
         } else {
             if ($state_pol == 5) {
+                if ($respuesta['state'] == 2) {
 
+                    $d_sale = find_sales_by_id('sales_products', $idSale);
+                    foreach($d_sale as $result){
+                        update_product_base_qty($result['qty'], $result['product_id']);
+                    }
+    
+                    $sql  = "UPDATE sales SET";
+                    $sql .= " state= '5'";
+                    $sql .= " WHERE id ={$idSale}";
+                    $result = $db->query($sql);
+        
+                }
             } 
         }
     }
 }
 
-$respuesta = find_by_id_sale(1);
-var_dump($respuesta['state']);

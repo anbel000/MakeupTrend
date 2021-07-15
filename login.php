@@ -70,7 +70,7 @@
 require_once('includes/load.php');
 
 
-if ($_SESSION["loginUser"] == true) {
+if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
   redirect("viewcourse.php", false);
 } else {
   if (isset($_POST["login"])) {

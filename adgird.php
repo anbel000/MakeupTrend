@@ -20,6 +20,29 @@
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/60b6e2756699c7280daa333d/1f75696sg';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<style>
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<!--End of Tawk.to Script-->
+
 <body>
   <!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -74,7 +97,10 @@
                     </li>
                   <?php endforeach; ?>
                   <li class="nav-item">
-                    <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
+                    <a href="login.php" aria-label="Toggle navigation">Cursos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
                   </li>
                 </ul>
               </div> <!-- navbar collapse -->
@@ -128,7 +154,7 @@
                 <?php foreach ($categories as $categorie) :
                   $count_categorie = join_count_by_id("products", $categorie['id']); ?>
                   <li>
-                    <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>"><i class="lni lni-dinner"></i><?php echo remove_junk($categorie['name']); ?><span><?php echo remove_junk($count_categorie['total']); ?></span></a>
+                    <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>"><i class="lni lni-radio-button"></i><?php echo remove_junk($categorie['name']); ?><span><?php echo remove_junk($count_categorie['total']); ?></span></a>
                   </li>
                 <?php endforeach; ?>
               </ul>
@@ -143,9 +169,9 @@
                   <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-12">
                       <h3 class="title">
-                        <?php 
-                          $cantidadResultados = join_count_by_id("products", $_GET['id']);
-                          echo "Mostrando " . $cantidadResultados["total"] . " productos encontrados";
+                        <?php
+                        $cantidadResultados = join_count_by_id("products", $_GET['id']);
+                        echo "Mostrando " . $cantidadResultados["total"] . " productos encontrados";
                         ?>
                       </h3>
                     </div>
@@ -153,7 +179,6 @@
                       <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                           <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="true"><i class="lni lni-grid-alt"></i></button>
-                          <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="false"><i class="lni lni-list"></i></button>
                         </div>
                       </nav>
                     </div>
@@ -167,7 +192,7 @@
                           <figure class="card2 card2-product-grid card2-lg" style="margin-top: 28px;">
                             <?php if ($product['quantity'] == 0) { ?>
                               <div class="author2">
-                                <p class="sale">Agotado</p>
+                                <p class="sale" style="margin-top: 3px;">Agotado</p>
                               </div>
                             <?php } ?>
                             <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
@@ -206,21 +231,6 @@
                         </div>
                       <?php endforeach; ?>
                     </div>
-                    <div class="row" style="padding-bottom: 50px;">
-                      <div class="col-12">
-
-                        <div class="pagination left">
-                          <ul class="pagination-list">
-                            <li><a href="javascript:void(0)">1</a></li>
-                            <li class="active"><a href="javascript:void(0)">2</a></li>
-                            <li><a href="javascript:void(0)">3</a></li>
-                            <li><a href="javascript:void(0)">4</a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a></li>
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -236,19 +246,21 @@
   <footer class="footer">
     <!-- Start Footer Bottom -->
     <div class="footer-bottom" style="background: rgb(223,3,152);
-  background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">
+        background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">
       <div class="container">
         <div class="inner">
           <div class="row">
             <div class="col-12">
               <div class="content">
-                <p class="copyright-text">@MakeupTrend2021</p>
                 <ul class="footer-social">
-                  <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                  <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                  <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                  <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                      <ion-icon name="logo-tiktok"></ion-icon>
+                    </a></li>
+                  <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                 </ul>
+                <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
               </div>
             </div>
           </div>
@@ -259,11 +271,11 @@
   </footer>
   <!-- End footer -->
 
-  <a href="#" class="scroll-top btn-hover" style="display: none;">
-    <i class="lni lni-chevron-up"></i>
-  </a>
-
   <!-- ========================== SCRIPTS HERE =========================-->
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
   <script src="./assets/js/bootstrap.min.js"></script>
   <script src="./assets/js/wow.min.js"></script>
   <script src="./assets/js/tiny-slider.js"></script>

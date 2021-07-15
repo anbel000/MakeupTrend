@@ -210,7 +210,7 @@ if (isset($_GET["closeSession"])) {
                             <div class="col-lg-6 col-md-6 col-12">
                                 <!-- Start Single List -->
                                 <div class="single-list wow fadeInUp" data-wow-delay=".2s">
-                                    <a href="assets/catálagos/Catalogo Al Por Mayor - Makeup Trend.pdf" download="Catalogo Al Por Mayor - Makeup Trend.pdf"> <i class="lni lni-book"></i></a>
+                                    <a href="assets/catálagos/Catalogo Al Por Mayor - Makeup Trend.pdf" download="Catalogo Al Por Mayor - Makeup Trend.pdf"> <i class="lni lni-download"></i></a>
                                     <h4>Catálogo Al Mayor</h4>
                                     <p>Descarga nuestro catálogo al por mayor para enterar de precios y productos.</p>
                                 </div>
@@ -219,7 +219,7 @@ if (isset($_GET["closeSession"])) {
                             <div class="col-lg-6 col-md-6 col-12">
                                 <!-- Start Single List -->
                                 <div class="single-list wow fadeInUp" data-wow-delay=".4s">
-                                    <a href="assets/catálagos/Catalogo Al Detal - Makeup Trend.pdf" download="Catalogo Al Detal - Makeup Trend.pdf"> <i class="lni lni-book"></i></a>
+                                    <a href="assets/catálagos/Catalogo Al Detal - Makeup Trend.pdf" download="Catalogo Al Detal - Makeup Trend.pdf"> <i class="lni lni-download"></i></a>
                                     <h4>Catálogo Al Detal</h4>
                                     <p>Descarga nuestro catálogo al detal para enterar de precios y productos.</p>
                                 </div>
@@ -256,7 +256,7 @@ if (isset($_GET["closeSession"])) {
                             <figure class="card2 card2-product-grid card2-lg">
                                 <?php if ($product['quantity'] == 0) { ?>
                                     <div class="author2">
-                                        <p class="sale">Agotado</p>
+                                        <p class="sale" style="margin-top: 3px;">Agotado</p>
                                     </div>
                                 <?php } ?>
                                 <a href="addetails.php?id=<?php echo (int)$product['id']; ?>" class="img-wrap" data-abc="true">
@@ -326,6 +326,27 @@ if (isset($_GET["closeSession"])) {
     </section>
     <!-- /End Items Grid Area New Products -->
 
+    <!-- Start Metodos De Pago Area -->
+    <section class="items-grid section custom-padding">
+        <div class="container justify-content-center">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s" style="background: -webkit-linear-gradient(#e91e63, #bf01ef);
+                        -webkit-background-clip: text;-webkit-text-fill-color: transparent;">MÉTODOS DE PAGO</h2>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7" style="margin: auto;">
+                        <img src="https://cdn.shopify.com/s/files/1/0044/7836/9859/files/metodos_de_pago.png?v=1618942617" class="img-fluid" alt="">
+                </div>    
+            </div>
+        </div>
+    </section>
+    <!-- /End Metodos De Pago -->
+
     <!-- Start Footer Area -->
     <footer class="footer">
         <!-- Start Footer Bottom -->
@@ -336,13 +357,13 @@ if (isset($_GET["closeSession"])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="content">
-                                <p class="copyright-text">@MakeupTrend2021</p>
                                 <ul class="footer-social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                    <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                                    <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1"><ion-icon name="logo-tiktok"></ion-icon></a></li>
+                                    <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                                 </ul>
+                                <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
                             </div>
                         </div>
                     </div>
@@ -353,12 +374,11 @@ if (isset($_GET["closeSession"])) {
     </footer>
     <!--/ End Footer Area -->
 
-    <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
-    </a>
 
     <!-- ========================= JS here ========================= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>

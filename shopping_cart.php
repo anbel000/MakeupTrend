@@ -26,6 +26,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
 </head>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/60b6e2756699c7280daa333d/1f75696sg';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<style>
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<!--End of Tawk.to Script-->
+
 <body>
     <!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -83,7 +106,7 @@
                                         </li>
                                     <?php endforeach; ?>
                                     <li class="nav-item">
-                                        <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
+                                        <a href="login.php" aria-label="Toggle navigation">Cursos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
@@ -111,60 +134,60 @@
                     </div>
                 </div>
                 <form style="display: contents;" action="javascript::none">
-                <?php
-                $count = 0;
-                if (isset($_SESSION["products_shoppingCart"]) && !empty($_SESSION["products_shoppingCart"])) {
-                    foreach ($_SESSION["products_shoppingCart"] as $indice => $qty) {
-                        $product = join_product_table_by_id($indice);
-                        foreach ($product as $result) {
-                            $count = $count + 1;
-                ?>
-                            <div class="row border-top">
-                                <div class="row main align-items-center">
-                                    <input hidden type="numer" id="id<?php echo $count; ?>" value="<?php echo $result["id"] ?>">
-                                    <input hidden type="numer" id="qtyDisponible<?php echo $count; ?>" value="<?php echo $result["quantity"] ?>">
+                    <?php
+                    $count = 0;
+                    if (isset($_SESSION["products_shoppingCart"]) && !empty($_SESSION["products_shoppingCart"])) {
+                        foreach ($_SESSION["products_shoppingCart"] as $indice => $qty) {
+                            $product = join_product_table_by_id($indice);
+                            foreach ($product as $result) {
+                                $count = $count + 1;
+                    ?>
+                                <div class="row border-top">
+                                    <div class="row main align-items-center">
+                                        <input hidden type="numer" id="id<?php echo $count; ?>" value="<?php echo $result["id"] ?>">
+                                        <input hidden type="numer" id="qtyDisponible<?php echo $count; ?>" value="<?php echo $result["quantity"] ?>">
 
-                                    <div class="col-md-2 col-2"><img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($result['image']); ?>/1.jpg"></div>
-                                    <div class="col-md-4 col-3">
-                                        <div class="row" id="name_product<?php echo $count; ?>"><?php echo $result["name"] ?></div>
-                                    </div>
-                                    
+                                        <div class="col-md-2 col-2"><img class="img-fluid" src="./assets/images/products/<?php echo remove_junk($result['image']); ?>/1.jpg"></div>
+                                        <div class="col-md-4 col-3">
+                                            <div class="row" id="name_product<?php echo $count; ?>"><?php echo $result["name"] ?></div>
+                                        </div>
+
                                         <div class="col-2">
                                             <input type="number" onchange="document.getElementById('qtyDisp').click(); calculo2()" min="1" max="<?php echo $result["quantity"] ?>" style="width:50px;text-align: center;margin-bottom:0vh;" id="qty<?php echo $count; ?>" class="form-control" value="<?php echo $qty ?>" />
                                         </div>
                                         <input type="submit" id="qtyDisp" hidden>
-                                    
-                                    <div class="col-3" id="price<?php echo $count; ?>">$
-                                        <?php
-                                        if ($result['offer'] == 0) {
-                                            echo number_format($result['sale_price'], 0, ",", ".");
-                                        } else {
-                                            echo number_format($result['offer'], 0, ",", ".");
-                                        }
 
-                                        ?>
-                                    </div>
-                                    <div class="col">
-                                        <span class="close"><a href="javascript:quitarProducto(<?php echo $result["id"] ?>);">&#10005;</a></span>
+                                        <div class="col-3" id="price<?php echo $count; ?>">$
+                                            <?php
+                                            if ($result['offer'] == 0) {
+                                                echo number_format($result['sale_price'], 0, ",", ".");
+                                            } else {
+                                                echo number_format($result['offer'], 0, ",", ".");
+                                            }
+
+                                            ?>
+                                        </div>
+                                        <div class="col">
+                                            <span class="close"><a href="javascript:quitarProducto(<?php echo $result["id"] ?>);">&#10005;</a></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                    <?php
+                        <?php
+                            }
                         }
-                    }
-                } else {
-                    ?>
-                    </form>
-                    <div class="row">
-                        <div class="col-12">
-                            <p>NO EXISTEN PRODUCTOS AGREGADOS AL CARRITO</p>
-                        </div>
+                    } else {
+                        ?>
+                </form>
+                <div class="row">
+                    <div class="col-12">
+                        <p>NO EXISTEN PRODUCTOS AGREGADOS AL CARRITO</p>
                     </div>
+                </div>
 
-                <?php
-                }
-                ?>
-                <div class="back-to-shop"><a href="index.php">&leftarrow;<span class="text-muted"> Regresar a la tienda</span></a></div>
+            <?php
+                    }
+            ?>
+            <div class="back-to-shop"><a href="index.php">&leftarrow;<span class="text-muted"> Regresar a la tienda</span></a></div>
             </div>
             <div class="col-md-4 summary">
                 <div>
@@ -222,13 +245,15 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="content">
-                                <p class="copyright-text">@MakeupTrend2021</p>
                                 <ul class="footer-social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                    <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                                    <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                                            <ion-icon name="logo-tiktok"></ion-icon>
+                                        </a></li>
+                                    <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                                 </ul>
+                                <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
                             </div>
                         </div>
                     </div>
@@ -239,12 +264,10 @@
     </footer>
     <!--/ End Footer Area -->
 
-    <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
-    </a>
-
     <!-- ========================= JS here ========================= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

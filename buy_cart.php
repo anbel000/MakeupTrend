@@ -27,6 +27,29 @@
 
 </head>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/60b6e2756699c7280daa333d/1f75696sg';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<style>
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<!--End of Tawk.to Script-->
+
 <body>
     <!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -84,7 +107,7 @@
                                         </li>
                                     <?php endforeach; ?>
                                     <li class="nav-item">
-                                        <a href="javascript:void(0)" aria-label="Toggle navigation">FAC</a>
+                                        <a href="login.php" aria-label="Toggle navigation">Cursos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="shopping_cart.php" aria-label="Toggle navigation"><i style="font-size: 20px;" class="lni lni-cart"></i></a>
@@ -137,7 +160,7 @@
                 </div>
                 <div class="row">
                     
-                        <button class="btn" onclick="pagar()" style="height: 40px;">SIGUIENTE</button>
+                        <button class="btn" onclick="pagar()" style="height: 40px;">CONFIRMAR COMPRA</button>
                     
                 </div>
                 <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
@@ -174,37 +197,37 @@
 
     <!-- Start Footer Area -->
     <footer class="footer">
-        <!-- Start Footer Bottom -->
-        <div class="footer-bottom" style="background: rgb(223,3,152);
+    <!-- Start Footer Bottom -->
+    <div class="footer-bottom" style="background: rgb(223,3,152);
         background: linear-gradient(90deg, rgba(223,3,152,1) 0%, rgba(132,0,255,1) 78%);">
-            <div class="container">
-                <div class="inner">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content">
-                                <p class="copyright-text">@MakeupTrend2021</p>
-                                <ul class="footer-social">
-                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="inner">
+          <div class="row">
+            <div class="col-12">
+              <div class="content">
+                <ul class="footer-social">
+                  <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                  <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                  <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                      <ion-icon name="logo-tiktok"></ion-icon>
+                    </a></li>
+                  <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
+                </ul>
+                <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- End Footer Middle -->
-    </footer>
+      </div>
+    </div>
+    <!-- End Footer Middle -->
+  </footer>
     <!--/ End Footer Area -->
 
-    <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
-    </a>
-
     <!-- ========================= JS here ========================= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>
     
