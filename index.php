@@ -136,13 +136,13 @@ if (isset($_GET["closeSession"])) {
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./assets/img1.png" class="d-block w-100" alt="...">
+                    <img src="./assets/images/logo/baner1.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="./assets/img2.png" class="d-block w-100" alt="...">
+                    <img src="./assets/images/logo/baner2.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="./assets/img6.png" class="d-block w-100" alt="...">
+                    <img src="./assets/images/logo/baner3.png" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
