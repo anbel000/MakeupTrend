@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Ads Details - ClassiGrids Classified Ads and Listing Website Template</title>
+    <title>Makeup Trend</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="https://demo.graygrids.com/themes/classigrids-demo/assets/images/favicon.svg">
@@ -84,7 +84,7 @@
                 <div class="col-lg-12">
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="index.html">
+                            <a class="navbar-brand" href="index.php">
                                 <img src="assets/images/logo/logo.svg" alt="Logo">
                             </a>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,16 +170,16 @@
                                     }
                                 }
                                 ?>
-                                <img class="xzoom" id="xzoom-default" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xoriginal="././assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" />
+                                <img class="xzoom" id="xzoom-default" alt="<?php echo remove_junk($product['name']); ?>" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xoriginal="././assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" />
                                 <div class="xzoom-thumbs">
                                     <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>">
-                                        <img class="xzoom-gallery" width="80" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>">
+                                        <img class="xzoom-gallery" width="80" alt="<?php echo remove_junk($product['name']); ?>" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[1] ?>">
                                     </a>
                                     <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>">
-                                        <img class="xzoom-gallery" width="80" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>">
+                                        <img class="xzoom-gallery" width="80" alt="<?php echo remove_junk($product['name']); ?>" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[2] ?>">
                                     </a>
                                     <a href="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>">
-                                        <img class="xzoom-gallery" width="80" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>">
+                                        <img class="xzoom-gallery" width="80" alt="<?php echo remove_junk($product['name']); ?>" src="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>" xpreview="./assets/images/products/<?php echo remove_junk($product['image']); ?>/<?php echo $images[3] ?>">
                                     </a>
                                 </div>
                             </div>

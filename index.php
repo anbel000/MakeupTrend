@@ -68,7 +68,7 @@ if (isset($_GET["closeSession"])) {
     <![endif]-->
 
     <?php
-    
+
     require_once('controller_shopping_cart.php');
     // Checkin What level user has permission to view this page
     //page_require_level(2);
@@ -94,7 +94,7 @@ if (isset($_GET["closeSession"])) {
                 <div class="col-lg-12">
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="index.html">
+                            <a class="navbar-brand" href="index.php">
                                 <img src="assets/images/logo/logo.svg" alt="Logo">
                             </a>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,6 +156,32 @@ if (isset($_GET["closeSession"])) {
     </section>
     <!-- End Hero Area -->
 
+    <!-- Button trigger modal -->
+    <button hidden type="button" class="btn btn-primary" id="info" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Información
+    </button>
+    <!-- Button trigger modal -->
+    <!-- Start Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">INFORMACIÓN</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Por compras superiores o iguales a $60.000 COP
+                    obtendras acceso a un curso gratuito de maquillaje. Y por compras superiores o iguales a $100.000 COP
+                    obtendras envío gratis en tu compra.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Genial!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  End Modal -->
+ 
     <!-- Start Categories Grid Area-->
     <section class="browse-cities section">
         <div class="container">
@@ -327,14 +353,14 @@ if (isset($_GET["closeSession"])) {
                     <div class="section-title">
                         <h2 class="wow fadeInUp" data-wow-delay=".4s" style="background: -webkit-linear-gradient(#e91e63, #bf01ef);
                         -webkit-background-clip: text;-webkit-text-fill-color: transparent;">MÉTODOS DE PAGO</h2>
-                        
+
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-7" style="margin: auto;">
-                        <img src="https://cdn.shopify.com/s/files/1/0044/7836/9859/files/metodos_de_pago.png?v=1618942617" class="img-fluid" alt="">
-                </div>    
+                    <img src="https://cdn.shopify.com/s/files/1/0044/7836/9859/files/metodos_de_pago.png?v=1618942617" class="img-fluid" alt="">
+                </div>
             </div>
         </div>
     </section>
@@ -353,7 +379,9 @@ if (isset($_GET["closeSession"])) {
                                 <ul class="footer-social">
                                     <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
                                     <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
-                                    <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1"><ion-icon name="logo-tiktok"></ion-icon></a></li>
+                                    <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                                            <ion-icon name="logo-tiktok"></ion-icon>
+                                        </a></li>
                                     <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                                 </ul>
                                 <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
@@ -380,7 +408,10 @@ if (isset($_GET["closeSession"])) {
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
-
+    
+    <script type="text/javascript">
+        document.getElementById("info").click();
+    </script>
 
     <script type="text/javascript">
         function agregarCarrito(id, qty) {

@@ -39,7 +39,7 @@
               </form>
               <p class="login-card-footer-text"></p>
               <nav class="login-card-footer-nav">
-                <a href="index.php">Regresar a la tienda</a>
+                <a href="login.php">Regresar</a>
               </nav>
             </div>
           </div>

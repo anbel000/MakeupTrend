@@ -1,12 +1,22 @@
 
 -- Autor: Andrés Ricardo Beltrán Sarta - 2021 
 
+-- CREDENCIALES PRUEBAS
 
 -- Base de datos: makeuptrend
 -- localhost
 -- username: root
 -- password: 
 -- Correr el sql por partes para evitar fallos.
+
+-- CREDENCIALES PRUEBAS
+
+-- Base de datos: makeuptrend
+-- localhost
+-- username: root
+-- password: 
+-- Correr el sql por partes para evitar fallos.
+
 
 --------------- CREACIÓN DE TABLAS -----------------
 
@@ -153,12 +163,9 @@ insert into products (name, quantity, sale_price, categorie_id, media_id, date, 
 
 insert into user_groups (group_name, group_level, group_status) values
 ('Admin', 1, 1),
-('Special', 2, 0),
 ('User', 3, 1);
 
 insert into users (name, username, password, user_level, image, status, last_login) values
-('Admin Users', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'pzg9wa7o1.jpg', 1, '2017-06-16 07:11:11'),
-('Special User', 'special', 'ba36b97a41e7faf742ab09bf88405ac04f99599a', 2, 'no_image.jpg', 1, '2017-06-16 07:11:26'),
-('Default User', 'user', '12dea96fec20593566ab75692c9949596833adc9', 3, 'no_image.jpg', 1, '2017-06-16 07:11:03');
+('Administrador', 'wwdani2011@hotmail.com', 'cf39b7344ee731194fd703a3a31efd5ec421c89a', 1, 'pzg9wa7o1.jpg', 1, '2017-06-16 07:11:11');
 
 
