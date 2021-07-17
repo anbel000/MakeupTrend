@@ -72,6 +72,10 @@ if (isset($_POST['sendaccount'])) {
             $json_data = json_encode($json);
             echo $json_data;
         }
+    }else{
+        $json = array('error' => "5", 'msg' => "El usuario ya esta creado");
+            $json_data = json_encode($json);
+            echo $json_data;
     }
 } 
 
@@ -135,19 +139,28 @@ function sendEmail($email, $plantilla, $asunto, $descripcion = "", $total = 0)
             $body = file_get_contents("assets/layaoutsEmail/" . $plantilla);
             $body = str_replace("{{urlPassword}}", "http://localhost:8080/MakeupTrend/resetnewpassword.php?id=" . $user[0]['id'], $body);
         }
-    }
-
-    if ($plantilla == "lyNewAccount.php") {
-        $body = "Correo: $email <br> Contraseña: makeup@2021";
     }else{
-        if ($plantilla == "lyNewBuy.php") {
-            $body = "Haz realizado la compra de: $descripcion <br> El total es: $total";
+        if ($plantilla == "lyNewAccount.php") {
+            $body = file_get_contents("assets/layaoutsEmail/" . $plantilla);
+            $body = str_replace("{{email}}", $email, $body);
+            $body = str_replace("{{password}}", "makeup@2021", $body);
         }else{
-            if ($plantilla == "lyActBuy.php") {
-                $body = "Tu compra ha sido actualizada, ahora haz realizado la compra de: $descripcion <br> El total es: $total";
+            if ($plantilla == "lyNewBuy.php") {
+                $body = file_get_contents("assets/layaoutsEmail/" . $plantilla);
+                $body = str_replace("{{descripcion}}", $descripcion, $body);
+                $body = str_replace("{{totalCompra}}", number_format($total, 0, ",", "."), $body);
+            }else{
+                if ($plantilla == "lyActBuy.php") {
+                    $body = file_get_contents("assets/layaoutsEmail/" . $plantilla);
+                    $body = str_replace("{{descripcion}}", $descripcion, $body);
+                    $body = str_replace("{{totalCompra}}", number_format($total, 0, ",", "."), $body);
+                }
             }
         }
     }
+
+
+   
 
    
 

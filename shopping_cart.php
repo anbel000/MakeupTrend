@@ -286,8 +286,8 @@
                 if (document.getElementById("type_send").value == 0) {
                     info.innerHTML = "La compra sera enviada a través de Inter Rapidisimo, el costo de envío lo asume el cliente. Dicho costo sera enviado al correo electronico al momento de realizar el envío.";
                 } else {
-                    if (document.getElementById("type_send").value == 7000) {
-                        info.innerHTML = "La compra sera enviada a domicilio, con un costo de $7.000 COP";
+                    if (document.getElementById("type_send").value == 6000) {
+                        info.innerHTML = "La compra sera enviada a domicilio, con un costo de $6.000 COP";
                     } else {
                         info.innerHTML = "Escoja un tipo de envío";
                     }

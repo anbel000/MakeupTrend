@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once('includes/load.php');
 
 if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
 
@@ -46,7 +46,7 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
         <?php
         // Checkin What level user has permission to view this page
         //page_require_level(2);
-        require_once('includes/load.php');
+        
         $categories = find_all("categories");
         ?>
 
@@ -78,11 +78,11 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                                 </button>
                                 <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                     <ul id="nav" class="navbar-nav ms-auto">
-                                        
+
                                         <li class="nav-item">
                                             <a href="index.php?closeSession=1qa2s*21" aria-label="Toggle navigation">Cerrar Sesión</a>
                                         </li>
-                                     
+
                                     </ul>
                                 </div> <!-- navbar collapse -->
                             </nav> <!-- navbar -->
@@ -201,13 +201,15 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                         <div class="row">
                             <div class="col-12">
                                 <div class="content">
-                                    <p class="copyright-text">@MakeupTrend2021</p>
                                     <ul class="footer-social">
-                                        <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                        <li><a href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"><i class="lni lni-facebook-filled"></i></a></li>
+                                        <li><a href="https://www.instagram.com/makeuptrend_col/"><i class="lni lni-instagram-original"></i></a></li>
+                                        <li><a href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1">
+                                                <ion-icon name="logo-tiktok"></ion-icon>
+                                            </a></li>
+                                        <li><a href="http://wa.link/4yfpye"><i class="lni lni-whatsapp"></i></a></li>
                                     </ul>
+                                    <p class="copyright-text">Copyright 2021 © Makeup Trend | Todos los derechos reservados</p>
                                 </div>
                             </div>
                         </div>
@@ -218,12 +220,10 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
         </footer>
         <!--/ End Footer Area -->
 
-        <!-- ========================= scroll-top ========================= -->
-        <a href="#" class="scroll-top btn-hover">
-            <i class="lni lni-chevron-up"></i>
-        </a>
-
         <!-- ========================= JS here ========================= -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.js"></script>

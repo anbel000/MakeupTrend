@@ -1,9 +1,8 @@
 <?php
+require_once('includes/load.php');
 if (isset($_GET["closeSession"])) {
-    session_start();
     if (isset($_SESSION["loginUser"])) {
         $_SESSION["loginUser"] = false;
-        var_dump($_SESSION["loginUser"]);
     }
 }
 
@@ -69,7 +68,7 @@ if (isset($_GET["closeSession"])) {
     <![endif]-->
 
     <?php
-    require_once('includes/load.php');
+    
     require_once('controller_shopping_cart.php');
     // Checkin What level user has permission to view this page
     //page_require_level(2);
@@ -175,13 +174,7 @@ if (isset($_GET["closeSession"])) {
                         <div class="single-city wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                             <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>" class="info-box">
                                 <div class="image">
-                                    <img src="./assets/images/categories/<?php echo remove_junk($categorie['name']); ?>.jpg" alt="#">
-                                </div>
-                                <div class="content">
-                                    <h4 class="name">
-                                        <?php echo remove_junk($categorie['name']); ?>
-                                        <span><?php echo remove_junk($count_categorie['total']); ?></span>
-                                    </h4>
+                                    <img src="./assets/images/categories/<?php echo remove_junk($categorie['name']); ?>.png" alt="<?php echo remove_junk($categorie['name']); ?>">
                                 </div>
                             </a>
                         </div>

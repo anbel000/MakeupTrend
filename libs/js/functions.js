@@ -285,8 +285,26 @@ function actualizarVenta() {
                         }
                     }
                 } else {
-                    alert(respuesta['msg']);
-                    location.reload();
+                    if (valorTotal >= 60000 && ($('[name="state"]')[0].value == 1 || $('[name="state"]')[0].value == 3)) {
+                        emailResponse = sendEmail();
+                        emailResponse = JSON.parse(emailResponse);
+                        console.log('-->', emailResponse["msg"]);
+                        if (emailResponse['error'] == false) {
+                            alert(respuesta['msg'] + " y envio del curso exitoso");
+                            location.reload();
+                        } else {
+                            if (emailResponse['error'] == "5") {
+                                alert(respuesta['msg'] + ", este usuario ya tiene acceso al curso");
+                                location.reload();
+                            } else {
+                                alert(respuesta['msg'] + ", pero ha ocurrido un error en el envio del curso");
+                                location.reload();
+                            }
+                        }  
+                    }else{
+                        alert(respuesta['msg']);
+                        location.reload();
+                    }
                 }
             }
             //Tratamos a respuesta según sea el tipo  y la estructura               

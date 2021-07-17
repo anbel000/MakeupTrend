@@ -37,46 +37,47 @@ function pagar() {
 
                         emailAccountResponse = sendEmailAccount();
                         emailAccountResponse = JSON.parse(emailAccountResponse);
+                        console.log('-->'+emailBuyResponse)
                         if (emailAccountResponse['error'] == false) {
-                            response = eliminarSession();
+                            //response = eliminarSession();
                             swal({
                                 title: "Compra Realizada",
                                 text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Revisa tu correo para obtener acceso al curso.",
                                 type: "success",
                             }).then(function () {
-                                window.location.href = "index.php";
+                                //window.location.href = "index.php";
                             });
                         } else {
                             if (emailAccountResponse['error'] == "5") {
-                                response = eliminarSession();
+                                //response = eliminarSession();
                                 swal({
                                     title: "Compra Realizada",
                                     text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
                                     type: "success",
                                 }).then(function () {
-                                    window.location.href = "index.php";
+                                    //window.location.href = "index.php";
                                 });
                             } else {
-                                response = eliminarSession();
+                                //response = eliminarSession();
                                 swal({
                                     title: "Compra Realizada",
                                     text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
                                     type: "success",
                                 }).then(function () {
-                                    window.location.href = "index.php";
+                                    //window.location.href = "index.php";
                                 });
                             }
 
                         }
                     } else {
                         emailBuyResponse = sendEmailBuy();
-                        response = eliminarSession();
+                        //response = eliminarSession();
                         swal({
                             title: "Compra Realizada",
                             text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
                             type: "success",
                         }).then(function () {
-                            window.location.href = "index.php";
+                            //window.location.href = "index.php";
                         });
                     }
                 }

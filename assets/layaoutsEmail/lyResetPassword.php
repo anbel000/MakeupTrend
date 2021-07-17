@@ -1,7 +1,3 @@
-<?php
-
-$palabra = "HOla buenas noches";
-?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -436,7 +432,7 @@ $palabra = "HOla buenas noches";
                         <tr>
                             <td align="center" style="padding:0;Margin:0">
                                 <table class="es-content-body"
-                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px"
+                                    style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#ffffff;width:600px"
                                     cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
                                     <tr>
                                         <td align="left" style="padding:0;Margin:0">
@@ -450,12 +446,16 @@ $palabra = "HOla buenas noches";
                                                             style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                             <tr>
                                                                 <td align="center"
-                                                                    style="padding:0;Margin:0;font-size:0px"><img
-                                                                        class="adapt-img"
-                                                                        src="https://exkumh.stripocdn.email/content/guids/CABINET_53e03a17eaf94f8afc8aff2d050cf5b4/images/74481623257931157.png"
-                                                                        alt
-                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-                                                                        width="265"></td>
+                                                                    style="padding:0;Margin:0;font-size:0px"><a
+                                                                        target="_blank"
+                                                                        href="https://makeuptrendcol.com.co"
+                                                                        style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img
+                                                                            class="adapt-img"
+                                                                            src="https://exkumh.stripocdn.email/content/guids/CABINET_53e03a17eaf94f8afc8aff2d050cf5b4/images/74481623257931157.png"
+                                                                            alt="Makeup Trend"
+                                                                            style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
+                                                                            width="265" title="Makeup Trend"
+                                                                            height="291"></a></td>
                                                             </tr>
                                                         </table>
                                                     </td>
@@ -505,7 +505,10 @@ $palabra = "HOla buenas noches";
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#6B3748;font-size:16px">
                                                                         Hemos recibido una petición para restablecer la
                                                                         contraseña de tu cuenta, para poder hacerlo
-                                                                        ingresa al siguiente enlace: {{urlPassword}}
+                                                                        ingresa al siguiente enlace: {{urlPassword}} </p>
+                                                                    <p
+                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#6B3748;font-size:16px">
+                                                                        {{urlPassword}} </p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#6B3748;font-size:16px">
                                                                         <br></p>
@@ -529,7 +532,7 @@ $palabra = "HOla buenas noches";
                                     style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px">
                                     <tr>
                                         <td align="left" bgcolor="#6b3748"
-                                            style="padding:20px;Margin:0;background-color:#6B3748">
+                                            style="padding:20px;Margin:0;background-color:#6b3748">
                                             <table cellpadding="0" cellspacing="0" width="100%"
                                                 style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                 <tr>
@@ -549,7 +552,7 @@ $palabra = "HOla buenas noches";
                                                                             <td align="center" valign="top"
                                                                                 style="padding:0;Margin:0;padding-right:30px">
                                                                                 <a target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                    href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
                                                                                         title="Facebook"
                                                                                         src="https://exkumh.stripocdn.email/content/assets/img/social-icons/circle-white/facebook-circle-white.png"
@@ -557,13 +560,34 @@ $palabra = "HOla buenas noches";
                                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                                             </td>
                                                                             <td align="center" valign="top"
-                                                                                style="padding:0;Margin:0"><a
-                                                                                    target="_blank"
-                                                                                    href="https://viewstripo.email."
+                                                                                style="padding:0;Margin:0;padding-right:30px">
+                                                                                <a target="_blank"
+                                                                                    href="https://www.instagram.com/makeuptrend_col/"
                                                                                     style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
                                                                                         title="Instagram"
                                                                                         src="https://exkumh.stripocdn.email/content/assets/img/social-icons/circle-white/instagram-circle-white.png"
                                                                                         alt="Inst" width="32"
+                                                                                        height="32"
+                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
+                                                                            </td>
+                                                                            <td align="center" valign="top"
+                                                                                style="padding:0;Margin:0;padding-right:30px">
+                                                                                <a target="_blank"
+                                                                                    href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1"
+                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
+                                                                                        title="TikTok"
+                                                                                        src="https://exkumh.stripocdn.email/content/assets/img/social-icons/circle-white/tiktok-circle-white.png"
+                                                                                        alt="Tt" width="32" height="32"
+                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
+                                                                            </td>
+                                                                            <td align="center" valign="top"
+                                                                                style="padding:0;Margin:0"><a
+                                                                                    target="_blank"
+                                                                                    href="http://wa.link/4yfpye"
+                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
+                                                                                        title="Whatsapp"
+                                                                                        src="https://exkumh.stripocdn.email/content/assets/img/messenger-icons/circle-white/whatsapp-circle-white.png"
+                                                                                        alt="Whatsapp" width="32"
                                                                                         height="32"
                                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
                                                                             </td>

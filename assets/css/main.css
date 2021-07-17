@@ -4132,18 +4132,6 @@ blockquote .shape {
 
 
 
-.browse-cities .single-city .info-box::before {
-	position: absolute;
-	content: "";
-	left: 0;
-	bottom: 0;
-	height: 130px;
-	width: 100%;
-	background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#000000f0));
-	background: linear-gradient(transparent, #000000f0);
-	z-index: 0
-}
-
 .browse-cities .single-city .more-btn {
 	font-size: 30px;
 	color: #fff;
@@ -6782,7 +6770,7 @@ blockquote .shape {
 		margin-top: 8px
 	}
 	.hero-area {
-		padding-top: 69px;
+		padding-top: 58px;
 		
 	}
 	.hero-area .hero-text h2 {
@@ -7098,7 +7086,7 @@ blockquote .shape {
 		margin-top: 8px
 	}
 	.hero-area {
-		padding-top: 79px;
+		padding-top: 68px;
 		
 	}
 	.hero-area .hero-text h2 {

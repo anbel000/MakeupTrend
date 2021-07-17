@@ -59,7 +59,7 @@ if ($_POST['infoCart'] == 'true' && isset($_POST['productos']) && isset($_POST['
                 $_SESSION["totalCompra"] = $total_compra;
                 $_SESSION["subTotalCompra"] = $total_compra;
             }else{
-                $_SESSION["totalCompra"] = $total_compra + 7000;
+                $_SESSION["totalCompra"] = $total_compra + 6000;
                 $_SESSION["subTotalCompra"] = $total_compra;
             }
         }

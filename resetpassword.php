@@ -22,12 +22,12 @@
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
-            <img src="https://image.freepik.com/foto-gratis/maquilladora-trabajando-tiro-medio_23-2148328757.jpg" alt="login" class="login-card-img">
+            <img src="assets/images/resetpass.jpg" alt="Restaurar contraseña" class="login-card-img">
           </div>
           <div class="col-md-7">
             <div class="card-body">
               <div class="brand-wrapper">
-                <img src="assets/images/logo.svg" alt="logo" class="logo">
+                <img src="assets/images/logo/logo.svg" alt="logo" class="logo">
               </div>
               <p class="login-card-description">Ingresa tu correo electronico para restablecer la contraseña</p>
               <form action="resetpassword.php" method="POST">

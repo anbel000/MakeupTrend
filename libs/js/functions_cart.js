@@ -128,7 +128,7 @@ function cargarEnvios() {
             tipoEnvioSelect.add(opcion)
         } else {
             let opcion = document.createElement('option')
-            opcion.value = 7000
+            opcion.value = 6000
             opcion.text = "A Domicilio"
             tipoEnvioSelect.add(opcion)
         }
