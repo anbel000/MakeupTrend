@@ -171,14 +171,14 @@ function sendEmail($email, $plantilla, $asunto, $descripcion = "", $total = 0)
     try {
         $mail->SMTPDebug = 0;
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com;';
+        $mail->Host       = 'mail.makeuptrendcol.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'wwandresbeltran@gmail.com';
-        $mail->Password   = '123Andres@Beltran';
+        $mail->Username   = 'informacion@makeuptrendcol.com';
+        $mail->Password   = 'VRxR+}[8e_,f';
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
 
-        $mail->setFrom('makeuptrendcol@gmail.com', 'Makeup Trend');
+        $mail->setFrom('informacion@makeuptrendcol.com', 'Makeup Trend');
         $mail->addAddress($email);
 
 

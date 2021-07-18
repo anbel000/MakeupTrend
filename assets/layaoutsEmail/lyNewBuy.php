@@ -550,45 +550,7 @@
                                                                         <tr>
                                                                             <td align="center" valign="top"
                                                                                 style="padding:0;Margin:0;padding-right:30px">
-                                                                                <a target="_blank"
-                                                                                    href="https://www.facebook.com/makeuptrend.col/?ref=page_internal"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
-                                                                                        title="Facebook"
-                                                                                        src="https://exkumh.stripocdn.email/content/assets/img/social-icons/circle-white/facebook-circle-white.png"
-                                                                                        alt="Fb" width="32" height="32"
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
-                                                                            </td>
-                                                                            <td align="center" valign="top"
-                                                                                style="padding:0;Margin:0;padding-right:30px">
-                                                                                <a target="_blank"
-                                                                                    href="https://www.instagram.com/makeuptrend_col/"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
-                                                                                        title="Instagram"
-                                                                                        src="https://exkumh.stripocdn.email/content/assets/img/social-icons/circle-white/instagram-circle-white.png"
-                                                                                        alt="Inst" width="32"
-                                                                                        height="32"
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
-                                                                            </td>
-                                                                            <td align="center" valign="top"
-                                                                                style="padding:0;Margin:0;padding-right:30px">
-                                                                                <a target="_blank"
-                                                                                    href="https://www.tiktok.com/@makeuptrend_colofic?lang=es&is_copy_url=1&is_from_webapp=v1"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
-                                                                                        title="TikTok"
-                                                                                        src="https://exkumh.stripocdn.email/content/assets/img/social-icons/circle-white/tiktok-circle-white.png"
-                                                                                        alt="Tt" width="32" height="32"
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
-                                                                            </td>
-                                                                            <td align="center" valign="top"
-                                                                                style="padding:0;Margin:0"><a
-                                                                                    target="_blank"
-                                                                                    href="http://wa.link/4yfpye"
-                                                                                    style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#FFFFFF;font-size:14px"><img
-                                                                                        title="Whatsapp"
-                                                                                        src="https://exkumh.stripocdn.email/content/assets/img/messenger-icons/circle-white/whatsapp-circle-white.png"
-                                                                                        alt="Whatsapp" width="32"
-                                                                                        height="32"
-                                                                                        style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"></a>
+                                                                           
                                                                             </td>
                                                                         </tr>
                                                                     </table>

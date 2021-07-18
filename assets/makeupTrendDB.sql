@@ -11,10 +11,10 @@
 
 -- CREDENCIALES PRUEBAS
 
--- Base de datos: makeuptrend
+-- Base de datos: makeuptr_makeuptrend
 -- localhost
--- username: root
--- password: 
+-- username: makeuptr_admin
+-- password: Ih*8SOYF[A$6
 -- Correr el sql por partes para evitar fallos.
 
 
