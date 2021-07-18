@@ -8,81 +8,95 @@ function pagar() {
         document.getElementById('type_ubication').value !== "" &&
         document.getElementById('email').value !== "") {
 
-
-        name_sale = document.getElementById('name_sale').value;
-        cel_phone = document.getElementById('cel_phone').value;
-        direction = document.getElementById('direction').value;
-        neighborhood = document.getElementById('neighborhood').value;
-        type_ubication = document.getElementById('type_ubication').value;
-        email = document.getElementById('email').value;
-
-        registro = registrarVentaTemporal();
-        registro = JSON.parse(registro);
-        if (registro['error'] == true) {
-            //console.log('--', registro);
-            swal({
-                title: "¡Error!",
-                text: registro['msg'],
-                type: "error",
-            });
+        if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(document.getElementById('email').value)) {
+            emailValidado = true;
         } else {
-            if (registro['error'] == false) {
-                //console.log('-->', registro);
-                if (registro['tpPago'] == "PayU") {
-                    payU();
-                } else {
-                    if (registro['subvalor'] >= 60000) {
-                        emailBuyResponse = sendEmailBuy();
-                        //emailBuyResponse = JSON.parse(emailBuyResponse);
+            emailValidado = false;
+        }
 
-                        emailAccountResponse = sendEmailAccount();
-                        emailAccountResponse = JSON.parse(emailAccountResponse);
-                        //console.log('-->'+emailBuyResponse)
-                        if (emailAccountResponse['error'] == false) {
-                            response = eliminarSession();
-                            swal({
-                                title: "Compra Realizada",
-                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Revisa tu correo para obtener acceso al curso.",
-                                type: "success",
-                            }).then(function () {
-                                window.location.href = "index.php";
-                            });
-                        } else {
-                            if (emailAccountResponse['error'] == "5") {
+        if (emailValidado == true) {
+            name_sale = document.getElementById('name_sale').value;
+            cel_phone = document.getElementById('cel_phone').value;
+            direction = document.getElementById('direction').value;
+            neighborhood = document.getElementById('neighborhood').value;
+            type_ubication = document.getElementById('type_ubication').value;
+            email = document.getElementById('email').value;
+
+            registro = registrarVentaTemporal();
+            registro = JSON.parse(registro);
+            if (registro['error'] == true) {
+                //console.log('--', registro);
+                swal({
+                    title: "¡Error!",
+                    text: registro['msg'],
+                    type: "error",
+                });
+            } else {
+                if (registro['error'] == false) {
+                    //console.log('-->', registro);
+                    if (registro['tpPago'] == "PayU") {
+                        payU();
+                    } else {
+                        if (registro['subvalor'] >= 60000) {
+                            emailBuyResponse = sendEmailBuy();
+                            //emailBuyResponse = JSON.parse(emailBuyResponse);
+
+                            emailAccountResponse = sendEmailAccount();
+                            emailAccountResponse = JSON.parse(emailAccountResponse);
+                            //console.log('-->'+emailBuyResponse)
+                            if (emailAccountResponse['error'] == false) {
                                 response = eliminarSession();
                                 swal({
                                     title: "Compra Realizada",
-                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
+                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Revisa tu correo para obtener acceso al curso.",
                                     type: "success",
                                 }).then(function () {
                                     window.location.href = "index.php";
                                 });
                             } else {
-                                response = eliminarSession();
-                                swal({
-                                    title: "Compra Realizada",
-                                    text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
-                                    type: "success",
-                                }).then(function () {
-                                    window.location.href = "index.php";
-                                });
-                            }
+                                if (emailAccountResponse['error'] == "5") {
+                                    response = eliminarSession();
+                                    swal({
+                                        title: "Compra Realizada",
+                                        text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
+                                        type: "success",
+                                    }).then(function () {
+                                        window.location.href = "index.php";
+                                    });
+                                } else {
+                                    response = eliminarSession();
+                                    swal({
+                                        title: "Compra Realizada",
+                                        text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido. Ponte en contacto con nosotros para darte acceso al curso.",
+                                        type: "success",
+                                    }).then(function () {
+                                        window.location.href = "index.php";
+                                    });
+                                }
 
+                            }
+                        } else {
+                            emailBuyResponse = sendEmailBuy();
+                            response = eliminarSession();
+                            swal({
+                                title: "Compra Realizada",
+                                text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
+                                type: "success",
+                            }).then(function () {
+                                window.location.href = "index.php";
+                            });
                         }
-                    } else {
-                        emailBuyResponse = sendEmailBuy();
-                        response = eliminarSession();
-                        swal({
-                            title: "Compra Realizada",
-                            text: "Tu compra ha sido registrada, te estaremos avisando cuando se realice el envio de tu pedido.",
-                            type: "success",
-                        }).then(function () {
-                            window.location.href = "index.php";
-                        });
                     }
                 }
             }
+        } else {
+            swal({
+                title: "¡Error!",
+                text: "Formato de correo inválido",
+                type: "error",
+            });
         }
+
 
     } else {
         swal({
@@ -135,8 +149,8 @@ function pagar() {
     function payU() {
 
         refereceCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
-        refereceCode = registro['idSale'] + '' + refereceCode;
-        
+        refereceCode = registro['idSale'] + '-' + refereceCode;
+
         //“ApiKey~merchantId~referenceCode~amount~currency”. 
         firma = "4Vj8eK4rloUd272L48hsrarnUA~508029~" + refereceCode + "~" + registro['valor'] + "~COP"
 

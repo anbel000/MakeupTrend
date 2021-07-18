@@ -18,9 +18,11 @@ if (
     $value = $_POST["value"];
     $descripcion = $_POST["extra1"];
 
-    $y = strlen($reference_sale);
-    $v = ($y + 2) - $y;
-    $idSale = substr($reference_sale, 0, $v);
+    $cadena = $reference_sale;
+    $separador = "-";
+    $separada = explode($separador, $cadena);
+    $idSale = $separada[0];
+    
     $respuesta = find_by_id_sale($idSale);
     
     if ($state_pol == 4) {

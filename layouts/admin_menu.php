@@ -38,6 +38,12 @@
     </a>
   </li>
   <li>
+    <a href="upload_images.php#assets%2Fcatálagos" >
+      <i class="glyphicon glyphicon-picture"></i>
+      <span>Catálogos</span>
+    </a>
+  </li>
+  <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-th-list"></i>
        <span>Ventas</span>

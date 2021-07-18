@@ -346,7 +346,11 @@ function sendEmail() {
 
 
 function sendEmailBuy(descripcion, total) {
-
+    if($('[name="tipo_envio"]')[0].value == "A Domicilio"){
+        totalCompra = total + 6000;
+    }else{
+        totalCompra = total;
+    }
     var formData = {
         'sendbuy': "true",
         'email': $('[name="email"]')[0].value,
@@ -354,7 +358,7 @@ function sendEmailBuy(descripcion, total) {
         'asunto': "Compra realizada - Makeup Trend",
         'nombre': $('[name="name_sale"]')[0].value,
         'descripcion': descripcion,
-        'total': total
+        'total': totalCompra
     };
     // process the form
 
@@ -376,7 +380,11 @@ function sendEmailBuy(descripcion, total) {
 }
 
 function sendEmailBuyAct(descripcion, total) {
-
+    if($('[name="tipo_envio"]')[0].value == "A Domicilio"){
+        totalCompra = total + 6000;
+    }else{
+        totalCompra = total;
+    }
     var formData = {
         'sendbuy': "true",
         'email': $('[name="email"]')[0].value,
@@ -384,7 +392,7 @@ function sendEmailBuyAct(descripcion, total) {
         'asunto': "Compra Actualizada - Makeup Trend",
         'nombre': $('[name="name_sale"]')[0].value,
         'descripcion': descripcion,
-        'total': total
+        'total': totalCompra
     };
     // process the form
 

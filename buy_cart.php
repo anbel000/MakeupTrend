@@ -172,7 +172,7 @@
                             <input type="text" class="form-control" id="type_ubication" placeholder="Apartamento o Casa">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="email" placeholder="Correo electronico">
+                            <input type="email" class="form-control" id="email" placeholder="Correo electronico">
                         </div>
                     </div>
                 </div>

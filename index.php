@@ -155,22 +155,27 @@ if (isset($_GET["closeSession"])) {
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./assets/images/logo/baner1.png" class="d-block w-100" alt="...">
+                    <img src="./assets/images/logo/baner1.png" class="d-block w-100" alt="Bienvenida">
                 </div>
                 <div class="carousel-item">
-                    <img src="./assets/images/logo/baner2.png" class="d-block w-100" alt="...">
+                    <a href="https://wa.link/6nimef" style="display: contents;">
+                        <img src="./assets/images/logo/baner2.png" hrf="index.php" class="d-block w-100" alt="¿Quieres ser mayorista?">
+                    </a>
                 </div>
                 <div class="carousel-item">
-                    <img src="./assets/images/logo/baner3.png" class="d-block w-100" alt="...">
+                    <img src="./assets/images/logo/baner3.png" class="d-block w-100" alt="Envíos a nivel nacional">
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/logo/baner4.png" class="d-block w-100" alt="Publica en instagram y obten envio gratis">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+                <span class="visually-hidden">Anterior</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+                <span class="visually-hidden">Siguiente</span>
             </button>
         </div>
     </section>
@@ -250,8 +255,8 @@ if (isset($_GET["closeSession"])) {
                                 <!-- Start Single List -->
                                 <div class="single-list wow fadeInUp" data-wow-delay=".2s">
                                     <a href="assets/catálagos/Catalogo Al Por Mayor - Makeup Trend.pdf" download="Catalogo Al Por Mayor - Makeup Trend.pdf"> <i class="lni lni-download"></i></a>
-                                    <h4>Catálogo Al Mayor</h4>
-                                    <p>Descarga nuestro catálogo al por mayor para enterar de precios y productos.</p>
+                                    <h4>Catálogo Al Por Mayor</h4>
+                                    <p>Descarga nuestro catálogo al por mayor para enterarte de precios y productos.</p>
                                 </div>
                                 <!-- Start Single List -->
                             </div>
@@ -260,7 +265,7 @@ if (isset($_GET["closeSession"])) {
                                 <div class="single-list wow fadeInUp" data-wow-delay=".4s">
                                     <a href="assets/catálagos/Catalogo Al Detal - Makeup Trend.pdf" download="Catalogo Al Detal - Makeup Trend.pdf"> <i class="lni lni-download"></i></a>
                                     <h4>Catálogo Al Detal</h4>
-                                    <p>Descarga nuestro catálogo al detal para enterar de precios y productos.</p>
+                                    <p>Descarga nuestro catálogo al detal para enterarte de precios y productos.</p>
                                 </div>
                                 <!-- Start Single List -->
                             </div>

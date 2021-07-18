@@ -509,7 +509,7 @@
                                                                         <br></p>
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#6B3748;font-size:16px">
-                                                                        <strong>Total de compra sin envío: ${{totalCompra}} COP</strong>
+                                                                        <strong>Total de compra: ${{totalCompra}} COP</strong>
                                                                     </p>
                                                                 </td>
                                                             </tr>
