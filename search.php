@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Makeup Trend</title>
-  <meta name="description" content="">
+  <title>Búsqueda</title>
+  <meta name="description" content="Búsqueda de los productos deseados">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
@@ -169,7 +169,7 @@
                 <?php foreach ($categories as $categorie) :
                   $count_categorie = join_count_by_id("products", $categorie['id']); ?>
                   <li>
-                    <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>"><i class="lni lni-dinner"></i><?php echo remove_junk($categorie['name']); ?><span><?php echo remove_junk($count_categorie['total']); ?></span></a>
+                    <a href="adgird.php?id=<?php echo (int)$categorie['id']; ?>"><i class="lni lni-radio-button"></i><?php echo remove_junk($categorie['name']); ?><span><?php echo remove_junk($count_categorie['total']); ?></span></a>
                   </li>
                 <?php endforeach; ?>
               </ul>

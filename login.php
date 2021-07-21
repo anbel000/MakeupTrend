@@ -1,5 +1,29 @@
 
+<?php
+require_once('includes/load.php');
 
+$errorSesion = false;
+if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
+  $errorSesion = false;
+  redirect("viewcourse.php", false);
+} else {
+  if (isset($_POST["login"])) {
+
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $user_id = authenticateCourse($email, $password);
+    if ($user_id) {
+      $errorSesion = false;
+      $_SESSION["loginUser"] = true;
+      redirect("viewcourse.php", false);
+    } else {
+      $errorSesion = true;
+    }
+  }
+}
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,40 +107,22 @@
 </body>
 
 <?php
-require_once('includes/load.php');
+if($errorSesion == true){
+  echo '
+  <script type="text/javascript">
 
+  $(document).ready(function(){
+    swal({
+        title: "Inicio de sesión fallido",
+        text: "Por favor vuelve a ingresar tus datos y verifica que esten bien.",
+        type: "error",
+    }).then(function() {
+      
+    });
+  })
 
-if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
-  redirect("viewcourse.php", false);
-} else {
-  if (isset($_POST["login"])) {
-
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $user_id = authenticateCourse($email, $password);
-    if ($user_id) {
-
-      $_SESSION["loginUser"] = true;
-      redirect("viewcourse.php", false);
-    } else {
-
-      echo '
-            <script type="text/javascript">
-
-            $(document).ready(function(){
-              swal({
-                  title: "Inicio de sesión fallido",
-                  text: "Por favor vuelve a ingresar tus datos y verifica que esten bien.",
-                  type: "error",
-              }).then(function() {
-                window.location.href = "login.php";
-              });
-            })
-
-            </script>
-            ';
-    }
-  }
+  </script>
+  ';
 }
 
 

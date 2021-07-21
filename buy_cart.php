@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Makeup Trend</title>
-    <meta name="description" content="" />
+    <title>Comprar</title>
+    <meta name="description" content="Finalización de la compra"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <!-- Place favicon.ico in the root directory -->

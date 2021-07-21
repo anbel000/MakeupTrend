@@ -11,8 +11,8 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Makeup Trend</title>
-        <meta name="description" content="" />
+        <title>Curso</title>
+        <meta name="description" content="Cursos de maquillaje" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- Place favicon.ico in the root directory -->
@@ -85,7 +85,7 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                     <div class="col-lg-12">
                         <div class="nav-inner">
                             <nav class="navbar navbar-expand-lg">
-                                <a class="navbar-brand" href="index.html">
+                                <a class="navbar-brand" href="index.php">
                                     <img src="assets/images/logo/logo.svg" alt="Logo">
                                 </a>
                                 <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,9 +132,22 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                                     <div class="single-list wow fadeInUp" data-wow-delay=".2s">
 
                                         <div class="col-12">
-                                            <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" style="width: inherit;" controls></video>
+                                        <iframe src="https://drive.google.com/file/d/1-SuCfSFMiIzzx9Kd3ooVweoaLDaOWSgr/preview" height="263" style="width: inherit;" allow="autoplay" allowfullscreen="true"></iframe>
                                         </div>
-                                        <h4 style="margin: inherit;">¿Cómo aplicar el maquillaje?</h4>
+                                        <h4 style="margin: inherit;">Preparación de nuestra piel</h4>
+                                    </div>
+                                    
+                                    <!-- Start Single List -->
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <!-- Start Single List -->
+
+                                    <div class="single-list wow fadeInUp" data-wow-delay=".2s">
+
+                                        <div class="col-12">
+                                            <iframe src="https://drive.google.com/file/d/1-1RHYNyN1Yusf6CfCrNK_rjw5sUrW1Bl/preview" height="263" style="width: inherit;" allow="autoplay" allowfullscreen="true"></iframe>
+                                        </div>
+                                        <h4 style="margin: inherit;">Cejas</h4>
                                     </div>
                                     <!-- Start Single List -->
                                 </div>
@@ -144,9 +157,9 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                                     <div class="single-list wow fadeInUp" data-wow-delay=".2s">
 
                                         <div class="col-12">
-                                            <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" style="width: inherit;" controls></video>
+                                            <iframe src="https://drive.google.com/file/d/1-3gvPNbGA7de0Nush51noCoDGHARFDk8/preview" height="263" style="width: inherit;" allow="autoplay" allowfullscreen="true"></iframe>
                                         </div>
-                                        <h4 style="margin: inherit;">¿Cómo aplicar el maquillaje?</h4>
+                                        <h4 style="margin: inherit;">Delineado</h4>
                                     </div>
                                     <!-- Start Single List -->
                                 </div>
@@ -156,9 +169,9 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                                     <div class="single-list wow fadeInUp" data-wow-delay=".2s">
 
                                         <div class="col-12">
-                                            <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" style="width: inherit;" controls></video>
+                                            <iframe src="https://drive.google.com/file/d/1-DgpJQcw2Wo3uJCWJ4oe5joKBu5dJUI7/preview" height="263" style="width: inherit;" allow="autoplay" allowfullscreen="true"></iframe>
                                         </div>
-                                        <h4 style="margin: inherit;">¿Cómo aplicar el maquillaje?</h4>
+                                        <h4 style="margin: inherit;">Maquillaje para el día día</h4>
                                     </div>
                                     <!-- Start Single List -->
                                 </div>
@@ -168,36 +181,13 @@ if (isset($_SESSION["loginUser"]) && $_SESSION["loginUser"] == true) {
                                     <div class="single-list wow fadeInUp" data-wow-delay=".2s">
 
                                         <div class="col-12">
-                                            <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" style="width: inherit;" controls></video>
+                                            <iframe src="https://drive.google.com/file/d/1-IdXrJyrsI8ib6FA8PCWGYIslscE3Hem/preview" height="263" style="width: inherit;" allow="autoplay" allowfullscreen="true"></iframe>
                                         </div>
-                                        <h4 style="margin: inherit;">¿Cómo aplicar el maquillaje?</h4>
+                                        <h4 style="margin: inherit;">Maquillaje para el día día - Parte 2</h4>
                                     </div>
                                     <!-- Start Single List -->
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <!-- Start Single List -->
-
-                                    <div class="single-list wow fadeInUp" data-wow-delay=".2s">
-
-                                        <div class="col-12">
-                                            <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" style="width: inherit;" controls></video>
-                                        </div>
-                                        <h4 style="margin: inherit;">¿Cómo aplicar el maquillaje?</h4>
-                                    </div>
-                                    <!-- Start Single List -->
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <!-- Start Single List -->
-
-                                    <div class="single-list wow fadeInUp" data-wow-delay=".2s">
-
-                                        <div class="col-12">
-                                            <video src="https://codingyaar.com/wp-content/uploads/video-in-bootstrap-card.mp4" style="width: inherit;" controls></video>
-                                        </div>
-                                        <h4 style="margin: inherit;">¿Cómo aplicar el maquillaje?</h4>
-                                    </div>
-                                    <!-- Start Single List -->
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

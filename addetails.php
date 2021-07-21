@@ -6,8 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Makeup Trend</title>
-    <meta name="description" content="">
+    <title>Detalles de producto</title>
+    <meta name="description" content="Detalles del producto ideal para ti">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.0/sweetalert2.css" />
