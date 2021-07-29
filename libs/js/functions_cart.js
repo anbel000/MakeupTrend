@@ -236,6 +236,7 @@ function almacenarInfo(count) {
                 ciudad: document.getElementById('ciudades').value,
                 tipoEnvio: text2,
                 tipoPago: document.getElementById('tipo_pago').value,
+                description_products: document.getElementById('exampleFormControlTextarea1').value,
             }
 
 

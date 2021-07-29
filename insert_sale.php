@@ -137,12 +137,13 @@ if (isset($_POST['add_sale_online'])) {
         $shipping = "No";
         $channel = "Página";
         $date    = $db->escape($_POST['date']);
+        $description_products      = $_SESSION["description_products"];
 
 
         $sql  = "INSERT INTO sales (";
-        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,shipping,channel,date";
+        $sql .= "name,cel_phone,email,department,city,direction,neighborhood,type_ubication,payment_method,shipping_type,state,shipping,channel,date,description_products";
         $sql .= ") VALUES (";
-        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$shipping}','{$channel}','{$date}'";
+        $sql .= "'{$name_sale}','{$cel_phone}','{$email}','{$department}','{$city}','{$direction}','{$neighborhood}','{$type_ubication}','{$payment_method}','{$shipping_type}','{$state}','{$shipping}','{$channel}','{$date}','{$description_products}'";
         $sql .= ")";
 
         if ($db->query($sql)) {

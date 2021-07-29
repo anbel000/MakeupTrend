@@ -70,7 +70,8 @@ create table sales (
     state int(11) not null,
     shipping varchar(11) not null,
     channel varchar(30) not null,
-    date date not null
+    date date not null,
+    description_products varchar(5000)
 );
 
 create table sales_products (

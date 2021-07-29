@@ -7,7 +7,7 @@
     <title>Carrito de compras</title>
     <meta name="description" content="Visualización del carrito de compras" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <!-- Place favicon.ico in the root directory -->
 
     <!-- Web Font -->
@@ -35,7 +35,7 @@
 <link rel="apple-touch-icon" sizes="144x144" href="9324c10bb96c639ec6140724f5bb097a/apple-icon-144x144.png">
 <link rel="apple-touch-icon" sizes="152x152" href="9324c10bb96c639ec6140724f5bb097a/apple-icon-152x152.png">
 <link rel="apple-touch-icon" sizes="180x180" href="9324c10bb96c639ec6140724f5bb097a/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="9324c10bb96c639ec6140724f5bb097a/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="9324c10bb96c639ec6140724f5bb097a/android-icon-192x192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="9324c10bb96c639ec6140724f5bb097a/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="9324c10bb96c639ec6140724f5bb097a/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="9324c10bb96c639ec6140724f5bb097a/favicon-16x16.png">
@@ -192,9 +192,14 @@
                                 </div>
                         <?php
                             }
-                        }
+                        } ?>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Si tus productos requieren un tono en especial, especificalo aquí</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                    <?php
                     } else {
-                        ?>
+                    ?>
                 </form>
                 <div class="row">
                     <div class="col-12">

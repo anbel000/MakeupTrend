@@ -1,14 +1,14 @@
 <?php
 require_once('includes/load.php');
 
-if ($_POST['infoCart'] == 'true' && isset($_POST['productos']) && isset($_POST['departamento']) && isset($_POST['ciudad']) && isset($_POST['tipoEnvio']) && isset($_POST['tipoPago'])) {
+if ($_POST['infoCart'] == 'true' && isset($_POST['productos']) && isset($_POST['departamento']) && isset($_POST['ciudad']) && isset($_POST['tipoEnvio']) && isset($_POST['tipoPago']) && isset($_POST['description_products'])) {
 
     $productos = $_POST['productos'];
     $departamento = $_POST['departamento'];
     $ciudad = $_POST['ciudad'];
     $tipoEnvio = $_POST['tipoEnvio'];
     $tipoPago = $_POST['tipoPago'];
-
+    $description_products = $_POST['description_products'];
 
     foreach ($productos as $result) {
         if (isset($_SESSION["products_shoppingCart"][$result['ID']])) {
@@ -51,6 +51,8 @@ if ($_POST['infoCart'] == 'true' && isset($_POST['productos']) && isset($_POST['
         $_SESSION["ciudad"] = $ciudad;
         $_SESSION["tipoEnvio"] = $tipoEnvio;
         $_SESSION["tipoPago"] = $tipoPago;
+        $_SESSION["description_products"] = $description_products;
+        
         if($tipoEnvio == "Inter Rapidisimo"){
             $_SESSION["totalCompra"] = $total_compra;
             $_SESSION["subTotalCompra"] = $total_compra;

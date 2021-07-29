@@ -175,7 +175,15 @@ if (!$sale) {
                 </select>
               </div>
             </div>
-          </div>
+          </div> 
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <h4><strong>Descripción adicional para tonos:</strong> <?php echo $sale["description_products"]; ?></h4>
+              </div>
+            </div>
+          </div> 
 
           <table class="table table-bordered" id="tablaProductos">
             <thead>
